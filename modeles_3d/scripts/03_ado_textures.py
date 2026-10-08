@@ -125,22 +125,25 @@ B.inputs["Emission Strength"].default_value = 0.45
 B.inputs["Coat Weight"].default_value = 1.0; B.inputs["Coat Roughness"].default_value = 0.02; B.inputs["Coat IOR"].default_value = 1.45
 
 # ================= AILES =================
+# Membrane lisse : peau fine sans cellules, grandes taches douces + grain tres fin
 m, N, L, B = newmat("AdoWingReal")
 tc = N.new("ShaderNodeTexCoord")
-vn = N.new("ShaderNodeTexVoronoi"); vn.feature = 'DISTANCE_TO_EDGE'; vn.inputs["Scale"].default_value = 7; vn.inputs["Randomness"].default_value = 1.0
-mp = N.new("ShaderNodeMapping"); mp.inputs["Scale"].default_value = (1.0, 2.2, 1.0)
-L.new(tc.outputs["Object"], mp.inputs["Vector"]); L.new(mp.outputs[0], vn.inputs["Vector"])
-vein = maprange(N, L, vn.outputs["Distance"], 0.0, 0.03, 1.0, 0.0)
-nz = N.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 12; L.new(tc.outputs["Object"], nz.inputs["Vector"])
-mott = maprange(N, L, nz.outputs["Fac"], 0.3, 0.7, 0.8, 1.1)
-mc = N.new("ShaderNodeCombineColor"); [L.new(mott, mc.inputs[i]) for i in range(3)]
-memb = mixrgb(N, L, 1.0, (*lin((0.72, 0.2, 0.1)), 1), mc.outputs[0], 'MULTIPLY')
-wc = mixrgb(N, L, vein, memb, (*lin((0.35, 0.06, 0.04)), 1))
-L.new(wc, B.inputs["Base Color"])
-B.inputs["Roughness"].default_value = 0.5
-B.inputs["Subsurface Weight"].default_value = 0.4; B.inputs["Subsurface Radius"].default_value = (0.5, 0.15, 0.05)
-bp = N.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.3; L.new(vein, bp.inputs["Height"]); L.new(bp.outputs["Normal"], B.inputs["Normal"])
-tr = N.new("ShaderNodeBsdfTranslucent"); tr.inputs["Color"].default_value = (*lin((1.0, 0.42, 0.12)), 1)
+nz = N.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 2.2; nz.inputs["Detail"].default_value = 3; nz.inputs["Roughness"].default_value = 0.45
+L.new(tc.outputs["Object"], nz.inputs["Vector"])
+ramp = N.new("ShaderNodeValToRGB"); L.new(nz.outputs["Fac"], ramp.inputs["Fac"])
+e = ramp.color_ramp.elements
+e[0].position = 0.3; e[0].color = (0.30, 0.025, 0.018, 1)
+e[1].position = 0.75; e[1].color = (0.62, 0.07, 0.035, 1)
+L.new(ramp.outputs["Color"], B.inputs["Base Color"])
+grain = N.new("ShaderNodeTexNoise"); grain.inputs["Scale"].default_value = 60; grain.inputs["Detail"].default_value = 2
+L.new(tc.outputs["Object"], grain.inputs["Vector"])
+bp = N.new("ShaderNodeBump"); bp.inputs["Strength"].default_value = 0.04; bp.inputs["Distance"].default_value = 0.0005
+L.new(grain.outputs["Fac"], bp.inputs["Height"]); L.new(bp.outputs["Normal"], B.inputs["Normal"])
+B.inputs["Roughness"].default_value = 0.42
+B.inputs["Subsurface Weight"].default_value = 0.3; B.inputs["Subsurface Radius"].default_value = (0.6, 0.15, 0.08)
+B.inputs["Coat Weight"].default_value = 0.15; B.inputs["Coat Roughness"].default_value = 0.3
+tr = N.new("ShaderNodeBsdfTranslucent"); tr.inputs["Color"].default_value = (1.0, 0.16, 0.02, 1)
+L.new(bp.outputs["Normal"], tr.inputs["Normal"])
 mix = N.new("ShaderNodeMixShader"); mix.inputs["Fac"].default_value = 0.3
 out = N["Material Output"]
 L.new(B.outputs[0], mix.inputs[1]); L.new(tr.outputs[0], mix.inputs[2]); L.new(mix.outputs[0], out.inputs["Surface"])

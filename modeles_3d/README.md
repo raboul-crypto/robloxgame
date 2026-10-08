@@ -11,10 +11,10 @@ Dragon classique (4 pattes + 2 ailes) :
 | Stade | État |
 |---|---|
 | Bébé | Fait : style chibi, grands yeux, joues roses, textures réalistes douces |
-| Ado | Fait : morphologie musclée, yeux ambre à pupille fendue, bouche et crocs, vraies pattes à doigts, ailes à os et membrane, textures réalistes |
+| Ado | Fait : morphologie musclée, yeux ambre à pupille fendue, bouche et crocs, vraies pattes à doigts, ailes à os et membrane lisse, textures réalistes |
 | Adulte | À faire |
 
-À faire ensuite : texture plus lisse de la membrane des ailes, l'adulte, puis les autres types (wyvern, drake, hydre, oriental, amphiptère, aquatique), et l'export vers Roblox (textures « cuites » en images).
+À faire ensuite : l'adulte, puis les autres types (wyvern, drake, hydre, oriental, amphiptère, aquatique), et l'export vers Roblox (textures « cuites » en images).
 
 ## Contenu
 
