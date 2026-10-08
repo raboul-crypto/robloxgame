@@ -16,7 +16,7 @@ Les règles de forme (proportions bébé / ado / adulte) sont dans [GUIDE_FORMES
 
 | Stade | Référence | État |
 |---|---|---|
-| Bébé | bébé dragon assis, esprit « bébé dragon de film d'animation » (façon Krokmou, sans le copier) | Fait : tête large et plate penchée sur le côté, très grands yeux écartés à grosses pupilles, grand sourire d'une joue à l'autre, oreilles en lobes souples, petites cornes, pattes en « coussins » à 4 orteils, grandes ailes basses sur les côtés, queue enroulée vers l'avant avec pique en losange, crête jusqu'au 1er tiers de la queue |
+| Bébé | bébé dragon assis, esprit « bébé dragon de film d'animation » (façon Krokmou, sans le copier) | Fait : tête large et plate penchée sur le côté, très grands yeux écartés à grosses pupilles, grand sourire d'une joue à l'autre, oreilles en lobes souples, petites cornes, grosses pattes rondes (4 doigts ronds séparés, coussinets dessous, griffes minuscules), grandes ailes basses sur les côtés, queue enroulée vers l'avant avec pique en losange, crête jusqu'au 1er tiers de la queue |
 | Ado | esprit « jeune dragon de jeu de plateforme » (sans copier de personnage existant) | Fait : svelte et athlétique, cou plus long, regard calme et assuré, sourire en coin avec 2 petits crocs, cornes recourbées, crête jusqu'au bout de la queue, vraies pattes de dragon |
 | Adulte | grand dragon western, en version lissée | Fait : long et sec, très long cou, tête haute, yeux en amande sous une arcade, longue gueule à crocs, cornes à pointes secondaires, plaques d'armure, ailes immenses, vraies pattes de dragon |
 

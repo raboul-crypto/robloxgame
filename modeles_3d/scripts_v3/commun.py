@@ -24,6 +24,7 @@ KERA = mat("Ivoire", (0.94, 0.91, 0.83), 0.35)              # cornes, griffes, p
 MEMB = mat("Membrane", (0.76, 0.76, 0.79), 0.7)             # membrane des ailes
 DARK = mat("Pupille", (0.02, 0.02, 0.03), 0.05, coat=1.0)
 HL = mat("Reflet", (1, 1, 1), 0.1, emit=3.0)
+PAD = mat("Coussinet", (0.93, 0.74, 0.77), 0.55)            # coussinets sous les pattes du bebe (piece a part)
 
 def iris_glacier(name="IrisGlacier"):
     """globe oculaire : iris bleu glacier en degrade (clair au centre, profond au bord, anneau sombre)."""
@@ -69,9 +70,13 @@ def scene_setup():
     except Exception: pass
     return sc, cam
 
-def shot(name, tgt, d, dist, only=None, base="C:\\Users\\user\\OneDrive\\Documents\\photo dragon\\wip\\"):
-    """rendu ; only = nom du stade a montrer seul ("Bebe", "Ado", "Adulte"), les autres sont masques le temps du rendu."""
+def shot(name, tgt, d, dist, only=None, hide=(), base="C:\\Users\\user\\OneDrive\\Documents\\photo dragon\\wip\\"):
+    """rendu ; only = nom du stade a montrer seul ("Bebe", "Ado", "Adulte"), les autres sont masques le temps du rendu.
+    hide = noms d'objets a masquer en plus (ex. sol et plateforme pour une vue de dessous)."""
     sc = bpy.context.scene; cam = sc.camera; hidden = []
+    for n in hide:
+        o = bpy.data.objects.get(n)
+        if o and not o.hide_render: o.hide_render = True; hidden.append(o)
     if only:
         for st in ("Bebe", "Ado", "Adulte"):
             if st == only: continue
@@ -118,7 +123,7 @@ class Dragon:
     les volumes qui en dependent (paupieres en peau, sillon de la bouche), puis build_body() reconstruit le corps.
     res = finesse des metaballs (plus petit = plus de details, plus de triangles)."""
     def __init__(self, coll_name, prefix, S, res=0.022):
-        self.P = prefix; self.S = S; self.claws = []; self.hooks = []; self.body = None
+        self.P = prefix; self.S = S; self.claws = []; self.hooks = []; self.pads = []; self.body = None
         self.HP = V((0, 0, 0)); self.HR = Matrix.Identity(3)
         for o in [o for o in bpy.data.objects if o.name.startswith(prefix)]: bpy.data.objects.remove(o, do_unlink=True)
         for m in [m for m in bpy.data.metaballs if m.name.startswith(prefix) and m.users == 0]: bpy.data.metaballs.remove(m)
@@ -163,6 +168,24 @@ class Dragon:
             for k in range(4):
                 t = k / 3; self.ell(b + d * 0.07 * size * t + V((0, 0, -0.01 * size * t)), (0.05 - 0.006 * t) * size, (1, 1, 0.85), 3.0)
             self.claws.append((b + d * 0.125 * size + V((0, 0, -0.008 * size)), d, size, claw_len, claw_r))
+    def paw(self, cx, cy, s, size=1.0, toes=4, spread=30, claw_len=0.022, claw_r=0.014):
+        """patte ronde de bebe (facon film d'animation) : paume en mitaine plus large que la jambe, 4 gros doigts ronds
+        bien separes par des sillons, coussinets sous la paume et sous chaque doigt (pieces a part, creees par
+        claws_build), griffes minuscules au bout des doigts. Le bas de la jambe doit arriver vers (cx, cy + 0.03*size, 0.2*size)
+        avec un rayon plus petit que la paume."""
+        c = V((cx, cy, 0.0)); u = V((0, 0, 1)); k = size
+        self.ell(c + V((0, 0.03 * k, 0.07 * k)), 0.1 * k, (1.2, 1.1, 0.7), 2.6)            # paume
+        dirs = []
+        for i in range(toes):
+            a = math.radians(spread * (i - (toes - 1) / 2) * s); d = V((math.sin(a), -math.cos(a), 0)); dirs.append(d)
+            self.ell(c + d * 0.14 * k + u * 0.04 * k, 0.036 * k, (1.0, 1.25, 0.95), 3.2, d.to_track_quat('Y', 'Z'))  # doigt rond
+            self.claws.append((c + d * 0.178 * k + u * 0.03 * k, d, k, claw_len, claw_r))
+            self.pads.append((c + d * 0.13 * k, d, 0.023 * k, 0.028 * k))                       # coussinet du doigt
+        for a, b in zip(dirs, dirs[1:]):                                                        # sillons entre les doigts
+            dm = (a + b).normalized()
+            self.ell(c + dm * 0.16 * k + u * 0.075 * k, 0.012 * k, (0.8, 2.6, 1.8), 2.6, dm.to_track_quat('Y', 'Z'), neg=True)
+        self.pads.append((c + V((0, 0.025 * k, 0)), V((0, -1, 0)), 0.065 * k, 0.055 * k))       # coussinet de la paume
+
     def dragon_foot(self, cx, cy, s, size=1.0, splay=8, claw_len=0.12, claw_r=0.028, rear=True):
         """vraie patte de dragon (ado, adulte) : pied compact et osseux, 3 longs doigts articules vers l'avant
         (phalanges, jointures marquees, coussinets sous les doigts, doigt du milieu plus long) + 1 ergot a l'arriere.
@@ -245,7 +268,9 @@ class Dragon:
         M = Matrix.Translation(base) @ q.to_matrix().to_4x4() @ Matrix.Diagonal((r * flatx, r * flat, d.length, 1))
         return self._mesh_obj(name, bm, mm, M, smooth)
     def claws_build(self, mm=KERA):
-        """griffes separees de la patte : coniques (pieds 'coussins' du bebe), en crochet (dragon_foot)."""
+        """griffes separees de la patte : coniques (pattes du bebe), en crochet (dragon_foot) ; + coussinets (paw)."""
+        for i, (p, d, rw, rl) in enumerate(self.pads):
+            self.sphere(f"Pad_{i}", p + V((0, 0, rw * 0.15)), (rw, rl, rw * 0.35), PAD, d.to_track_quat('-Y', 'Z'), 16)
         for i, (tip, d, sz, L, r) in enumerate(self.claws):
             self.cone(f"Claw_{i}", tip - d * 0.02 * sz, tip + d * L * sz + V((0, 0, -L * 0.45 * sz)), r * sz, mm)
         for i, (b, d, L, r) in enumerate(self.hooks):

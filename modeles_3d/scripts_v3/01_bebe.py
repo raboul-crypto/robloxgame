@@ -2,7 +2,7 @@
 # Bebe dragon assis, gris perle, lisse. Tete LARGE ET PLATE (pas une boule) : crane bas et large, front plat entre
 # les yeux, grosses joues, museau court, large et arrondi, grande bouche souriante d'une joue a l'autre ; tres grands
 # yeux ecartes a grosses pupilles (regard tendre), tete penchee sur le cote. Corps en poire assis bien droit, pattes
-# avant droites a gros pieds ronds ("coussins", 4 orteils, petites griffes), cuisses rondes, queue qui s'enroule
+# avant droites a grosses pattes rondes (4 gros doigts ronds separes, coussinets dessous, griffes minuscules), cuisses rondes, queue qui s'enroule
 # vers l'avant avec pique en losange, grandes ailes basses posees sur les cotes. Elements propres au jeu (pas Krokmou) :
 # petites cornes, crete de plaques, pique de queue, couleur blanche. A lancer en premier (met en place la scene).
 import bpy, math, os
@@ -33,10 +33,10 @@ D.ell((0, 0.05, 0.47), 0.47, (0.95, 0.95, 1.0), 2.4)          # ventre
 D.ell((0, -0.16, 0.76), 0.34, (0.95, 0.85, 1.0), 2.4)         # poitrail
 for s in (-1, 1):
     D.ell((s * 0.13, -0.42, 0.72), 0.14, (1, 0.7, 0.9), 3.2)
-    D.chain([(s * 0.22, -0.34, 0.74, 0.15), (s * 0.24, -0.44, 0.44, 0.135), (s * 0.26, -0.49, 0.18, 0.15)])   # pattes avant droites
-    D.foot(s * 0.26, -0.56, s, 1.35, claw_len=0.035, claw_r=0.02)                                           # gros pieds ronds
+    D.chain([(s * 0.22, -0.34, 0.74, 0.15), (s * 0.24, -0.44, 0.44, 0.13), (s * 0.26, -0.52, 0.26, 0.115)])  # pattes avant droites
+    D.paw(s * 0.26, -0.56, s, 1.4)                                                                           # grosses pattes rondes a doigts
     D.ell((s * 0.37, 0.18, 0.36), 0.32, (0.85, 1.1, 0.95), 2.4)                                             # cuisses rondes
-    D.foot(s * 0.45, -0.14, s, 1.3, claw_len=0.035, claw_r=0.02)
+    D.paw(s * 0.45, -0.16, s, 1.35)
 TAIL = [(0, 0.5, 0.32, 0.2), (0.2, 0.86, 0.17, 0.15), (0.52, 0.98, 0.12, 0.115), (0.8, 0.8, 0.1, 0.085), (0.94, 0.48, 0.1, 0.065), (0.92, 0.16, 0.1, 0.048)]
 D.chain(TAIL, 5, 0.95)                                        # queue qui s'enroule vers l'avant
 body = D.build_body()                                           # 1re passe : sert a placer les yeux et la bouche
@@ -86,5 +86,7 @@ if globals().get("RENDER", True):
     shot("v3_bebe_face", (0, -0.4, 1.1), (0.12, -1, 0.12), 6.5, only="Bebe")
     shot("v3_bebe_profil", (0, 0.1, 0.9), (1, -0.05, 0.12), 9.0, only="Bebe")
     shot("v3_bebe_dos", (0, 0.2, 0.9), (0.5, 1, 0.5), 9.0, only="Bebe")
+    shot("v3_bebe_pattes", (0, -0.45, 0.15), (0.35, -1, 0.45), 3.2, only="Bebe")
+    shot("v3_bebe_dessous", (0, -0.3, 0.05), (0.15, -0.5, -1), 3.6, only="Bebe", hide=("Ground", "Plateforme_Bebe"))
     mid = (EYES[0]["c"] + EYES[1]["c"]) / 2; fw = D.hd(V((0, -1, 0)))
     shot("v3_bebe_yeux", mid + fw * 0.2, fw + V((0.3, 0, 0.12)), 3.4, only="Bebe")
