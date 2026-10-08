@@ -47,7 +47,7 @@ body = D.build_body()
 IRIS = iris_glacier("IrisAdo")
 for s in (-1, 1):
     l, n = D.hhit(HC, (s * 0.58, -0.78, 0.12)); nf = (n + D.hd((0, -0.45, 0))).normalized()
-    D.eye(s, l, n, nf, 0.115, IRIS, lid_up=(0.36, -24), lid_lo=(0.55, 8), sink=0.38)
+    D.eye(s, l, n, nf, 0.115, IRIS, lid_up=(0.55, -6), lid_lo=(0.66, 0), sink=0.38, rim=0)
     l2, n2 = D.hhit((s * 0.07, -1.65, 2.22), (s * 0.3, -1, 0.4))
     D.sphere(f"Nostril_{s}", l2 - n2 * 0.01, (0.028, 0.028, 0.018), DARK, n2.to_track_quat('-Y', 'Z'), 12)
 M = D.mouth("Mouth", [-1.62, -1.5, -1.35, -1.2, -1.06], [2.07, 2.05, 2.03, 2.04, 2.08], [0.008, 0.012, 0.013, 0.012, 0.006])

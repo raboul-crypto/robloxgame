@@ -264,7 +264,7 @@ class Dragon:
         q = frame_quat(n, t) @ Matrix.Rotation(math.radians(90), 4, 'Y').to_quaternion()   # pointes dans le sens de t
         return self.lemon(name, l - n * dep * 0.3, q, h, w, dep, mm, 1.4)                  # feuille effilee : longueur h, largeur w
 
-    def eye(self, s, l, n, nf, R, iris, lid_up=(0.4, 0), lid_lo=(0.6, 0), sink=0.45, rim=0.13, hl=True):
+    def eye(self, s, l, n, nf, R, iris, lid_up=(0.4, 0), lid_lo=(0.6, 0), sink=0.45, rim=0.09, hl=True):
         """oeil : globe (sphere) enfonce dans l'orbite, pupille fendue verticale posee sur le globe,
         paupieres superieure et inferieure saillantes et arrondies (calottes + bourrelet).
         lid_up / lid_lo = (ouverture 0..1, inclinaison en degres) ; l'inclinaison donne l'expression."""
@@ -290,7 +290,7 @@ class Dragon:
             e1 = nrm.cross(V((0, 1, 0))).normalized(); e2 = nrm.cross(e1); rad = math.sqrt(max(0.0, 1 - op * op))
             ring = [nrm * op + (e1 * math.cos(a) + e2 * math.sin(a)) * rad for a in [k * 2 * math.pi / 48 for k in range(48)]]
             front = [p.y < -0.35 for p in ring]
-            if all(front) or not any(front): continue
+            if rim <= 0 or all(front) or not any(front): continue
             k0 = next(i for i in range(48) if front[i] and not front[i - 1])
             arc = []
             for k in range(48):
