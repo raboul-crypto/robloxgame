@@ -35,16 +35,28 @@ for s in (-1, 1):
     D.foot(s * 0.44, -0.12, s, 1.2, claw_len=0.05, claw_r=0.022)
 TAIL = [(0, 0.5, 0.35, 0.2), (0.12, 0.8, 0.2, 0.15), (0.3, 1.0, 0.14, 0.11), (0.5, 1.06, 0.12, 0.08), (0.66, 0.98, 0.12, 0.055)]
 D.chain(TAIL, 5, 0.95)
-body = D.build_body()
+body = D.build_body()                                           # 1re passe : sert a placer les yeux et la bouche
 
-# ---- yeux : globe bleu glacier, pupille fendue, paupieres arrondies (regard innocent) ----
+# ---- yeux : grands globes bleu glacier qui regardent ensemble droit devant, paupieres arrondies (regard innocent) ----
 IRIS = iris_glacier("IrisBebe")
+GAZE = D.hp((0, -12.0, 1.3))                                    # point vise au loin, commun aux deux yeux (regard parallele)
+EYES = []
 for s in (-1, 1):
     l, n = D.hhit(HC, (s * 0.4, -0.92, 0.0)); nf = (n + D.hd((0, -0.7, 0))).normalized()
-    D.eye(s, l, n, nf, 0.2, IRIS, lid_up=(0.56, 0), lid_lo=(0.6, 0), sink=0.62, lid_thick=0.11)
+    EYES.append(D.eye_at(s, l, n, nf, 0.2, 0.62, GAZE))
+# ---- bouche : petit sourire qui fait le tour du museau, coins releves sous les joues ----
+MOUTH_YC = -1.0
+MP, MPLAN = D.mouth_at([(0, -1.35, 1.045), (0.13, -1.3, 1.05), (0.23, -1.17, 1.06), (0.29, -1.0, 1.1), (0.32, -0.9, 1.16), (0.32, -0.84, 1.21)], MOUTH_YC)
+D.groove(MP, 0.02, 0.32)
+for s in (-1, 1): D.ell(D.hp((s * 0.33, -0.86, 1.2)), 0.08, (1, 1, 0.9), 3.0)   # petites joues au-dessus des coins
+body = D.build_body()                                           # 2e passe : corps final
+
+for E in EYES:
+    D.eye_build(E, IRIS); D.eye_shell_lids(E, up=(0.56, 0), lo=(0.6, 0), thick=0.11)
+for s in (-1, 1):
     l2, n2 = D.hhit((s * 0.08, -1.22, 1.3), (s * 0.25, -1, 0.5))
     D.sphere(f"Nostril_{s}", l2 - n2 * 0.012, (0.036, 0.036, 0.024), DARK, n2.to_track_quat('-Y', 'Z'), 12)
-D.mouth("Mouth", [-1.22, -1.12, -1.0, -0.88, -0.76], [1.06, 1.05, 1.05, 1.07, 1.11], [0.008, 0.013, 0.014, 0.013, 0.007])
+D.mouth_build("Mouth", MPLAN, MOUTH_YC, 0.011)
 
 # ---- cornes enroulees (aretes definies) + deux petites pointes frontales + oreilles-nageoires ----
 for s in (-1, 1):
@@ -64,9 +76,9 @@ D.claws_build()
 # ---- petites ailes (os + membrane tendue) ----
 E = V((0.32, 0.2, 0.22)); W = V((0.6, 0.12, 0.42))
 F = [[W, V((0.95, 0.18, 0.55)), V((1.3, 0.35, 0.48))], [W, V((0.92, 0.45, 0.32)), V((1.12, 0.78, 0.1))], [W, V((0.78, 0.62, 0.12)), V((0.86, 1.02, -0.14))]]
-for s in (-1, 1):
-    l, n = D.hit((s * 0.2, 0.05, 0.85), (s * 0.45, 0.2, 1))
-    D.wing(s, l - n * 0.04, 0.6, F, E, W, V((0.02, 0.7, -0.22)), raise_deg=30, sweep_deg=10, bone_r=0.035)
+for s in (-1, 1):                                               # sur le haut du dos, derriere les epaules ; deployees sur les cotes
+    l, n = D.hit((s * 0.2, 0.22, 0.6), (s * 0.55, 0.25, 1))
+    D.wing(s, l - n * 0.04, 0.95, F, E, W, V((0.02, 0.7, -0.22)), raise_deg=34, sweep_deg=6, bone_r=0.035)
 platform("Plateforme_Bebe", 0, 0.1, 1.6)
 print("bebe v3 OK")
 
@@ -74,3 +86,6 @@ if globals().get("RENDER", True):
     shot("v3_bebe", (0, -0.1, 0.8), (0.6, -1, 0.35), 9.0, only="Bebe")
     shot("v3_bebe_face", (0, -0.4, 1.1), (0.12, -1, 0.12), 6.5, only="Bebe")
     shot("v3_bebe_profil", (0, 0.1, 0.9), (1, -0.05, 0.12), 9.0, only="Bebe")
+    shot("v3_bebe_dos", (0, 0.2, 0.9), (0.5, 1, 0.5), 9.0, only="Bebe")
+    mid = (EYES[0]["c"] + EYES[1]["c"]) / 2; fw = D.hd(V((0, -1, 0)))
+    shot("v3_bebe_yeux", mid + fw * 0.2, fw + V((0.3, 0, 0.12)), 3.4, only="Bebe")

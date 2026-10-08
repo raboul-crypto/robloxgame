@@ -113,15 +113,19 @@ def _smooth_poly(poly, it=2):
 
 class Dragon:
     """Construit un dragon : metaballs -> corps lisse, puis pieces separees (coordonnees locales du corps).
-    S = placement dans la scene (translation + echelle). head_frame() permet de tourner la tete."""
-    def __init__(self, coll_name, prefix, S):
-        self.P = prefix; self.S = S; self.claws = []
+    S = placement dans la scene (translation + echelle). head_frame() permet de tourner la tete.
+    Construction en 2 passes : build_body() une 1re fois pour lancer les rayons (yeux, bouche), on ajoute ensuite
+    les volumes qui en dependent (paupieres en peau, sillon de la bouche), puis build_body() reconstruit le corps.
+    res = finesse des metaballs (plus petit = plus de details, plus de triangles)."""
+    def __init__(self, coll_name, prefix, S, res=0.022):
+        self.P = prefix; self.S = S; self.claws = []; self.hooks = []; self.body = None
         self.HP = V((0, 0, 0)); self.HR = Matrix.Identity(3)
         for o in [o for o in bpy.data.objects if o.name.startswith(prefix)]: bpy.data.objects.remove(o, do_unlink=True)
+        for m in [m for m in bpy.data.metaballs if m.name.startswith(prefix) and m.users == 0]: bpy.data.metaballs.remove(m)
         sc = bpy.context.scene
         self.coll = bpy.data.collections.get(coll_name) or bpy.data.collections.new(coll_name)
         if self.coll.name not in sc.collection.children: sc.collection.children.link(self.coll)
-        self.mb = bpy.data.metaballs.new(prefix + "MB"); self.mb.resolution = 0.022; self.mb.render_resolution = 0.022
+        self.mb = bpy.data.metaballs.new(prefix + "MB"); self.mb.resolution = res; self.mb.render_resolution = res
         self.mb.threshold = 0.6
 
     # ---- tete orientable ----
@@ -133,13 +137,14 @@ class Dragon:
     def hd(self, d): return self.HR @ V(d)
 
     # ---- volumes ----
-    def ell(self, co, r, size=(1, 1, 1), st=2.4, rot=None):
+    def ell(self, co, r, size=(1, 1, 1), st=2.4, rot=None, neg=False):
+        """volume ellipsoide ; neg=True creuse au lieu d'ajouter."""
         e = self.mb.elements.new(type='ELLIPSOID'); e.co = co; e.radius = r * 1.74
-        e.size_x, e.size_y, e.size_z = size; e.stiffness = st
+        e.size_x, e.size_y, e.size_z = size; e.stiffness = st; e.use_negative = neg
         if rot is not None: e.rotation = rot
-    def hell(self, co, r, size=(1, 1, 1), st=2.4):
+    def hell(self, co, r, size=(1, 1, 1), st=2.4, neg=False):
         """volume de la tete (suit la rotation de la tete)."""
-        self.ell(self.hp(co), r, size, st, self.HR.to_quaternion())
+        self.ell(self.hp(co), r, size, st, self.HR.to_quaternion(), neg)
     def chain(self, pts, n=5, f=1.0, st=2.0):
         """membre continu : points (x, y, z, rayon) interpoles."""
         for i in range(len(pts) - 1):
@@ -158,9 +163,35 @@ class Dragon:
             for k in range(4):
                 t = k / 3; self.ell(b + d * 0.07 * size * t + V((0, 0, -0.01 * size * t)), (0.05 - 0.006 * t) * size, (1, 1, 0.85), 3.0)
             self.claws.append((b + d * 0.125 * size + V((0, 0, -0.008 * size)), d, size, claw_len, claw_r))
+    def dragon_foot(self, cx, cy, s, size=1.0, splay=8, claw_len=0.12, claw_r=0.028, rear=True):
+        """vraie patte de dragon (ado, adulte) : pied compact et osseux, 3 longs doigts articules vers l'avant
+        (phalanges, jointures marquees, coussinets sous les doigts, doigt du milieu plus long) + 1 ergot a l'arriere.
+        Griffes recourbees en crochet jusqu'au sol (creees par claws_build). Le bas de la jambe doit arriver
+        vers (cx, cy + 0.03*size, 0.17*size)."""
+        c = V((cx, cy, 0.0)); u = V((0, 0, 1)); k = size
+        self.ell(c + V((0, 0.02 * k, 0.085 * k)), 0.062 * k, (1.15, 1.3, 0.95), 2.6)        # dessus du pied
+        for a, ln in ((-33, 0.88), (0, 1.0), (33, 0.88)):
+            ang = math.radians((a + splay) * s); d = V((math.sin(ang), -math.cos(ang), 0))
+            P = [c + d * 0.045 * k + u * 0.075 * k, c + d * 0.15 * ln * k + u * 0.08 * k,
+                 c + d * 0.245 * ln * k + u * 0.056 * k, c + d * 0.32 * ln * k + u * 0.038 * k]
+            Rr = [0.04, 0.034, 0.029, 0.024]
+            self.chain([(*p, r * k) for p, r in zip(P, Rr)], 3, 1.0, 3.0)
+            for p, r in ((P[1], 0.037), (P[2], 0.031)):                                         # jointures
+                self.ell(p + u * 0.01 * k, r * k, (0.95, 1.05, 0.9), 3.2)
+            self.ell(c + d * 0.15 * ln * k + u * 0.03 * k, 0.03 * k, (1.0, 1.35, 0.75), 3.0)    # coussinets
+            self.ell(c + d * 0.29 * ln * k + u * 0.022 * k, 0.023 * k, (1.0, 1.3, 0.75), 3.0)
+            self.hooks.append((P[3] + d * 0.012 * k + u * 0.004 * k, d, claw_len * k * (0.85 + 0.15 * ln), claw_r * k))
+        if rear:                                                                                # ergot (vers l'arriere, cote interieur)
+            d = V((-s * 0.35, 1, 0)).normalized()
+            P = [c + d * 0.03 * k + u * 0.11 * k, c + d * 0.09 * k + u * 0.085 * k, c + d * 0.13 * k + u * 0.065 * k]
+            self.chain([(*P[0], 0.04 * k), (*P[1], 0.032 * k), (*P[2], 0.026 * k)], 3, 1.0, 2.6)
+            self.hooks.append((P[2] + d * 0.01 * k, d, claw_len * k * 0.55, claw_r * k * 0.85))
 
     def build_body(self):
+        """metaballs -> maillage. Rappelee apres ajout de volumes, elle remplace le corps precedent."""
         sc = bpy.context.scene
+        if self.body is not None:
+            me = self.body.data; bpy.data.objects.remove(self.body, do_unlink=True); bpy.data.meshes.remove(me)
         mo = bpy.data.objects.new(self.P + "MB", self.mb); sc.collection.objects.link(mo)
         for o in sc.objects: o.select_set(False)
         bpy.context.view_layer.objects.active = mo; mo.select_set(True); bpy.context.view_layer.update()
@@ -214,9 +245,13 @@ class Dragon:
         M = Matrix.Translation(base) @ q.to_matrix().to_4x4() @ Matrix.Diagonal((r * flatx, r * flat, d.length, 1))
         return self._mesh_obj(name, bm, mm, M, smooth)
     def claws_build(self, mm=KERA):
-        """griffes coniques acerees, separees de la patte."""
+        """griffes separees de la patte : coniques (pieds 'coussins' du bebe), en crochet (dragon_foot)."""
         for i, (tip, d, sz, L, r) in enumerate(self.claws):
             self.cone(f"Claw_{i}", tip - d * 0.02 * sz, tip + d * L * sz + V((0, 0, -L * 0.45 * sz)), r * sz, mm)
+        for i, (b, d, L, r) in enumerate(self.hooks):
+            p2 = b + d * 0.92 * L; p2.z = 0.004
+            p1 = b.lerp(p2, 0.5) + d * 0.08 * L + V((0, 0, 0.22 * L + 0.25 * (b.z - p2.z)))
+            self.tube(f"Claw_h{i}", [b - d * 0.15 * L, p1, p2], [r, r * 0.68, r * 0.06], mm, res=6, bev=3)
     def horn(self, name, pts, radii, mm=KERA, spikes=0, spike_len=0.08, spike_r=0.03):
         """corne a aretes definies (section a facettes) + pointes secondaires le long de l'arete."""
         self.tube(name, pts, radii, mm, res=14, bev=1, smooth=False)
@@ -264,59 +299,83 @@ class Dragon:
         q = frame_quat(n, t) @ Matrix.Rotation(math.radians(90), 4, 'Y').to_quaternion()   # pointes dans le sens de t
         return self.lemon(name, l - n * dep * 0.3, q, h, w, dep, mm, 1.4)                  # feuille effilee : longueur h, largeur w
 
-    def eye(self, s, l, n, nf, R, iris, lid_up=(0.4, 0), lid_lo=(0.6, 0), sink=0.45, rim=0.0, lid_thick=0.14, hl=True):
-        """oeil : globe (sphere) enfonce dans l'orbite, pupille fendue verticale posee sur le globe,
-        paupieres superieure et inferieure saillantes et arrondies (calottes epaissies au bord adouci ;
-        rim > 0 ajoute en plus un bourrelet le long du bord).
-        lid_up / lid_lo = (ouverture 0..1, inclinaison en degres) ; l'inclinaison donne l'expression."""
-        q = face_quat(nf, 0, s); c = l - n * R * sink; Mq = q.to_matrix()
-        self.sphere(f"Eye_{s}", c, (R, R, R), iris, q, 32)
+    # ---- yeux (2 passes : eye_at + eye_brow avant la 2e construction du corps, eye_build + eye_shell_lids apres) ----
+    def eye_at(self, s, l, n, nf, R, sink, gaze, spread=0.0):
+        """position d'un oeil : centre du globe enfonce de sink*R sous la peau, repere du visage (nf), regard.
+        gaze = point vise, LE MEME pour les deux yeux : ils regardent ensemble au meme endroit (pas de strabisme).
+        spread = petit ecart symetrique vers l'exterieur (yeux poses sur les cotes du crane, pupilles restant visibles)."""
+        c = l - n * R * sink
+        g = (V(gaze) - c).normalized() + self.hd(V((s * spread, 0, 0)))
+        return dict(s=s, c=c, R=R, qf=face_quat(nf, 0, s), g=g.normalized())
+
+    def eye_brow(self, E, h=0.95, fwd=0.35, size=1.0, tilt=0.0, w=1.5):
+        """arcade (volume de la tete) posee au-dessus de l'oeil, dans le repere du visage : elle recouvre le haut de la
+        paupiere -> seul le bord de la paupiere reste visible (pas de dome). h / fwd = hauteur / avancee (fractions de R),
+        tilt en degres (+ = bout exterieur releve, - = bout exterieur abaisse)."""
+        R, c, s = E["R"], E["c"], E["s"]
+        q = E["qf"] @ Quaternion((0, 1, 0), math.radians(-tilt * s))
+        self.ell(c + q @ V((0, -fwd * R, h * R)), R * size, (w, 0.62, 0.42), 3.0, q)
+
+    def eye_shell_lids(self, E, up=(0.56, 0), lo=(0.6, 0), thick=0.11):
+        """paupieres en coque (bebe, ado) : calottes autour du globe, epaissies au bord arrondi, orientees selon le visage
+        (elles ne suivent pas le regard). up / lo = (ouverture 0..1, inclinaison en degres)."""
+        s, c, R = E["s"], E["c"], E["R"]; Mf = E["qf"].to_matrix()
+        for tag, (op, tilt), sg in (("Haut", up, 1), ("Bas", lo, -1)):
+            nrm = Matrix.Rotation(math.radians(tilt * s), 3, 'Y') @ V((0, 0, sg))
+            bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=32, v_segments=16, radius=1)
+            bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.dot(nrm) < op], context='VERTS')
+            lid = self._mesh_obj(f"EyeLid{tag}_{s}", bm, CLAY, Matrix.Translation(c) @ Mf.to_4x4() @ Matrix.Scale(R * 1.04, 4))
+            so = lid.modifiers.new("epaisseur", 'SOLIDIFY'); so.thickness = thick; so.offset = 1.0; so.use_even_offset = True
+            sb = lid.modifiers.new("arrondi", 'SUBSURF'); sb.levels = 1; sb.render_levels = 1
+
+    def eye_build(self, E, iris, hl=True):
+        """globe (iris bleu glacier) + pupille fendue verticale tournes vers le point vise ;
+        reflet du meme cote sur les deux yeux (lumiere commune)."""
+        s, c, R = E["s"], E["c"], E["R"]
+        qg = face_quat(E["g"], 0, s); Mg = qg.to_matrix()
+        self.sphere(f"Eye_{s}", c, (R, R, R), iris, qg, 32)
         # pupille fendue : amande dessinee directement sur la surface du globe
         bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=16, v_segments=8, radius=1)
         for v in bm.verts:
             x, y, z = v.co; z *= max(0.0, 1 - x * x) ** 0.5
             ax, az = z * 0.12, x * 0.62
             v.co = V((math.sin(ax) * math.cos(az), -math.cos(ax) * math.cos(az), math.sin(az))) * (1.012 + y * 0.004)
-        self._mesh_obj(f"EyePupil_{s}", bm, DARK, Matrix.Translation(c) @ Mq.to_4x4() @ Matrix.Scale(R, 4))
+        self._mesh_obj(f"EyePupil_{s}", bm, DARK, Matrix.Translation(c) @ Mg.to_4x4() @ Matrix.Scale(R, 4))
         if hl:
-            dl = Mq @ V((-0.3, -0.85, 0.42)).normalized()
+            dl = (self.hd(V((-0.25, -1.0, 0.0))) + V((0, 0, 0.55))).normalized()
+            dl = (dl + E["g"] * 0.6).normalized()
             self.sphere(f"EyeHL_{s}", c + dl * R * 1.0, (R * 0.12, R * 0.12, R * 0.12), HL, None, 12)
-        # paupieres
-        for tag, (op, tilt), up in (("Haut", lid_up, 1), ("Bas", lid_lo, -1)):
-            nrm = Matrix.Rotation(math.radians(tilt * s), 3, 'Y') @ V((0, 0, up))
-            Rl = 1.04; bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=32, v_segments=16, radius=1)
-            bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.dot(nrm) < op], context='VERTS')
-            M = Matrix.Translation(c) @ Mq.to_4x4() @ Matrix.Scale(R * Rl, 4)
-            lid = self._mesh_obj(f"EyeLid{tag}_{s}", bm, CLAY, M)
-            if lid_thick > 0:                                    # epaisseur + bord arrondi
-                so = lid.modifiers.new("epaisseur", 'SOLIDIFY'); so.thickness = lid_thick; so.offset = 1.0; so.use_even_offset = True
-                sb = lid.modifiers.new("arrondi", 'SUBSURF'); sb.levels = 1; sb.render_levels = 1
-            e1 = nrm.cross(V((0, 1, 0))).normalized(); e2 = nrm.cross(e1); rad = math.sqrt(max(0.0, 1 - op * op))
-            ring = [nrm * op + (e1 * math.cos(a) + e2 * math.sin(a)) * rad for a in [k * 2 * math.pi / 48 for k in range(48)]]
-            front = [p.y < -0.35 for p in ring]
-            if rim <= 0 or all(front) or not any(front): continue
-            k0 = next(i for i in range(48) if front[i] and not front[i - 1])
-            arc = []
-            for k in range(48):
-                p = ring[(k0 + k) % 48]
-                if p.y >= -0.35: break
-                arc.append(c + Mq @ (p * R * Rl))
-            if len(arc) >= 3:
-                rr = [R * rim * (0.4 if i in (0, len(arc) - 1) else 1.0) for i in range(len(arc))]
-                self.tube(f"EyeLid{tag}Bord_{s}", arc, rr, CLAY, res=4, bev=3)
 
-    def mouth(self, name, ys, zs, radii, mm=DARK):
-        """ligne de bouche : points poses sur le cote du museau (rayons depuis le cote, dans le repere de la tete)."""
-        out = {}
-        for s in (-1, 1):
-            pts = []
-            for y, z in zip(ys, zs):
-                o = self.hp((s * 2.0, y, z)); d = self.hd((-s, 0, 0))
-                h_, l, n, _ = self.body.ray_cast(o, d)
-                if h_: pts.append((l - n * 0.006, n))
-            if len(pts) >= 2: self.tube(f"{name}_{s}", [p for p, _ in pts], radii[:len(pts)], mm)
-            out[s] = pts
+    # ---- bouche (2 passes : mouth_at + groove avant la 2e construction, mouth_build apres) ----
+    def mouth_at(self, half, yc, n=31):
+        """trace de la bouche, d'un coin a l'autre en passant par l'avant du museau.
+        half = points (x >= 0, y, z) du milieu de l'avant jusqu'au coin droit (repere de la tete) ; on les lisse,
+        on les symetrise, puis chaque point est pose sur la peau par un rayon horizontal dirige vers l'axe du museau
+        (vers (0, yc) a l'avant du museau, vers x = 0 sur les cotes). Renvoie [(point, normale)]."""
+        right = _resample(_smooth_poly(half, 3), (n + 1) // 2)
+        plan = [V((-p.x, p.y, p.z)) for p in reversed(right[1:])] + right
+        return self._surf(plan, yc), plan
+    def _surf(self, plan, yc):
+        out = []
+        for p in plan:
+            d = V((p.x, p.y - yc, 0)) if p.y < yc else V((1 if p.x >= 0 else -1, 0, 0))
+            if d.length < 1e-6: d = V((0, -1, 0))
+            l, nn = self.hhit(V((0, p.y, p.z)) if p.y >= yc else V((0, yc, p.z)), d.normalized(), 3.0)
+            out.append((l, nn))
         return out
+    def groove(self, pts, r, depth=0.35, st=2.6, step=0.5):
+        """sillon creuse dans la peau le long des points (volumes negatifs) -> vraie fente de bouche avec ombre."""
+        for (a, na), (b, nb) in zip(pts, pts[1:]):
+            k = max(1, int((b - a).length / (r * step)))
+            for i in range(k):
+                t = i / k; p = a.lerp(b, t); nn = na.lerp(nb, t).normalized()
+                self.ell(p + nn * r * (1 - depth), r, (1, 1, 1), st, neg=True)
+    def mouth_build(self, name, plan, yc, rad, mm=DARK):
+        """ligne sombre posee au fond du sillon (apres la 2e construction), plus fine aux coins."""
+        pts = self._surf(plan, yc); N = len(pts)
+        radii = [rad * (0.35 + 0.65 * math.sin(math.pi * (i + 0.5) / N) ** 0.6) for i in range(N)]
+        self.tube(name, [l - nn * rad * 0.6 for l, nn in pts], radii, mm, res=3, bev=2)
+        return pts
 
     def wing(self, s, root, K, F, E, W, rear, raise_deg=20, sweep_deg=0, sag=0.07, scallop=0.22, bone_r=0.03, mm=MEMB, bone=CLAY):
         """aile de chauve-souris : membrane tendue festonnee + os (phalanges). root en coordonnees locales."""

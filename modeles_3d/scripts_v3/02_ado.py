@@ -3,13 +3,14 @@
 # epaules, cuisses), tete plus allongee (museau prononce, joues encore rondes, machoire robuste), cou plus long,
 # queue longue et epaisse a la base avec un grand pique en losange, crete de plaques de la tete au bout de la queue,
 # cornes plus longues et plus recourbees, 2 petites pointes frontales, yeux a globe au regard determine,
-# pattes longues a 4 orteils et griffes allongees. Debout, tete tournee vers le spectateur. A lancer apres 01_bebe.py.
+# pattes longues de vrai dragon (3 doigts articules + ergot, griffes en crochet), bouche qui fait le tour du museau.
+# Debout, tete tournee vers le spectateur. A lancer apres 01_bebe.py.
 import bpy, math, os
 from mathutils import Vector as V, Matrix
 DIR = globals().get("DIR", r"C:\Users\user\OneDrive\Documents\robloxcreation\modeles_3d\scripts_v3")
 exec(open(os.path.join(DIR, "commun.py"), encoding="utf-8").read())
 
-D = Dragon("Ado", "Ado_", Matrix.Translation((5.0, 0, 0)) @ Matrix.Scale(1.15, 4))
+D = Dragon("Ado", "Ado_", Matrix.Translation((5.0, 0, 0)) @ Matrix.Scale(1.15, 4), res=0.017)
 HC = V((0, -0.95, 2.22))
 D.head_frame((0, -0.82, 2.08), yaw=14, roll=-6)               # tourne vers le spectateur, legerement inclinee
 # ---- tete ----
@@ -33,28 +34,43 @@ for s in (-1, 1):
     D.ell((s * 0.14, -0.56, 1.08), 0.17, (1, 0.75, 1.0), 3.2)  # pectoraux
     D.ell((s * 0.28, -0.34, 1.26), 0.16, (0.9, 1.1, 1.0), 3.2) # epaules
     for y in (-0.12, 0.08, 0.28): D.ell((s * 0.07, y, 0.9), 0.07, (1.2, 1.4, 0.35), 3.0)     # abdominaux (relief discret)
-    D.chain([(s * 0.22, -0.36, 1.15, 0.19), (s * 0.28, -0.28, 0.76, 0.145), (s * 0.29, -0.4, 0.34, 0.12), (s * 0.29, -0.48, 0.11, 0.11)])
+    D.chain([(s * 0.22, -0.36, 1.15, 0.19), (s * 0.28, -0.28, 0.76, 0.145), (s * 0.29, -0.4, 0.34, 0.11), (s * 0.29, -0.47, 0.19, 0.075)])
     D.ell((s * 0.28, -0.32, 0.86), 0.15, (0.9, 1.0, 1.3), 3.0) # avant-bras
-    D.foot(s * 0.29, -0.54, s, 1.2, claw_len=0.085, claw_r=0.025)
-    D.chain([(s * 0.25, 0.84, 1.1, 0.26), (s * 0.31, 0.62, 0.7, 0.17), (s * 0.32, 0.92, 0.36, 0.125), (s * 0.32, 0.82, 0.11, 0.11)])
+    D.ell((s * 0.3, -0.38, 0.36), 0.075, (1.0, 1.0, 1.1), 3.0) # poignet
+    D.dragon_foot(s * 0.29, -0.52, s, 1.15, claw_len=0.1, claw_r=0.024)
+    D.chain([(s * 0.25, 0.84, 1.1, 0.26), (s * 0.31, 0.62, 0.7, 0.17), (s * 0.32, 0.92, 0.38, 0.115), (s * 0.32, 0.79, 0.2, 0.075)])
     D.ell((s * 0.28, 0.8, 0.96), 0.25, (0.8, 1.05, 1.15), 3.2) # cuisses
-    D.foot(s * 0.32, 0.76, s, 1.25, claw_len=0.085, claw_r=0.025)
+    D.ell((s * 0.32, 0.96, 0.4), 0.07, (0.9, 1.1, 1.0), 3.2)   # talon (jarret) osseux
+    D.dragon_foot(s * 0.32, 0.74, s, 1.2, claw_len=0.1, claw_r=0.024)
 TAIL = [(0, 1.08, 1.16, 0.24), (0.02, 1.5, 1.06, 0.18), (0.06, 1.95, 0.95, 0.13), (0.12, 2.4, 0.88, 0.09), (0.18, 2.78, 0.9, 0.06), (0.22, 3.02, 0.94, 0.045)]
 D.chain(TAIL, 5, 0.95)
-body = D.build_body()
+body = D.build_body()                                           # 1re passe : sert a placer les yeux et la bouche
 
-# ---- yeux au regard determine ----
+# ---- yeux au regard calme et assure : les deux yeux regardent au meme endroit ----
 IRIS = iris_glacier("IrisAdo")
+GAZE = D.hp((0, -12.0, 2.3))                                    # point vise au loin, commun aux deux yeux
+EYES = []
 for s in (-1, 1):
     l, n = D.hhit(HC, (s * 0.58, -0.78, 0.12)); nf = (n + D.hd((0, -0.45, 0))).normalized()
-    D.eye(s, l, n, nf, 0.125, IRIS, lid_up=(0.42, -4), lid_lo=(0.5, 0), sink=0.62)
+    EYES.append(D.eye_at(s, l, n, nf, 0.125, 0.62, GAZE))
+# ---- bouche : fait le tour du museau, sourire en coin qui remonte vers les joues ----
+MOUTH_YC = -1.45
+MP, MPLAN = D.mouth_at([(0, -1.7, 2.06), (0.08, -1.65, 2.055), (0.14, -1.52, 2.05), (0.17, -1.35, 2.04), (0.19, -1.18, 2.05),
+                        (0.2, -1.06, 2.09), (0.2, -0.99, 2.13)], MOUTH_YC)
+D.groove(MP, 0.016, 0.32)
+body = D.build_body()                                           # 2e passe : corps final
+
+for E in EYES:
+    D.eye_build(E, IRIS); D.eye_shell_lids(E, up=(0.42, -4), lo=(0.5, 0), thick=0.14)
+for s in (-1, 1):
     l2, n2 = D.hhit((s * 0.07, -1.65, 2.22), (s * 0.3, -1, 0.4))
     D.sphere(f"Nostril_{s}", l2 - n2 * 0.01, (0.028, 0.028, 0.018), DARK, n2.to_track_quat('-Y', 'Z'), 12)
-M = D.mouth("Mouth", [-1.62, -1.5, -1.35, -1.2, -1.06], [2.07, 2.05, 2.03, 2.04, 2.08], [0.008, 0.012, 0.013, 0.012, 0.006])
-for s, pts in M.items():
-    if len(pts) >= 3:
-        p, n = pts[1]; b = p - n * 0.008
-        D.cone(f"Fang_{s}", b, b + D.hd((0, -0.01, -0.065)), 0.018, KERA)
+MP = D.mouth_build("Mouth", MPLAN, MOUTH_YC, 0.009)
+for s in (-1, 1):                                                 # 2 petits crocs qui depassent sur la levre
+    for y0, ln in ((-1.47, 0.075), (-1.3, 0.055)):
+        i = min((i for i in range(len(MPLAN)) if MPLAN[i].x * s > 0), key=lambda i: abs(MPLAN[i].y - y0))
+        p, n = MP[i]; b = p - n * 0.012 + D.hd((0, 0, 0.012))
+        D.cone(f"Fang_{s}_{y0}", b, b + D.hd((0, -0.008, -ln)) + n * 0.006, 0.02, KERA)
 
 # ---- cornes plus longues et recourbees, 2 pointes frontales, pointes de joues ----
 for s in (-1, 1):
@@ -94,3 +110,6 @@ if globals().get("RENDER", True):
     shot("v3_ado", (5.0, 0.5, 1.7), (0.6, -1, 0.3), 17, only="Ado")
     shot("v3_ado_tete", S @ D.hp(HC) + V((0, -0.3, -0.1)), (0.55, -1, 0.12), 6.5, only="Ado")
     shot("v3_ado_profil", (5.0, 0.8, 1.7), (1, -0.05, 0.12), 17, only="Ado")
+    mid = S @ ((EYES[0]["c"] + EYES[1]["c"]) / 2); fw = (S.to_3x3() @ D.hd(V((0, -1, 0)))).normalized()
+    shot("v3_ado_yeux", mid + fw * 0.15, fw + V((0.3, 0, 0.12)), 2.6, only="Ado")
+    shot("v3_ado_pattes", (5.3, -0.4, 0.25), (0.7, -1, 0.35), 4.5, only="Ado")
