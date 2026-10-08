@@ -13,3 +13,6 @@ sourcemap.json
 Thumbs.db
 *.tmp
 .vscode/
+
+# Blender backups
+*.blend1
