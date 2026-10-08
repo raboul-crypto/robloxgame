@@ -16,7 +16,7 @@ Les règles de forme (proportions bébé / ado / adulte) sont dans [GUIDE_FORMES
 
 | Stade | Référence | État |
 |---|---|---|
-| Bébé | bébé dragon assis, très mignon | Fait : tête ronde surdimensionnée, yeux bleu glacier à pupille fendue (regard innocent), sourire qui fait le tour du museau, pattes en « coussins » à 4 orteils, ailes sur le dos visibles des deux côtés, crête jusqu'au 1er tiers de la queue, pique en losange |
+| Bébé | bébé dragon assis, esprit « bébé dragon de film d'animation » (façon Krokmou, sans le copier) | Fait : tête large et plate penchée sur le côté, très grands yeux écartés à grosses pupilles, grand sourire d'une joue à l'autre, oreilles en lobes souples, petites cornes, pattes en « coussins » à 4 orteils, grandes ailes basses sur les côtés, queue enroulée vers l'avant avec pique en losange, crête jusqu'au 1er tiers de la queue |
 | Ado | esprit « jeune dragon de jeu de plateforme » (sans copier de personnage existant) | Fait : svelte et athlétique, cou plus long, regard calme et assuré, sourire en coin avec 2 petits crocs, cornes recourbées, crête jusqu'au bout de la queue, vraies pattes de dragon |
 | Adulte | grand dragon western, en version lissée | Fait : long et sec, très long cou, tête haute, yeux en amande sous une arcade, longue gueule à crocs, cornes à pointes secondaires, plaques d'armure, ailes immenses, vraies pattes de dragon |
 
@@ -24,7 +24,8 @@ Pattes de l'ado et de l'adulte : 3 doigts articulés (jointures, coussinets) + 1
 Les deux yeux visent le même point (plus de strabisme).
 
 À affiner : museau de l'adulte vu de face, sillon de la bouche un peu irrégulier de près (finesse des métaballs).
-Nombre de triangles actuel (avant allègement) : bébé ~102 000, ado ~180 000, adulte ~340 000.
+Nombre de triangles actuel (avant allègement) : bébé ~141 000, ado ~180 000, adulte ~340 000.
+Le bébé garde ses propres signes distinctifs (blanc, cornes, crête, pique de queue) : on s'inspire du style des films, on ne reprend pas le personnage.
 Ensuite : allègement + UV, test d'import dans Roblox Studio, puis les autres types (wyvern, drake, hydre, oriental, amphiptère, aquatique) et les textures.
 
 ## Contenu

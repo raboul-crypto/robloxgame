@@ -82,9 +82,9 @@ def shot(name, tgt, d, dist, only=None, base="C:\\Users\\user\\OneDrive\\Documen
     sc.render.filepath = base + name + ".png"; bpy.ops.render.render(write_still=True)
     for x in hidden: x.hide_render = False
 
-def face_quat(n, tilt_deg, s):
-    """axe -Y local = normale, Z local ~ vers le haut, puis inclinaison autour de la normale."""
-    up = V((0, 0, 1)); z = (up - n * up.dot(n)).normalized()
+def face_quat(n, tilt_deg, s, up=None):
+    """axe -Y local = normale, Z local ~ vers le haut (up, par defaut vertical), puis inclinaison autour de la normale."""
+    up = V((0, 0, 1)) if up is None else V(up); z = (up - n * up.dot(n)).normalized()
     y = -n; x = y.cross(z)
     q = Matrix((x, y, z)).transposed().to_quaternion()
     return q @ Matrix.Rotation(math.radians(tilt_deg * s), 4, 'Y').to_quaternion()
@@ -306,7 +306,8 @@ class Dragon:
         spread = petit ecart symetrique vers l'exterieur (yeux poses sur les cotes du crane, pupilles restant visibles)."""
         c = l - n * R * sink
         g = (V(gaze) - c).normalized() + self.hd(V((s * spread, 0, 0)))
-        return dict(s=s, c=c, R=R, qf=face_quat(nf, 0, s), g=g.normalized())
+        up = self.hd(V((0, 0, 1)))                       # le "haut" de la tete : paupieres et pupilles suivent son inclinaison
+        return dict(s=s, c=c, R=R, qf=face_quat(nf, 0, s, up), g=g.normalized(), up=up)
 
     def eye_brow(self, E, h=0.95, fwd=0.35, size=1.0, tilt=0.0, w=1.5):
         """arcade (volume de la tete) posee au-dessus de l'oeil, dans le repere du visage : elle recouvre le haut de la
@@ -328,23 +329,24 @@ class Dragon:
             so = lid.modifiers.new("epaisseur", 'SOLIDIFY'); so.thickness = thick; so.offset = 1.0; so.use_even_offset = True
             sb = lid.modifiers.new("arrondi", 'SUBSURF'); sb.levels = 1; sb.render_levels = 1
 
-    def eye_build(self, E, iris, hl=True):
+    def eye_build(self, E, iris, hl=True, pupil=(0.12, 0.62), hl_size=0.12):
         """globe (iris bleu glacier) + pupille fendue verticale tournes vers le point vise ;
-        reflet du meme cote sur les deux yeux (lumiere commune)."""
+        reflet du meme cote sur les deux yeux (lumiere commune).
+        pupil = (demi-largeur, demi-hauteur) de la pupille en radians sur le globe (large = pupille dilatee, mignon)."""
         s, c, R = E["s"], E["c"], E["R"]
-        qg = face_quat(E["g"], 0, s); Mg = qg.to_matrix()
+        qg = face_quat(E["g"], 0, s, E["up"]); Mg = qg.to_matrix()
         self.sphere(f"Eye_{s}", c, (R, R, R), iris, qg, 32)
         # pupille fendue : amande dessinee directement sur la surface du globe
         bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=16, v_segments=8, radius=1)
         for v in bm.verts:
             x, y, z = v.co; z *= max(0.0, 1 - x * x) ** 0.5
-            ax, az = z * 0.12, x * 0.62
+            ax, az = z * pupil[0], x * pupil[1]
             v.co = V((math.sin(ax) * math.cos(az), -math.cos(ax) * math.cos(az), math.sin(az))) * (1.012 + y * 0.004)
         self._mesh_obj(f"EyePupil_{s}", bm, DARK, Matrix.Translation(c) @ Mg.to_4x4() @ Matrix.Scale(R, 4))
         if hl:
             dl = (self.hd(V((-0.25, -1.0, 0.0))) + V((0, 0, 0.55))).normalized()
             dl = (dl + E["g"] * 0.6).normalized()
-            self.sphere(f"EyeHL_{s}", c + dl * R * 1.0, (R * 0.12, R * 0.12, R * 0.12), HL, None, 12)
+            self.sphere(f"EyeHL_{s}", c + dl * R * 1.0, (R * hl_size,) * 3, HL, None, 12)
 
     # ---- bouche (2 passes : mouth_at + groove avant la 2e construction, mouth_build apres) ----
     def mouth_at(self, half, yc, n=31):
