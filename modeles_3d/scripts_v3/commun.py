@@ -264,9 +264,10 @@ class Dragon:
         q = frame_quat(n, t) @ Matrix.Rotation(math.radians(90), 4, 'Y').to_quaternion()   # pointes dans le sens de t
         return self.lemon(name, l - n * dep * 0.3, q, h, w, dep, mm, 1.4)                  # feuille effilee : longueur h, largeur w
 
-    def eye(self, s, l, n, nf, R, iris, lid_up=(0.4, 0), lid_lo=(0.6, 0), sink=0.45, rim=0.09, hl=True):
+    def eye(self, s, l, n, nf, R, iris, lid_up=(0.4, 0), lid_lo=(0.6, 0), sink=0.45, rim=0.0, lid_thick=0.14, hl=True):
         """oeil : globe (sphere) enfonce dans l'orbite, pupille fendue verticale posee sur le globe,
-        paupieres superieure et inferieure saillantes et arrondies (calottes + bourrelet).
+        paupieres superieure et inferieure saillantes et arrondies (calottes epaissies au bord adouci ;
+        rim > 0 ajoute en plus un bourrelet le long du bord).
         lid_up / lid_lo = (ouverture 0..1, inclinaison en degres) ; l'inclinaison donne l'expression."""
         q = face_quat(nf, 0, s); c = l - n * R * sink; Mq = q.to_matrix()
         self.sphere(f"Eye_{s}", c, (R, R, R), iris, q, 32)
@@ -283,10 +284,13 @@ class Dragon:
         # paupieres
         for tag, (op, tilt), up in (("Haut", lid_up, 1), ("Bas", lid_lo, -1)):
             nrm = Matrix.Rotation(math.radians(tilt * s), 3, 'Y') @ V((0, 0, up))
-            Rl = 1.12; bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=40, v_segments=20, radius=1)
+            Rl = 1.04; bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=32, v_segments=16, radius=1)
             bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.dot(nrm) < op], context='VERTS')
             M = Matrix.Translation(c) @ Mq.to_4x4() @ Matrix.Scale(R * Rl, 4)
-            self._mesh_obj(f"EyeLid{tag}_{s}", bm, CLAY, M)
+            lid = self._mesh_obj(f"EyeLid{tag}_{s}", bm, CLAY, M)
+            if lid_thick > 0:                                    # epaisseur + bord arrondi
+                so = lid.modifiers.new("epaisseur", 'SOLIDIFY'); so.thickness = lid_thick; so.offset = 1.0; so.use_even_offset = True
+                sb = lid.modifiers.new("arrondi", 'SUBSURF'); sb.levels = 1; sb.render_levels = 1
             e1 = nrm.cross(V((0, 1, 0))).normalized(); e2 = nrm.cross(e1); rad = math.sqrt(max(0.0, 1 - op * op))
             ring = [nrm * op + (e1 * math.cos(a) + e2 * math.sin(a)) * rad for a in [k * 2 * math.pi / 48 for k in range(48)]]
             front = [p.y < -0.35 for p in ring]
