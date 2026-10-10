@@ -112,7 +112,7 @@ function CombatService.spawnWildDragon(speciesId: string, position: Vector3): Wi
 	local stage = "Bebe"
 	local maxHp = Worlds.List[1].WildHp.Bebe or 80
 
-	local model = DragonModels.getModel(speciesId, stage)
+	local model = DragonModels.getWildModel(speciesId, stage)
 	model.Name = "Wild_" .. speciesId
 	model:SetAttribute("IsWild", true)
 	model:SetAttribute("SpeciesId", speciesId)
@@ -122,14 +122,16 @@ function CombatService.spawnWildDragon(speciesId: string, position: Vector3): Wi
 		primary.Anchored = true
 	end
 
-	model:PivotTo(CFrame.new(position) * CFrame.Angles(0, math.rad(math.random(0, 360)), 0))
+	local groundOffset = DragonModels.getGroundOffset(model)
+	model:PivotTo(CFrame.new(position + Vector3.new(0, groundOffset, 0)) * CFrame.Angles(0, math.rad(math.random(0, 360)), 0))
 	model.Parent = wildFolder
 
-	-- Barre de vie 3D (BillboardGui)
+	-- Barre de vie 3D (BillboardGui), au-dessus de la tête quelle que soit la taille
+	local _, modelSize = model:GetBoundingBox()
 	local billboard = Instance.new("BillboardGui")
 	billboard.Name = "WildHealthBar"
 	billboard.Size = UDim2.fromOffset(130, 36)
-	billboard.StudsOffset = Vector3.new(0, 3.5, 0)
+	billboard.StudsOffset = Vector3.new(0, modelSize.Y / 2 + 1.5, 0)
 	billboard.AlwaysOnTop = true
 	billboard.Adornee = primary
 

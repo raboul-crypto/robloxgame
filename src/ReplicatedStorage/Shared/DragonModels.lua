@@ -60,4 +60,41 @@ function DragonModels.getModel(dragonId: string, stage: string?): Model
 	return model
 end
 
+-- Taille des dragons sauvages : l'adulte fait 2 fois la hauteur d'un personnage Roblox (R15 ≈ 5,5 studs).
+-- Les familiers (PetFollowController) gardent la taille de base de getModel.
+local PLAYER_HEIGHT = 5.5
+local WILD_ADULT_HEIGHT = PLAYER_HEIGHT * 2
+local wildScaleCache: { [string]: number } = {}
+
+-- Facteur d'échelle d'une espèce, calculé sur son adulte puis appliqué à tous les stades (proportions conservées).
+function DragonModels.getWildScale(dragonId: string): number
+	local cached = wildScaleCache[dragonId]
+	if cached then
+		return cached
+	end
+	local adult = DragonModels.getModel(dragonId, "Adulte")
+	local _, size = adult:GetBoundingBox()
+	adult:Destroy()
+	local scale = size.Y > 0 and WILD_ADULT_HEIGHT / size.Y or 1
+	wildScaleCache[dragonId] = scale
+	return scale
+end
+
+--[[
+	Modèle d'un dragon sauvage (agrandi). Le pivot reste au centre du Body :
+	utiliser getGroundOffset pour poser le dragon au sol.
+]]
+function DragonModels.getWildModel(dragonId: string, stage: string?): Model
+	local model = DragonModels.getModel(dragonId, stage)
+	model:ScaleTo(DragonModels.getWildScale(dragonId))
+	return model
+end
+
+-- Décalage vertical entre le sol et le pivot pour que les pattes touchent le sol.
+function DragonModels.getGroundOffset(model: Model): number
+	local pivot = model:GetPivot()
+	local cf, size = model:GetBoundingBox()
+	return pivot.Position.Y - (cf.Position.Y - size.Y / 2)
+end
+
 return DragonModels
