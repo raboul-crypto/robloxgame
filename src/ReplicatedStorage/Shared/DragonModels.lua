@@ -60,33 +60,40 @@ function DragonModels.getModel(dragonId: string, stage: string?): Model
 	return model
 end
 
--- Taille des dragons sauvages : l'adulte fait 2 fois la hauteur d'un personnage Roblox (R15 ≈ 5,5 studs).
+-- Hauteur des dragons sauvages par stade, en studs (personnage Roblox R15 ≈ 5,5 studs) :
+-- bébé à hauteur de genou, jeune un peu plus petit que le joueur, adulte 2 fois le joueur.
 -- Les familiers (PetFollowController) gardent la taille de base de getModel.
-local PLAYER_HEIGHT = 5.5
-local WILD_ADULT_HEIGHT = PLAYER_HEIGHT * 2
+local WILD_HEIGHT: { [string]: number } = {
+	Bebe = 2.2,
+	Jeune = 4.5,
+	Adulte = 11,
+}
 local wildScaleCache: { [string]: number } = {}
 
--- Facteur d'échelle d'une espèce, calculé sur son adulte puis appliqué à tous les stades (proportions conservées).
-function DragonModels.getWildScale(dragonId: string): number
-	local cached = wildScaleCache[dragonId]
+-- Facteur d'échelle d'une espèce à un stade donné pour atteindre WILD_HEIGHT.
+function DragonModels.getWildScale(dragonId: string, stage: string?): number
+	local s = stage or "Bebe"
+	local key = dragonId .. "_" .. s
+	local cached = wildScaleCache[key]
 	if cached then
 		return cached
 	end
-	local adult = DragonModels.getModel(dragonId, "Adulte")
-	local _, size = adult:GetBoundingBox()
-	adult:Destroy()
-	local scale = size.Y > 0 and WILD_ADULT_HEIGHT / size.Y or 1
-	wildScaleCache[dragonId] = scale
+	local model = DragonModels.getModel(dragonId, s)
+	local _, size = model:GetBoundingBox()
+	model:Destroy()
+	local target = WILD_HEIGHT[s] or WILD_HEIGHT.Adulte
+	local scale = size.Y > 0 and target / size.Y or 1
+	wildScaleCache[key] = scale
 	return scale
 end
 
 --[[
-	Modèle d'un dragon sauvage (agrandi). Le pivot reste au centre du Body :
+	Modèle d'un dragon sauvage à la taille de son stade. Le pivot reste au centre du Body :
 	utiliser getGroundOffset pour poser le dragon au sol.
 ]]
 function DragonModels.getWildModel(dragonId: string, stage: string?): Model
 	local model = DragonModels.getModel(dragonId, stage)
-	model:ScaleTo(DragonModels.getWildScale(dragonId))
+	model:ScaleTo(DragonModels.getWildScale(dragonId, stage))
 	return model
 end
 
