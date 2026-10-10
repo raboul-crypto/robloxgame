@@ -101,10 +101,21 @@ local function makeTemplate(id: string, stage: string): Model?
 	body.Parent = model
 	model.PrimaryPart = body
 
+	-- Si l'espèce a une couche d'yeux détaillée, les anciennes cellules "eye" (trop grossières) prennent la couleur de la peau
+	local skinColor: { any }? = nil
+	if st.Eyes then
+		for _, col in ipairs(colors) do
+			if col[1] == "main" then skinColor = col end
+		end
+	end
+
 	local accentColor = Color3.new(1, 1, 1)
 	for _, b in ipairs(boxes) do
 		local x, y, z, w, h, d, c = b[1], b[2], b[3], b[4], b[5], b[6], b[7]
 		local col = colors[c]
+		if skinColor and col[1] == "eye" then
+			col = skinColor
+		end
 		local role = col[1] :: string
 		local color = Color3.fromRGB(col[2], col[3], col[4])
 		local p = Instance.new("Part")
@@ -125,6 +136,36 @@ local function makeTemplate(id: string, stage: string): Model?
 		p.Anchored = true
 		p.CastShadow = role ~= "glow" and role ~= "star"
 		p.Parent = model
+	end
+
+	-- Yeux détaillés : plaques d'une demi-cellule (œil, pupille, reflet) posées sur la surface de la tête.
+	-- Format : x,y,plan,côté,couleur ; x et y en demi-cellules, plan = surface extérieure en demi-cellules, côté = ±1.
+	if st.Eyes then
+		local half = cell / 2
+		local thick = cell * 0.08
+		for entry in string.gmatch(st.Eyes, "[^;]+") do
+			local v = string.split(entry, ",")
+			local hx, hy, plane, side, c = tonumber(v[1]) :: number, tonumber(v[2]) :: number, tonumber(v[3]) :: number,
+				tonumber(v[4]) :: number, tonumber(v[5]) :: number
+			local col = colors[c]
+			local role = col[1] :: string
+			local p = Instance.new("Part")
+			p.Name = role == "dark" and "pupil" or role
+			p.Size = Vector3.new(thick, half, half)
+			-- viewer (x, y, z) -> Roblox (z, y, -x), comme les boîtes
+			p.CFrame = CFrame.new(plane * half + side * thick / 2, (hy + 0.5) * half, -(hx + 0.5) * half)
+			p.Color = Color3.fromRGB(col[2], col[3], col[4])
+			p.Material = (role == "eye" or role == "hi") and Enum.Material.Neon or Enum.Material.SmoothPlastic
+			p.TopSurface = Enum.SurfaceType.Smooth
+			p.BottomSurface = Enum.SurfaceType.Smooth
+			p.CanCollide = false
+			p.CanTouch = false
+			p.CanQuery = false
+			p.Massless = true
+			p.Anchored = true
+			p.CastShadow = false
+			p.Parent = model
+		end
 	end
 
 	-- Couleur d'accent pour les effets
