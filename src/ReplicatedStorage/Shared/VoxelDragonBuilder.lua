@@ -138,24 +138,62 @@ local function makeTemplate(id: string, stage: string): Model?
 		p.Parent = model
 	end
 
-	-- Yeux détaillés : plaques d'une demi-cellule (œil, pupille, reflet) posées sur la surface de la tête.
-	-- Format : x,y,plan,côté,couleur ; x et y en demi-cellules, plan = surface extérieure en demi-cellules, côté = ±1.
+	-- Yeux en volume, lisibles de face, de 3/4 et de profil.
+	-- La couche Eyes (x,y,plan,côté,couleur ; x/y/plan en demi-cellules, côté = ±1) sert à localiser chaque œil.
+	-- Chaque œil devient un globe qui dépasse de la tête ; la pupille occupe son coin avant-extérieur,
+	-- donc elle apparaît à la fois sur la face latérale et sur la face avant, avec un reflet blanc par-dessus.
 	if st.Eyes then
 		local half = cell / 2
-		local thick = cell * 0.08
+		local eps = cell * 0.03
+		local eyeCol, darkCol = nil, nil
+		local plates = {}
 		for entry in string.gmatch(st.Eyes, "[^;]+") do
 			local v = string.split(entry, ",")
-			local hx, hy, plane, side, c = tonumber(v[1]) :: number, tonumber(v[2]) :: number, tonumber(v[3]) :: number,
-				tonumber(v[4]) :: number, tonumber(v[5]) :: number
-			local col = colors[c]
-			local role = col[1] :: string
+			local col = colors[tonumber(v[5]) :: number]
+			if col[1] == "eye" then eyeCol = col end
+			if col[1] == "dark" then darkCol = col end
+			table.insert(plates, {
+				x = tonumber(v[1]) :: number, y = tonumber(v[2]) :: number, plane = tonumber(v[3]) :: number,
+				side = tonumber(v[4]) :: number, dark = col[1] == "dark",
+			})
+		end
+
+		-- Regroupe les plaques voisines en yeux (les hydres ont plusieurs têtes)
+		local group: { number } = {}
+		local function find(i: number): number
+			while group[i] ~= i do i = group[i] end
+			return i
+		end
+		for i = 1, #plates do group[i] = i end
+		for i = 1, #plates do
+			for j = i + 1, #plates do
+				local a, b = plates[i], plates[j]
+				if a.side == b.side and math.abs(a.x - b.x) <= 1.5 and math.abs(a.y - b.y) <= 1.5 then
+					group[find(i)] = find(j)
+				end
+			end
+		end
+		local eyes: { [number]: any } = {}
+		for i, p in ipairs(plates) do
+			local r = find(i)
+			local e = eyes[r]
+			if not e then
+				e = { side = p.side, x0 = p.x, x1 = p.x + 1, y0 = p.y, y1 = p.y + 1, plane = p.plane, d0 = math.huge, d1 = -math.huge }
+				eyes[r] = e
+			end
+			e.x0 = math.min(e.x0, p.x); e.x1 = math.max(e.x1, p.x + 1)
+			e.y0 = math.min(e.y0, p.y); e.y1 = math.max(e.y1, p.y + 1)
+			e.plane = p.side > 0 and math.max(e.plane, p.plane) or math.min(e.plane, p.plane)
+			if p.dark then e.d0 = math.min(e.d0, p.y); e.d1 = math.max(e.d1, p.y + 1) end
+		end
+
+		local function eyePart(name: string, col: { any }, neon: boolean, xa: number, xb: number, ya: number, yb: number, za: number, zb: number)
 			local p = Instance.new("Part")
-			p.Name = role == "dark" and "pupil" or role
-			p.Size = Vector3.new(thick, half, half)
-			-- viewer (x, y, z) -> Roblox (z, y, -x), comme les boîtes
-			p.CFrame = CFrame.new(plane * half + side * thick / 2, (hy + 0.5) * half, -(hx + 0.5) * half)
+			p.Name = name
+			p.Size = Vector3.new(math.abs(xb - xa), yb - ya, zb - za)
+			p.CFrame = CFrame.new((xa + xb) / 2, (ya + yb) / 2, (za + zb) / 2)
 			p.Color = Color3.fromRGB(col[2], col[3], col[4])
-			p.Material = (role == "eye" or role == "hi") and Enum.Material.Neon or Enum.Material.SmoothPlastic
+			p.Material = neon and Enum.Material.Neon or Enum.Material.SmoothPlastic
 			p.TopSurface = Enum.SurfaceType.Smooth
 			p.BottomSurface = Enum.SurfaceType.Smooth
 			p.CanCollide = false
@@ -165,6 +203,74 @@ local function makeTemplate(id: string, stage: string): Model?
 			p.Anchored = true
 			p.CastShadow = false
 			p.Parent = model
+		end
+
+		-- Occupation des cellules, pour trouver la vraie surface de la tête sur toute l'emprise de l'œil
+		local occ: { [number]: boolean } = {}
+		local function key(x: number, y: number, z: number): number
+			return ((x + 300) * 600 + (y + 300)) * 600 + (z + 300)
+		end
+		for _, b in ipairs(boxes) do
+			for i = b[1], b[1] + b[4] - 1 do
+				for j = b[2], b[2] + b[5] - 1 do
+					for k = b[3], b[3] + b[6] - 1 do
+						occ[key(i, j, k)] = true
+					end
+				end
+			end
+		end
+		-- Couche latérale extérieure contiguë au-dessus de l'emprise [xa, xb[ × [ya, yb[ (en cellules)
+		local function outerSurface(xa: number, xb: number, ya: number, yb: number, plane: number, side: number): number
+			local layer = side > 0 and plane - 1 or plane
+			local function layerHit(l: number): boolean
+				for i = xa, xb - 1 do
+					for j = ya, yb - 1 do
+						if occ[key(i, j, l)] then return true end
+					end
+				end
+				return false
+			end
+			while layerHit(layer + side) do
+				layer += side
+			end
+			return side > 0 and layer + 1 or layer
+		end
+
+		local white = { "hi", 255, 255, 255 }
+		local dark = darkCol or { "dark", 10, 10, 14 }
+		local iris = eyeCol or { "eye", 255, 220, 60 }
+		for _, e in pairs(eyes) do
+			local s = e.side
+			-- dimensions du globe (studs) ; viewer x -> Roblox -Z (l'avant de la tête est vers -Z)
+			local w = math.max((e.x1 - e.x0) * half, cell * 1.5)
+			local h = math.max((e.y1 - e.y0) * half, cell * 1.25)
+			local zMid = -((e.x0 + e.x1) / 2) * half
+			local yMid = ((e.y0 + e.y1) / 2) * half
+			local front, back = zMid - w / 2, zMid + w / 2
+			local bottom, top = yMid - h / 2, yMid + h / 2
+			local plane = math.round(e.plane / 2) -- en cellules
+			plane = outerSurface(math.floor(-back / cell), math.ceil(-front / cell), math.floor(bottom / cell), math.ceil(top / cell), plane, s)
+			local surface = plane * cell
+			local bulge = math.max(cell * 0.75, w * 0.45) -- dépassement hors de la tête
+			local inner = surface - s * cell * 0.5
+			local outer = surface + s * bulge
+			eyePart("eye", iris, true, inner, outer, bottom, top, front, back)
+
+			-- pupille au coin avant-extérieur : visible de face, de 3/4 et de profil
+			local pd0 = e.d0 < math.huge and e.d0 * half or bottom + h * 0.15
+			local pd1 = e.d1 > -math.huge and e.d1 * half or top - h * 0.2
+			local ph = math.clamp(pd1 - pd0, h * 0.45, h * 0.75)
+			local pyMid = math.clamp((pd0 + pd1) / 2, bottom + ph / 2, top - ph / 2)
+			local pw = w * 0.55
+			local pdep = bulge * 0.7
+			eyePart("pupil", dark, false, outer - s * pdep, outer + s * eps,
+				pyMid - ph / 2, pyMid + ph / 2, front - eps, front + pw)
+
+			-- reflet en haut du coin de la pupille
+			local hs = math.min(pw, ph, pdep) * 0.45
+			local hyTop = pyMid + ph / 2
+			eyePart("hi", white, true, outer - s * hs, outer + s * eps * 2,
+				hyTop - hs, hyTop, front - eps * 2, front + hs)
 		end
 	end
 
