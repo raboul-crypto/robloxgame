@@ -63,11 +63,132 @@ function VoxelDragonBuilder.has(id: string): boolean
 	return getData(id) ~= nil
 end
 
+-- Effet de particules selon l'élément, et attributs communs du modèle
+local function addElementFX(model: Model, body: BasePart, data: any, colors: { { any } }, stage: string)
+	local element = normElement(data.Element)
+	local fx = FX[element]
+	if fx then
+		local accentColor = Color3.new(1, 1, 1)
+		for _, col in ipairs(colors) do
+			if col[1] == fx.Color then accentColor = Color3.fromRGB(col[2], col[3], col[4]) end
+		end
+		local att = Instance.new("Attachment")
+		att.Name = "FX"
+		att.Parent = body
+		local e = Instance.new("ParticleEmitter")
+		e.Name = "ElementFX"
+		e.Color = ColorSequence.new(accentColor)
+		e.LightEmission = fx.Light
+		e.Size = NumberSequence.new({ NumberSequenceKeypoint.new(0, fx.Size * (stage == "Bebe" and 0.7 or 1)), NumberSequenceKeypoint.new(1, 0) })
+		e.Transparency = NumberSequence.new(0.1, 1)
+		e.Lifetime = NumberRange.new(1.2, 2.2)
+		e.Rate = fx.Rate * (stage == "Adulte" and 1.5 or 1)
+		e.Speed = fx.Speed
+		e.SpreadAngle = Vector2.new(180, 180)
+		e.Acceleration = fx.Accel
+		e.Shape = Enum.ParticleEmitterShape.Box
+		e.Parent = att
+	end
+	model:SetAttribute("Element", element)
+	model:SetAttribute("Stage", stage)
+	model:SetAttribute("Voxel", true)
+end
+
+-- Directions des axes du viewer (1:+x 2:-x 3:+y 4:-y 5:+z 6:-z) converties en Roblox : x -> -Z, y -> Y, z -> X
+local AXIS_DIR = {
+	Vector3.new(0, 0, -1), Vector3.new(0, 0, 1), Vector3.new(0, 1, 0),
+	Vector3.new(0, -1, 0), Vector3.new(1, 0, 0), Vector3.new(-1, 0, 0),
+}
+local AXIS_INDEX = { 1, 1, 2, 2, 3, 3 } -- axe du viewer (1 = x, 2 = y, 3 = z) de chaque direction
+
+--[[
+	Modèle « mi-voxel / low poly » : gros blocs et pentes (WedgePart) aux arêtes arrondies, yeux en volume.
+	Format LowPoly.Parts : "B,x0,y0,z0,x1,y1,z1,c" (bloc) ou "W,x0,y0,z0,x1,y1,z1,c,a,b" (pente qui coupe l'arête
+	entre les faces a et b) ; coordonnées en voxels du viewer, 1 voxel = CELL / 2 studs.
+]]
+local function makeLowPoly(data: any, stage: string, lp: any): Model
+	local vox = CELL / 2 * (data.Giant and GIANT or 1)
+	local colors: { { any } } = lp.Colors
+	local model = Instance.new("Model")
+	model.Name = data.Name
+
+	local parts = {}
+	local minV = Vector3.new(math.huge, math.huge, math.huge)
+	local maxV = -minV
+	for entry in string.gmatch(lp.Parts, "[^;]+") do
+		local v = string.split(entry, ",")
+		local a = { tonumber(v[2]) :: number, tonumber(v[3]) :: number, tonumber(v[4]) :: number }
+		local b = { tonumber(v[5]) :: number, tonumber(v[6]) :: number, tonumber(v[7]) :: number }
+		local col = colors[tonumber(v[8]) :: number]
+		local role = col[1] :: string
+		local p: BasePart
+		-- centre et taille en Roblox : viewer (x, y, z) -> (z, y, -x)
+		local center = Vector3.new((a[3] + b[3]) / 2, (a[2] + b[2]) / 2, -(a[1] + b[1]) / 2) * vox
+		local ext = { (b[1] - a[1]) * vox, (b[2] - a[2]) * vox, (b[3] - a[3]) * vox }
+		if v[1] == "W" then
+			local ia, ib = tonumber(v[9]) :: number, tonumber(v[10]) :: number
+			local ax, bx = AXIS_INDEX[ia], AXIS_INDEX[ib]
+			local rx = 6 - ax - bx -- axe restant (1 + 2 + 3 = 6)
+			local dirY, dirZ = AXIS_DIR[ia], -AXIS_DIR[ib]
+			p = Instance.new("WedgePart")
+			p.Size = Vector3.new(ext[rx], ext[ax], ext[bx])
+			p.CFrame = CFrame.fromMatrix(center, dirY:Cross(dirZ), dirY, dirZ)
+		else
+			p = Instance.new("Part")
+			p.Size = Vector3.new(ext[3], ext[2], ext[1])
+			p.CFrame = CFrame.new(center)
+		end
+		p.Name = role == "dark" and "pupil" or role
+		p.Color = Color3.fromRGB(col[2], col[3], col[4])
+		p.Material = NEON[role] and Enum.Material.Neon or Enum.Material.SmoothPlastic
+		if MEM[role] and data.FinAlpha then p.Transparency = 0.25 end
+		if data.Metal and (role == "main" or role == "main2" or role == "acc" or role == "acc2") then p.Reflectance = 0.15 end
+		p.TopSurface = Enum.SurfaceType.Smooth
+		p.BottomSurface = Enum.SurfaceType.Smooth
+		p.CanCollide = false
+		p.CanTouch = false
+		p.CanQuery = false
+		p.Massless = true
+		p.Anchored = true
+		p.CastShadow = role ~= "glow" and role ~= "star" and role ~= "eye" and role ~= "hi"
+		table.insert(parts, p)
+		local box = Vector3.new(ext[3], ext[2], ext[1]) / 2
+		minV = minV:Min(center - box); maxV = maxV:Max(center + box)
+	end
+
+	-- pieds au sol (y = 0) et corps centré, comme les modèles voxel
+	local offset = Vector3.new(-(minV.X + maxV.X) / 2, -minV.Y, -(minV.Z + maxV.Z) / 2)
+	local size = maxV - minV
+	local body = Instance.new("Part")
+	body.Name = "Body"
+	body.Size = size
+	body.Transparency = 1
+	body.CanCollide = false
+	body.CanTouch = false
+	body.CanQuery = false
+	body.Massless = true
+	body.Anchored = true
+	body.CFrame = CFrame.new(0, size.Y / 2, 0)
+	body.Parent = model
+	model.PrimaryPart = body
+	for _, p in ipairs(parts) do
+		p.CFrame = p.CFrame + offset
+		p.Parent = model
+	end
+
+	addElementFX(model, body, data, colors, stage)
+	model:SetAttribute("LowPoly", true)
+	return model
+end
+
 local function makeTemplate(id: string, stage: string): Model?
 	local data = getData(id)
 	if not data then return nil end
 	local st = data[stage] or data.Adulte
 	if not st then return nil end
+	if st.LowPoly then
+		return makeLowPoly(data, stage, st.LowPoly)
+	end
 
 	local cell = CELL * (data.Giant and GIANT or 1)
 	local colors: { { any } } = st.Colors
@@ -109,7 +230,6 @@ local function makeTemplate(id: string, stage: string): Model?
 		end
 	end
 
-	local accentColor = Color3.new(1, 1, 1)
 	for _, b in ipairs(boxes) do
 		local x, y, z, w, h, d, c = b[1], b[2], b[3], b[4], b[5], b[6], b[7]
 		local col = colors[c]
@@ -274,34 +394,7 @@ local function makeTemplate(id: string, stage: string): Model?
 		end
 	end
 
-	-- Couleur d'accent pour les effets
-	local element = normElement(data.Element)
-	local fx = FX[element]
-	if fx then
-		for _, col in ipairs(colors) do
-			if col[1] == fx.Color then accentColor = Color3.fromRGB(col[2], col[3], col[4]) end
-		end
-		local att = Instance.new("Attachment")
-		att.Name = "FX"
-		att.Parent = body
-		local e = Instance.new("ParticleEmitter")
-		e.Name = "ElementFX"
-		e.Color = ColorSequence.new(accentColor)
-		e.LightEmission = fx.Light
-		e.Size = NumberSequence.new({ NumberSequenceKeypoint.new(0, fx.Size * (stage == "Bebe" and 0.7 or 1)), NumberSequenceKeypoint.new(1, 0) })
-		e.Transparency = NumberSequence.new(0.1, 1)
-		e.Lifetime = NumberRange.new(1.2, 2.2)
-		e.Rate = fx.Rate * (stage == "Adulte" and 1.5 or 1)
-		e.Speed = fx.Speed
-		e.SpreadAngle = Vector2.new(180, 180)
-		e.Acceleration = fx.Accel
-		e.Shape = Enum.ParticleEmitterShape.Box
-		e.Parent = att
-	end
-
-	model:SetAttribute("Element", element)
-	model:SetAttribute("Stage", stage)
-	model:SetAttribute("Voxel", true)
+	addElementFX(model, body, data, colors, stage)
 	return model
 end
 
