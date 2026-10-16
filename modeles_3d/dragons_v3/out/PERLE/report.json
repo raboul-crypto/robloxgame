@@ -1,0 +1,44 @@
+{
+ "slug": "PERLE",
+ "stages": {
+  "BEBE": {
+   "tris": 3834,
+   "objects": 261,
+   "notes": "Grosse tête, perle sertie dorée, grands yeux à reflets, nageoires-oreilles irisées, petite coquille, perles-lueurs, veines. 77 % du budget.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (bébé 1.45)",
+    "PEARL_R : taille de la perle du front",
+    "EAR_L / EAR_RAYS : longueur et rayons des nageoires-oreilles",
+    "SHELL_RIBS : secteurs de la coquille du dos",
+    "BEAD_R : perles-lueurs au bout des nageoires (0 = aucune)",
+    "FX_N : nombre de bulles et perles flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 6610,
+   "objects": 460,
+   "notes": "Perle avec diadème doré, coquille à deux niveaux et perles-lueurs, nageoires-oreilles à 6 rayons, crinière irisée, plastron et bracelets dorés. 78 % du budget.",
+   "reglages": [
+    "NECK_L / NECK_RISE : longueur et verticalité du cou",
+    "PEARL_R : taille de la perle du front",
+    "EAR_L / EAR_RAYS : nageoires-oreilles irisées",
+    "PEC_SPAN / PEC_RAYS : envergure et rayons des pectorales",
+    "SHELL_RIBS : secteurs de la coquille du dos",
+    "ORN : ornements dorés (0 aucun, 1 moyens, 2 complets)"
+   ]
+  },
+  "ADULTE": {
+   "tris": 10080,
+   "objects": 708,
+   "notes": "Perle sertie avec diadème, coquille à deux niveaux, nageoires-oreilles à 8 rayons, pectorales à 9 rayons, ornements dorés, perles-lueurs, veines, 14 FX. 78 % du budget.",
+   "reglages": [
+    "NECK_L / NECK_RISE : longueur et verticalité du cou",
+    "PEARL_R : taille de la perle du front",
+    "EAR_L / EAR_RAYS : nageoires-oreilles irisées (signe distinctif)",
+    "PEC_SPAN / PEC_RAYS : envergure et rayons des pectorales",
+    "SHELL_RIBS : secteurs de la coquille du dos",
+    "BEAD_R / ORN : perles-lueurs et ornements dorés"
+   ]
+  }
+ }
+}

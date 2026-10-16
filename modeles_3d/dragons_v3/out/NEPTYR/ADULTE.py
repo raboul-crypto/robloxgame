@@ -68,7 +68,7 @@ ANTLER_K   = 1.0                      # taille des bois (1 = pleine taille)
 ANTLER_TINES = 4                      # nombre de ramifications par bois (0 à 4)
 WHISKER_K  = 1.0                      # longueur des moustaches
 BEARD_N    = 5                        # éclats de barbe
-MANE_RINGS, MANE_COUNT, MANE_K = 3, 14, 1.0   # crinière : rangées, éclats par rangée, taille
+MANE_RINGS, MANE_COUNT, MANE_K = 3, 18, 1.0   # crinière : rangées, éclats par rangée, taille
 
 # Colonne vertébrale en vague : points de contrôle (Catmull-Rom) et rayon le long du corps (s de 0 à 1)
 CTRL = [
@@ -89,7 +89,7 @@ CTRL = [
     (-0.7, 18.6, 6.2),  # bout de queue
 ]
 RADIUS_KEYS = [(0.0, 0.6), (0.06, 0.7), (0.2, 0.82), (0.35, 0.95), (0.55, 0.9), (0.75, 0.6), (0.9, 0.36), (1.0, 0.22)]
-SEG_STEP   = 0.75                     # longueur d'un segment du corps
+SEG_STEP   = 0.6                      # longueur d'un segment du corps
 SEG_BEVEL  = 0.06                     # biseau des segments
 TAIL_START = 0.62                     # à partir de s = 0.62, les segments vont dans TAIL_ROOT
 SWIRL_RANGE, SWIRL_EVERY = (0.12, 0.92), 6   # spirales (et runes entre elles) tous les N segments

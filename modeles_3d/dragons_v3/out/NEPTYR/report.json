@@ -1,0 +1,44 @@
+{
+ "slug": "NEPTYR",
+ "stages": {
+  "BEBE": {
+   "tris": 5382,
+   "objects": 312,
+   "notes": "Bébé Neptyr : grands yeux, joyau, bois dorés courts, aura et runes cyan, nageoire de queue. Budget 6000 (90 %).",
+   "reglages": [
+    "HEAD_POS, SNOUT_L : position de la tête et longueur du museau",
+    "ANTLER_K, ANTLER_TINES : taille et ramifications des bois",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière",
+    "CTRL, RADIUS_KEYS : forme du corps en S",
+    "TAIL_FAN_N, TAIL_FAN_L : nageoire de queue",
+    "AURA_N, AURA_R, FX_COUNT : aura et FX flottants"
+   ]
+  },
+  "ADO": {
+   "tris": 7606,
+   "objects": 440,
+   "notes": "Ado Neptyr : bois 2 pointes, diadème, plastron, épaulières, aura, anneau runique de queue. Budget 10000 (76 %).",
+   "reglages": [
+    "HEAD_POS, SNOUT_L : position de la tête et longueur du museau",
+    "ANTLER_K, ANTLER_TINES : taille et ramifications des bois",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière",
+    "CTRL, RADIUS_KEYS, SEG_STEP : forme du corps en S et finesse des segments",
+    "TAIL_FAN_N, TAIL_FAN_L, TAIL_K : nageoire et ornement de queue",
+    "AURA_N, AURA_R, FX_COUNT : aura et FX flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 11132,
+   "objects": 664,
+   "notes": "Adulte Neptyr : bois 4 ramifications, crinière 3x18, plastron et épaulières dorés, aura 16 pointes, nageoire de queue 9 plumes, 16 FX et 4 anneaux. SEG_STEP 0.6 et crinière 18 pour monter à 74 % de 15000.",
+   "reglages": [
+    "HEAD_POS, SNOUT_L : position de la tête et longueur du museau",
+    "ANTLER_K, ANTLER_TINES : taille et ramifications des bois",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière",
+    "CTRL, RADIUS_KEYS, SEG_STEP : forme du corps en S et finesse des segments",
+    "TAIL_FAN_N, TAIL_FAN_L, TAIL_K : nageoire et ornement de queue",
+    "AURA_N, AURA_R, FX_COUNT : aura et FX flottants"
+   ]
+  }
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "slug": "TEMPETE",
+ "stages": {
+  "BEBE": {
+   "tris": 4130,
+   "objects": 263,
+   "notes": "Bébé trapu, grands yeux, crinière de nuage 1 anneau, spirales de vent émissives. Budget 5000 (83 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "MANE_RINGS / MANE_N : anneaux et nuages de la crinière",
+    "WING_SPAN : envergure des ailes-bras",
+    "FRAY_N : nuages du bord effiloché des ailes",
+    "SWIRL_FLANK / SWIRL_WING : spirales de vent",
+    "NECK_L / NECK_N : longueur et maillons du cou"
+   ]
+  },
+  "ADO": {
+   "tris": 6770,
+   "objects": 453,
+   "notes": "Cou 4 maillons, crocs, crinière 2 anneaux, ornements dorés, ailes effilochées. Budget 8500 (80 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "MANE_RINGS / MANE_N : anneaux et nuages de la crinière",
+    "WING_SPAN : envergure des ailes-bras",
+    "FRAY_N : nuages du bord effiloché des ailes",
+    "SWIRL_FLANK / SWIRL_WING : spirales de vent",
+    "NECK_L / NECK_N : longueur et maillons du cou"
+   ]
+  },
+  "ADULTE": {
+   "tris": 9232,
+   "objects": 647,
+   "notes": "Wyvern massive, crinière 3 anneaux, grandes ailes en nuage, FX 14. Budget 13000 (71 %). Pas d'éclairs (Foudre = élément futur, selon data).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "MANE_RINGS / MANE_N : anneaux et nuages de la crinière",
+    "WING_SPAN : envergure des ailes-bras",
+    "FRAY_N : nuages du bord effiloché des ailes",
+    "SWIRL_FLANK / SWIRL_WING : spirales de vent",
+    "NECK_L / NECK_N : longueur et maillons du cou"
+   ]
+  }
+ }
+}

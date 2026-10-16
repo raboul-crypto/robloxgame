@@ -223,7 +223,7 @@ def hshard(name, w, t, Ln, loc, direction, mat, up=(0, 0, 1)):
     return shard("Head_" + name, w * HS, t * HS, Ln * HS, hv(loc), direction, mat, H, up)
 
 def hchain(name, pts, t0, t1, mat, up=(0, 0, 1)):
-    tchain("Head_" + name, [hv(p) for p in pts], t0 * HS, t1 * HS, mat, H, up)
+    tchain("Head_" + name, [hv(p) for p in pts], t0 * HS * 1.4, t1 * HS * 1.4, mat, H, up)
 
 def hbar(name, p1, p2, th, mat, up=(0, 0, 1), depth=None):
     bar("Head_" + name, hv(p1), hv(p2), th * HS, mat, H, up, None if depth is None else depth * HS)
@@ -294,7 +294,7 @@ for ring_i in range(MANE_RINGS):
         rr = (0.62 - 0.05 * ring_i) + random.random() * 0.12
         m = [M_CLOUD, M_CLOUD2, M_CLOUD3][(k + ring_i) % 3] if ring_i else pick([M_CLOUD, M_CLOUD, M_CLOUD2])
         hcloud(f"Mane_{ring_i}_{k}", loc, rr * 1.35, 2, [m, pick([M_CLOUD, M_CLOUD2])], 0.7)
-        if k % 2:
+        if k % 3:
             continue
         jit = Vector((random.uniform(-0.15, 0.15), random.uniform(0, 0.2), random.uniform(-0.15, 0.15)))
         direction = rad * (0.9 - ring_i * 0.2) + Vector((0, 1.0, 0)) + jit

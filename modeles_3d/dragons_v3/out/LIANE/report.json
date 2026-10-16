@@ -1,0 +1,44 @@
+{
+ "slug": "LIANE",
+ "stages": {
+  "BEBE": {
+   "tris": 4928,
+   "objects": 319,
+   "notes": "Hydre Plante Épique à 3 têtes à touffe de feuilles, lianes, fleurs lumineuses, carapace d'écorce, ornements dorés. Budget 5,000.",
+   "reglages": [
+    "HEADS : position, taille et rotation des 3 têtes",
+    "HEAD_SCALE : taille de la tête centrale",
+    "BW, BH, TORSO_L : taille du torse",
+    "LEG_H : hauteur des pattes",
+    "TAIL_L : longueur de la queue",
+    "FX_N : spores et feuilles flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 8078,
+   "objects": 538,
+   "notes": "Hydre Plante Épique à 3 têtes à touffe de feuilles, lianes, fleurs lumineuses, carapace d'écorce, ornements dorés. Budget 8,500.",
+   "reglages": [
+    "HEADS : position, taille et rotation des 3 têtes",
+    "NECK_L, NECK_N, NECK_CURVE : hauteur, maillons et courbe des cous",
+    "SNOUT_L, HORN_L : museau et cornes",
+    "TORSO_L, BW, BH : taille du torse",
+    "TAIL_L : longueur de la queue",
+    "GLOW_STR : puissance de la lueur"
+   ]
+  },
+  "ADULTE": {
+   "tris": 11354,
+   "objects": 791,
+   "notes": "Hydre Plante Épique à 3 têtes à touffe de feuilles, lianes, fleurs lumineuses, carapace d'écorce, ornements dorés. Budget 13,000.",
+   "reglages": [
+    "HEADS : position, taille et rotation des 3 têtes",
+    "NECK_L, NECK_N, NECK_CURVE : hauteur, maillons et courbe des cous",
+    "HORN_L, FANGS : cornes et crocs",
+    "BW, BH, LEG_H, TORSO_L : proportions du corps",
+    "TAIL_L : longueur de la queue",
+    "GLOW_STR, FX_N : lueur et éléments flottants"
+   ]
+  }
+ }
+}

@@ -64,48 +64,48 @@ LEG_H = 1.2                       # hauteur des pattes
 TORSO_L = 2.9                     # longueur torse + bassin
 NECK_L = 0.45                     # hauteur du cou central
 NECK_LEAN = 0.1                   # avancée du cou vers l'avant
-NECK_N = 2                        # nombre de maillons par cou
+NECK_N = 1                        # nombre de maillons par cou
 NECK_R = (0.78, 0.72)             # rayon du cou : base, haut
 NECK_CURVE = 0.0                  # courbure en S des cous
 NECK_LEAF_K = 0.8                 # taille des feuilles de nuque
 NECK_FLOWERS = False              # fleurs sur les cous
 HEAD_SCALE = 1.25                 # taille de la tête centrale
 HEAD_PITCH = 0                    # degrés : la tête regarde vers le bas
-HEADS = [(0.0, 0.0, 0.0, 1.0, 0), (-2.0, 0.6, -0.35, 0.8, -22), (2.0, 0.6, -0.35, 0.8, 22)]# (décalage X, Y, Z, échelle, rotation vers l'extérieur en degrés)
+HEADS = [(0.0, 0.0, 0.0, 1.0, 0), (-2.45, 0.6, -0.35, 0.8, -22), (2.45, 0.6, -0.35, 0.8, 22)]# (décalage X, Y, Z, échelle, rotation vers l'extérieur en degrés)
 SNOUT_L = 0.85                    # longueur du museau
 JAW_OPEN = 0                      # ouverture de la gueule (degrés)
 FANGS = 0                         # crocs par côté
 HORN_L = 0.0                      # longueur des cornes
 EYE = (0.92, 0.95, 0.68, 0.76, 0.36, 0.48)# blanc L/H, iris L/H, pupille L/H
 BROW_TILT = 0                     # inclinaison des sourcils
-TUFT_N = 5                        # feuilles de la touffe sur chaque tête
+TUFT_N = 4                        # feuilles de la touffe sur chaque tête
 TUFT_L = 1.5                      # longueur des feuilles de la touffe
-CHEEK_N = 1                       # feuilles de joue par côté
+CHEEK_N = 0                       # feuilles de joue par côté
 FLOWER_HEAD2 = False              # fleurs supplémentaires sur les têtes
 SCALE_ROWS = 2                    # rangées d'écailles-feuilles par flanc
-SCALE_COLS = 4                    # écailles par rangée
-BELLY_N = 3                       # plaques de ventre
+SCALE_COLS = 3                    # écailles par rangée
+BELLY_N = 2                       # plaques de ventre
 CARA_N = 4                        # rangées de la carapace d'écorce
 CREST_H = 0.9                     # hauteur des feuilles de crête
 VINE_TURNS = 1.5                  # tours de chaque liane autour du torse
-VINE_SEG = 7                      # segments par tour de liane
+VINE_SEG = 5                      # segments par tour de liane
 VINE_TH = 0.17                    # épaisseur des lianes
 VINE_FLOWERS_A = (0.3, 0.7)       # positions (0 à 1) des fleurs sur la liane A
 VINE_FLOWERS_B = (0.5,)           # positions des fleurs sur la liane B
-FLOWER_N = 2                      # fleurs sur le dos
+FLOWER_N = 1                      # fleurs sur le dos
 FLOWER_R = 0.3                    # taille des fleurs
 SWIRLS = 0                        # spirales claires par flanc
 BRACER_K = 0.32                   # hauteur du bracelet
 CLAW_K = 0.45                     # longueur des griffes
 THIGH_LEAVES = 0                  # feuilles sur chaque cuisse
 TAIL_L = 2.4                      # longueur de la queue
-TAIL_STEP = 0.5                   # pas des segments de queue
+TAIL_STEP = 0.6                   # pas des segments de queue
 TAIL_VINE = False                 # lianes sur la queue
 TAIL_TIP = 0.9                    # taille des feuilles du bout de queue
 TAIL_TIP_LEAVES = 3               # feuilles du bout de queue
 TAIL_FLOWER = True                # fleur au bout de la queue
-SAP_N = 2                         # grappes de sève lumineuse sur le dos
-FX_N = 6                          # spores / pétales / feuilles flottants
+SAP_N = 1                         # grappes de sève lumineuse sur le dos
+FX_N = 3                          # spores / pétales / feuilles flottants
 FX_SIZE = 0.28                    # taille des FX
 
 # ----------------------------------------------------------
@@ -220,7 +220,7 @@ def build_head(H, k, hs):
     def hv(v):
         return tuple(c * hs for c in v)
     def hb(name, size, loc, rot=None, mat=None, bevel=0.0):
-        return box(P + name, hv(size), hv(loc), rot, mat, H, bevel * hs)
+        return box(P + name, hv(size), hv(loc), rot, mat, H, bevel * hs if (k == 1 or not IS_BEBE) else 0.0)
     SNOUT_FRONT = -0.85 - SNOUT_L
 
     # Crâne et museau biseautés, arête du museau en écorce

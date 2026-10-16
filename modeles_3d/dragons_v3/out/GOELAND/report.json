@@ -1,0 +1,44 @@
+{
+ "slug": "GOELAND",
+ "stages": {
+  "BEBE": {
+   "tris": 2956,
+   "objects": 174,
+   "notes": "Très grosse tête blanche, grands yeux à reflets, bec jaune court, houppe de 2 rangées, ailes-bras à 6 plumes de vol, éventail de 5 plumes. 99 % du budget.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (bébé 1.3)",
+    "BEAK_K : longueur du bec",
+    "WING_SPAN / WRIST_Z : envergure et hauteur du poignet des ailes-bras",
+    "CREST_N / CREST_K : nombre et taille des plumes de la houppe",
+    "TAIL_FEATH / TAIL_FEATH_L : plumes et longueur de l'éventail de queue",
+    "FX_N : nombre de plumes flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 4160,
+   "objects": 254,
+   "notes": "Cou de 4 maillons, bec crochu avec petites dents, sourcils, collerette de 5 plumes, ailes-bras à 9 plumes de vol, éventail de 7 plumes. 92 % du budget.",
+   "reglages": [
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "WING_SPAN / FEATH_PER : envergure et plumes de vol par doigt",
+    "CREST_ROWS / CREST_N : rangées et plumes de la houppe",
+    "RUFF_N : plumes de la collerette",
+    "TAIL_L / TAIL_FEATH : longueur de la queue et plumes de l'éventail",
+    "TEETH : dents par côté"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5890,
+   "objects": 368,
+   "notes": "Cou en S de 5 maillons, bec crochu avec 3 dents et tache rouge, sourcils sévères, houppe de 3 rangées, collerette de 7, ailes à 12 plumes de vol, éventail de 9 plumes. 98 % du budget.",
+   "reglages": [
+    "WING_SPAN / WRIST_Z : envergure et hauteur du poignet des ailes-bras",
+    "FEATH_PER / SEC_F : plumes de vol par doigt et plumes secondaires",
+    "NECK_L / NECK_LEAN : longueur et avancée du cou",
+    "CREST_ROWS / CREST_N / CREST_K : houppe de plumes",
+    "TAIL_L / TAIL_FEATH_L : longueur de la queue et des plumes de l'éventail",
+    "LEG_H : hauteur des pattes"
+   ]
+  }
+ }
+}

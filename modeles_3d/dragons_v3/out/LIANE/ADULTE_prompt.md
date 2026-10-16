@@ -1,0 +1,62 @@
+Tu es un artiste technique 3D. Tu vas écrire un script Python pour Blender (bpy) qui génère
+le modèle 3D du dragon « Adulte Liane » de mon jeu Roblox Dragon Pets Simulator.
+
+PIÈCES JOINTES
+1. Une image de concept des 3 stades si tu en as une ; sinon la description ci-dessous fait foi.
+   Seul le dragon « Adulte Liane » (en haut à droite sur l'image s'il y en a une) est à modéliser.
+2. Le GDD du jeu (Dragon_Pets_GDD_v2.3.docx). Lis en priorité :
+   - partie 9, tableau du monde 3 : Liane = Plante, Épique, Brute, morphologie Hydre ;
+   - partie 13, Direction artistique : style par stade, morphologies, couleurs,
+     « Fabrication des modèles ».
+   Si l'image et le GDD se contredisent, l'image gagne pour l'apparence, le GDD gagne pour
+   les contraintes techniques.
+
+ÉTAPE 1 — AVANT D'ÉCRIRE DU CODE
+Décris en 10 à 15 puces ce que tu vois (ou ce que la description impose) sur l'Adulte Liane : pose, proportions, chaque
+élément de la tête, du corps, des pattes et de la queue, et la palette. Puis liste les
+contraintes du GDD qui s'appliquent. Je valide avant que tu codes.
+
+CE QUE LE MODÈLE DOIT REPRODUIRE (vérifie chaque point)
+- Pose : hydre massive à TROIS têtes sur des cous en courbe (5 maillons), debout sur 4 pattes épaisses, torse large et haut, pas d'ailes, longue queue qui traîne.
+- Têtes : la centrale plus grande (échelle 1.05, cou haut de 4.4 et avancé de 1.0) et deux latérales (échelle 0.82, décalées de ±3.1, tournées de ±26 degrés, plus basses) ; chacune a un crâne carré, un museau long (1.45), une mâchoire entrouverte (9 degrés) avec 3 crocs crème par côté et 2 crocs du bas, yeux à pupille fendue et iris ambre lumineux, sourcils d'écorce sévères (20 degrés), grandes cornes d'écorce à pointe sombre, bague dorée et feuille, touffe de 9 feuilles nervurées, 3 feuilles de joue par côté, 3 fleurs sur chaque tête.
+- Corps : torse et bassin biseautés vert sapin, épaules en wedge, 6 plaques de ventre vert clair, plastron de 3 plaques claires à bord doré avec gemme de sève, carapace d'écorce de 7 rangées avec grandes feuilles de crête nervurées, 2 lianes en spirale (2 tours) avec feuilles et 7 fleurs, 4 fleurs sur le dos, 4 rangées de 6 écailles-feuilles par flanc, 2 spirales claires par flanc, cous avec gorge claire, dos d'écorce, bagues de liane et fleurs.
+- Pattes : 4 pattes épaisses (LEG_H 3.0), épaule et cuisse en wedge, tibia, bracelet d'écorce à 2 bords dorés avec gemme de sève, liane, feuille de genou, 2 feuilles de cuisse, pied plat, 3 doigts + 3 griffes ivoire.
+- Ailes : aucune, pas de WINGS_ROOT.
+- Queue : longue (6.0), segments verts, ventre clair, plaques d'écorce, lianes, feuilles, bout en grappe de 5 grandes feuilles nervurées autour d'un bourgeon de sève lumineux et une fleur rose.
+- Signes distinctifs (identiques aux 3 stades) : trois têtes à touffes de feuilles ; lianes entrecroisées sur le corps ; petites fleurs orange et roses ; carapace d'écorce et de feuilles sur le dos.
+- Rendu de rareté (Épique) : complet (GLOW_STR 3.0) : yeux, fleurs et sève lumineux, 5 grappes de sève dans la carapace, plastron, bagues de cornes et bracelets dorés, gemmes de sève, 14 spores, pétales et feuilles flottants.
+- Palette (hex, Principled BSDF) : Body #3A7A2A (corps), BodyDark #2A5A20 (mâchoire, écailles sombres), BodyWarm #4C9232 (écailles chaudes),
+  Shadow #183514 (jointures, narines, bouche), Belly #A8D660 (ventre, plastron, gorges), Bark #7E5234 (écorce, cornes), BarkDark #573520 (sourcils, strates),
+  Leaf #4FA832, LeafLight #8AD04A, LeafDeep #2F7A28 (feuilles), Vine #5BA83A (lianes), Claw #EDE3C8 (griffes ivoire), Fang #F4EBD0 (crocs),
+  Gold #F2B233 (métal 0.9, ornements), EyeWhite #F2F2F2, Black #0A0A0A (pupilles).
+  Émissifs : Iris #F28C2E (yeux), FlowerOrange #F28C2E et FlowerPink #F27FA0 (pétales), FlowerHeart #FFD84A (cœur des fleurs), Sap #C8F55A (sève, spores, gemmes), tous à la puissance GLOW_STR du stade.
+- Style : low-poly en blocs biseautés, lisible de loin. Pas de sculpture organique. Les feuilles sont des plaques en losange.
+
+CONTRAINTES TECHNIQUES
+- Budget : 13,000 triangles maximum après modificateurs (le script en fait environ 11,354, vise 80-100 %). Biseau à 1 segment au plus,
+  et seulement sur les gros blocs (têtes, torse, bassin, cuisses, pieds), jamais sur les feuilles, pics, griffes ou petites pièces.
+  Le script affiche le total de triangles à la fin.
+- Pièces séparées, sans squelette (le rig viendra plus tard, GDD partie 13).
+- Hiérarchie : un empty LIANE_ADULTE_MASTER_ROOT avec 6 enfants HEAD_ROOT (tête centrale), HEAD2_ROOT, HEAD3_ROOT, BODY_ROOT, LEGS_ROOT et TAIL_ROOT
+  (pas de WINGS_ROOT). Chaque pièce est parentée au bon root. Les pièces de chaque tête sont placées en coordonnées locales de son root de tête
+  (placé en haut du cou, légèrement penché vers l'avant).
+- Tout dans une collection « LIANE_ADULTE ». Le script est relançable : au début, il supprime uniquement les objets de cette
+  collection et les enfants des roots LIANE_ADULTE_*. Il ne touche jamais aux autres stades ni aux autres dragons de la scène.
+- Les 3 cous et la queue suivent une courbe lissée (Catmull-Rom) rééchantillonnée à pas constant, avec un repère par segment et un rayon qui varie
+  le long de la courbe. Les proportions (BW, BH, LEG_H, TORSO_L, NECK_L, HEAD_SCALE, TAIL_L...) et la liste HEADS sont des
+  variables faciles à modifier dans le bloc « RÉGLAGES DU STADE » en haut du code.
+- Crée les meshes avec bmesh / from_pydata, pas avec bpy.ops dans les boucles.
+- Matériaux Principled BSDF réutilisés s'ils existent, mais toujours mis à jour. Couleurs saturées en espace linéaire.
+  Yeux, fleurs, sève et spores émissifs. Compatible Blender 4.x et 5.x (« Emission Color » ou « Emission »).
+- Seed aléatoire fixe (3303) pour que chaque exécution donne le même dragon.
+- Option ADD_FLOATING_FX pour ajouter ou non les spores, pétales et feuilles flottants.
+- Conventions : avant du dragon = -Y, haut = +Z, unité = mètre, hauteur totale 11 m, posé sur Z = 0.
+- Code commenté en français, découpé en sections numérotées (7 palette, 8 proportions et hiérarchie, 9 têtes,
+  10 corps, 11 pattes, 12 ailes (aucune), 13 queue, 14 rareté / FX, 15 finalisation).
+
+LIVRAISON
+1. Le script complet dans un seul fichier .py.
+2. Si tu as accès à Blender : lance-le, fais une capture de la vue 3D, compare avec
+   l'image (ou la description) et corrige les écarts visibles (couleurs, taille des têtes, lueur des fleurs)
+   avant de me le rendre. Donne le nombre de triangles.
+3. Une liste courte des réglages à changer pour ajuster la forme.
