@@ -1,0 +1,44 @@
+{
+ "slug": "TREFLE",
+ "stages": {
+  "BEBE": {
+   "tris": 3240,
+   "objects": 218,
+   "notes": "Gros crâne, très grands yeux verts, pousse-trèfle sur le crâne, petites ailes à trèfle, collerette de 9 feuilles, 2 trèfles lumineux sur les flancs. Budget 4000 (81 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "WING_SPAN / WING_LIFT : envergure et inclinaison des ailes",
+    "MANE_N : feuilles de la collerette",
+    "FLANK_CLOVERS : trèfles lumineux sur les flancs",
+    "TAIL_L / TAIL_LEAF : longueur et feuilles de la queue",
+    "FX_N : nombre de lucioles"
+   ]
+  },
+  "ADO": {
+   "tris": 4970,
+   "objects": 330,
+   "notes": "Cou de 5 maillons à lianes, grand trèfle sur tige, grandes ailes à trèfle, crête double, trèfles lumineux, pierres vertes aux pieds. Budget 6000 (83 %).",
+   "reglages": [
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "WING_SPAN / WING_BONE : envergure et épaisseur des os d'aile",
+    "SAIL : taille de la crête pâle du cou",
+    "FLANK_CLOVERS / BACK_CLOVERS : trèfles lumineux",
+    "TAIL_L / TAIL_LEAF : longueur de la queue et feuilles du bout",
+    "FX_N : nombre de lucioles"
+   ]
+  },
+  "ADULTE": {
+   "tris": 6338,
+   "objects": 437,
+   "notes": "Trèfle sur chaque corne, couronne de feuilles au crâne, cou de 6 maillons à lianes, crête pâle double, grandes ailes à trèfle, trèfles lumineux sur flancs, dos et queue, pierres vertes aux pieds. Budget 8000 (79 %).",
+   "reglages": [
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "HEAD_SCALE : taille de la tête",
+    "WING_SPAN / WING_FINGERS : envergure et doigts des ailes",
+    "SAIL / CREST2 : grande crête pâle double",
+    "FLANK_CLOVERS / BACK_CLOVERS : trèfles lumineux",
+    "TAIL_L / FX_N : longueur de la queue, lucioles"
+   ]
+  }
+ }
+}

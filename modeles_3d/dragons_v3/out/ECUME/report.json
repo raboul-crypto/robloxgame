@@ -1,0 +1,44 @@
+{
+ "slug": "ECUME",
+ "stages": {
+  "BEBE": {
+   "tris": 2992,
+   "objects": 189,
+   "notes": "Gros crâne, très grands yeux à reflets, nageoires-oreilles à 4 rayons, pectorales et pelviennes en éventail, palettes palmées, queue de poisson avec caudale en V. Budget 3000 (100 %), repassé sous le budget en réduisant écume, bulles et segments.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (bébé 1.45)",
+    "EAR_L / EAR_RAYS : longueur et nombre de rayons des nageoires-oreilles",
+    "PEC_SPAN : longueur des nageoires pectorales",
+    "STEP / TAIL_STEP : pas des segments (moins de segments = moins de triangles)",
+    "CAUDAL_L : taille des lobes de la nageoire caudale",
+    "FX_N : nombre de bulles"
+   ]
+  },
+  "ADO": {
+   "tris": 4420,
+   "objects": 293,
+   "notes": "Cou allongé, yeux en amande avec sourcils, petits crocs, nageoires-oreilles à 5 rayons, épines du front, nageoires de coude, caudale en V à 4 rayons. Budget 4500 (98 %), ramené sous le budget en supprimant la crinière de cou et en espaçant les segments.",
+   "reglages": [
+    "NECK_L / NECK_RISE : longueur et verticalité du cou",
+    "EAR_L / EAR_RAYS : nageoires-oreilles (signe distinctif)",
+    "PEC_SPAN / PEC_RAYS : taille et rayons des pectorales",
+    "TAIL_L / CAUDAL_L : longueur de la queue et taille de la caudale",
+    "STEP / TAIL_STEP : pas des segments (budget de triangles)",
+    "FOAM_N : nombre de taches d'écume"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5944,
+   "objects": 396,
+   "notes": "Crinière de nageoires sur le cou, 3 crocs, sourcils sévères, pectorales à 6 rayons, 14 taches d'écume, caudale en V à 4 rayons. Budget 6000 (99 %).",
+   "reglages": [
+    "NECK_L / NECK_RISE : longueur et verticalité du cou",
+    "EAR_L / EAR_RAYS : nageoires-oreilles (signe distinctif)",
+    "PEC_SPAN / PEC_RAYS : envergure et rayons des pectorales",
+    "TAIL_L / CAUDAL_L : longueur de la queue et taille de la caudale",
+    "NECK_MANE : crinière de nageoires sur le cou",
+    "FOAM_N : nombre de taches d'écume"
+   ]
+  }
+ }
+}

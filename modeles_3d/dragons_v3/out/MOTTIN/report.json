@@ -1,0 +1,44 @@
+{
+ "slug": "MOTTIN",
+ "stages": {
+  "BEBE": {
+   "tris": 2396,
+   "objects": 122,
+   "notes": "Grosse tête carrée, très grands yeux ambre à reflets, 6 petites cornes, petites plaques de roche sur le dos, petite massue de queue, ventre crème en 4 plaques. Budget 3000 (80 %). Pas d'émission.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (bébé 1.15)",
+    "HORN_N / HORN_K : nombre et taille des cornes",
+    "CREST_N : nombre de plaques de roche sur le dos",
+    "CLUB_SIZE / CLUB_ROCKS : taille et roches de la massue",
+    "LEG_H / BW : hauteur des pattes et largeur du corps",
+    "FX_N : nombre d'éclats flottants"
+   ]
+  },
+  "ADO": {
+   "tris": 3600,
+   "objects": 189,
+   "notes": "Crocs, sourcils de roche, 5 plaques d'armure empilées, roches de nuque et d'épaule, barbe de roches, massue de 5 roches. Budget 4500 (80 %). Pas d'émission.",
+   "reglages": [
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "HORN_N / HORN_K : cornes en éventail",
+    "CREST_N / SHOULDER_ROCKS : plaques d'armure et roches d'épaule",
+    "CLUB_SIZE / CLUB_ROCKS / CLUB_SPIKES : massue de queue",
+    "TAIL_L : longueur de la queue",
+    "FX_N : nombre d'éclats flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5496,
+   "objects": 335,
+   "notes": "Armure de 6 plaques de roche, 4 roches par épaule, barbe de 4 roches, 5 cornes par côté, massue de 6 roches avec 4 pointes, fissures de lave émissives (strength 1.8). Budget 6000 (92 %).",
+   "reglages": [
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "HORN_N / HORN_K : cornes en éventail",
+    "CREST_N / SHOULDER_ROCKS : plaques d'armure et roches d'épaule",
+    "CRACKS / LEG_CRACKS : fissures de lave (flancs, gantelets)",
+    "CLUB_SIZE / CLUB_ROCKS / CLUB_SPIKES : massue de queue",
+    "FX_N : nombre d'éclats flottants"
+   ]
+  }
+ }
+}

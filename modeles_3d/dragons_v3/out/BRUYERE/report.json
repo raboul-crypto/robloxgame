@@ -1,0 +1,44 @@
+{
+ "slug": "BRUYERE",
+ "stages": {
+  "BEBE": {
+   "tris": 3990,
+   "objects": 243,
+   "notes": "Grosse tête carrée, petites cornes, bruyère sur le crâne, dalles de roche, yeux ambre. Rare discret. Budget 4000 (100 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H / TORSO_L : hauteur des pattes et longueur du torse",
+    "NECK_L / NECK_N : longueur et nombre de maillons du cou",
+    "TAIL_L : longueur de la queue",
+    "TUFTS / HEATHER_HEAD : quantité de bruyère",
+    "FX_N : nombre d'éléments flottants"
+   ]
+  },
+  "ADO": {
+   "tris": 5890,
+   "objects": 390,
+   "notes": "Cornes à branche, crocs, armure de roche, bruyère, cristaux ambre, lianes dorées sur les pattes. Budget 6000 (98 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H / TORSO_L : hauteur des pattes et longueur du torse",
+    "NECK_L / NECK_N : longueur et nombre de maillons du cou",
+    "TAIL_L : longueur de la queue",
+    "TUFTS / HEATHER_HEAD : quantité de bruyère",
+    "FX_N : nombre d'éléments flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 7646,
+   "objects": 527,
+   "notes": "Bois ramifiés, armure de roche double rangée, bruyère partout, cristaux ambre en grappes, lianes dorées, queue à grappe dorée. Budget 8000 (96 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H / TORSO_L : hauteur des pattes et longueur du torse",
+    "NECK_L / NECK_N : longueur et nombre de maillons du cou",
+    "TAIL_L : longueur de la queue",
+    "TUFTS / HEATHER_HEAD / SPOTS : bruyère et taches sur les flancs",
+    "FX_N : nombre d'éléments flottants"
+   ]
+  }
+ }
+}

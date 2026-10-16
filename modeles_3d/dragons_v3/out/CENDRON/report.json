@@ -1,0 +1,43 @@
+{
+ "slug": "CENDRON",
+ "stages": {
+  "BEBE": {
+   "tris": 2944,
+   "objects": 184,
+   "notes": "Grosse tête, grands yeux orange, fissures de lave, ventre cendre, piques noires. Budget 3000 (98 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H : hauteur des pattes",
+    "CRACKS / DORSAL_CRACKS : fissures de lave",
+    "WING_SPAN : envergure des ailes",
+    "TAIL_L : longueur de la queue"
+   ]
+  },
+  "ADO": {
+   "tris": 4310,
+   "objects": 276,
+   "notes": "Cou de 5 plaques, crocs, cornes recourbées, plaque de basalte, ailes à bords effilochés. Budget 4500 (96 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H : hauteur des pattes",
+    "CRACKS / DORSAL_CRACKS : fissures de lave",
+    "WING_SPAN : envergure des ailes",
+    "TAIL_L : longueur de la queue",
+    "NECK_L / NECK_N : longueur et plaques du cou"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5900,
+   "objects": 383,
+   "notes": "Cornes torsadées, fissures de lave partout, basalte, genouillères, ailes effilochées, queue à 3 pointes et braise. Budget 6000 (98 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H : hauteur des pattes",
+    "CRACKS / DORSAL_CRACKS : fissures de lave",
+    "WING_SPAN : envergure des ailes",
+    "TAIL_L : longueur de la queue",
+    "NECK_L / NECK_N : longueur et plaques du cou"
+   ]
+  }
+ }
+}

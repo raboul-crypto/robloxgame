@@ -99,18 +99,18 @@ STRIPES = 2
 STRIPE_SEGS = 8
 BACK_SLABS = 1
 SHOULDER_SLABS = 1
-RIDGE_N = 4
+RIDGE_N = 3
 BRACER_K = 0.35
 LEG_BEV = 0
 THIGH_PLATES = 0
 CLAW_L = 0.45
 TAIL_L = 2.4
 TAIL_STEP = 0.6
-TAIL_BEV_N = 2
+TAIL_BEV_N = 1
 TAIL_STRIPES = False
-TAIL_SPIKES = 3
-FX_N = 4
-DUST_N = 2
+TAIL_SPIKES = 2
+FX_N = 3
+DUST_N = 1
 FX_SIZE = 0.5
 
 # ----------------------------------------------------------

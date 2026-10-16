@@ -1,0 +1,44 @@
+{
+ "slug": "DUNE",
+ "stages": {
+  "BEBE": {
+   "tris": 2974,
+   "objects": 175,
+   "notes": "Grosse tête, très grands yeux, petites cornes beiges, collerette de 8 plaques, rayures de dune, dalles dorées. Commun sans émission. Budget 3000 (99 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H / TORSO_L : hauteur des pattes et longueur du torse",
+    "NECK_L : longueur du cou",
+    "TAIL_L : longueur de la queue",
+    "COLLAR_N / COLLAR_RINGS : collerette de plaques",
+    "FX_N / DUST_N : éclats de sable et poussière"
+   ]
+  },
+  "ADO": {
+   "tris": 4438,
+   "objects": 249,
+   "notes": "Cou de 4 plaques, crocs, sourcils, collerette, rayures sur flancs et queue, massue de pierre. Budget 4500 (99 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H / TORSO_L : hauteur des pattes et longueur du torse",
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "STRIPES : nombre de rayures de dune",
+    "COLLAR_N / COLLAR_RINGS : collerette de plaques",
+    "FX_N / DUST_N : éclats de sable et poussière"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5828,
+   "objects": 347,
+   "notes": "Grand cou de 6 plaques, collerette de 2 anneaux, grandes cornes beiges, menton dentelé, dalles dorées et sombres, rayures de dune, massue de pierre à 5 pointes. Budget 6000 (97 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H / TORSO_L : hauteur des pattes et longueur du torse",
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "STRIPES / STRIPE_SEGS : rayures de dune sur flancs et queue",
+    "COLLAR_N / COLLAR_RINGS : collerette de plaques",
+    "TAIL_SPIKES : pointes de la massue de queue"
+   ]
+  }
+ }
+}

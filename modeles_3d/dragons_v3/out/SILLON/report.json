@@ -1,0 +1,43 @@
+{
+ "slug": "SILLON",
+ "stages": {
+  "BEBE": {
+   "tris": 3448,
+   "objects": 202,
+   "notes": "Wyvern trapue, corne-soc grise, feuilles d'automne, pelle au poignet, yeux ambre. Budget 4000 (86 %).",
+   "reglages": [
+    "PITCH : inclinaison du torse",
+    "HEAD_SCALE : taille de la tête",
+    "MANE_N : feuilles de crinière",
+    "WING_SPAN : envergure des ailes-bras",
+    "TAIL_BLADE : taille de la lame en soc"
+   ]
+  },
+  "ADO": {
+   "tris": 4990,
+   "objects": 317,
+   "notes": "Corne-soc recourbée, crinière de feuilles, fissures ambre, lame en soc, pelles aux poignets. Budget 6000 (83 %).",
+   "reglages": [
+    "PITCH : inclinaison du torse",
+    "HEAD_SCALE : taille de la tête",
+    "MANE_N : feuilles de crinière",
+    "WING_SPAN : envergure des ailes-bras",
+    "TAIL_BLADE : taille de la lame en soc",
+    "NECK_L / NECK_N : longueur et maillons du cou"
+   ]
+  },
+  "ADULTE": {
+   "tris": 6100,
+   "objects": 402,
+   "notes": "Corne-soc, crinière 2 anneaux, cornes à 2 pointes, crête double, fissures ambre, lame en soc lumineuse. Budget 8000 (76 %).",
+   "reglages": [
+    "PITCH : inclinaison du torse",
+    "HEAD_SCALE : taille de la tête",
+    "MANE_N : feuilles de crinière",
+    "WING_SPAN : envergure des ailes-bras",
+    "TAIL_BLADE : taille de la lame en soc",
+    "NECK_L / NECK_N : longueur et maillons du cou"
+   ]
+  }
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "slug": "ESCARBILLE",
+ "stages": {
+  "BEBE": {
+   "tris": 3300,
+   "objects": 185,
+   "notes": "Gros crâne carré, très grands yeux avec reflets, 3 flammes de cristal derrière le crâne, plaques rouges + flammes sur le dos, hexagones et une fissure de lave par flanc. Budget 4000 (83 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "MANE_N : flammes de la crinière",
+    "CREST_N : plaques rouges de la crête",
+    "CRACKS : fissures de lave par flanc",
+    "LEG_H : hauteur des pattes",
+    "FLAME_K : taille des flammes de cristal"
+   ]
+  },
+  "ADO": {
+   "tris": 5150,
+   "objects": 293,
+   "notes": "Cou de 3 blocs, crocs, sourcils, cristal-corne sur le museau, 6 flammes de crinière, crête double, hexagones et fissures sur flancs et cuisses. Budget 6000 (86 %).",
+   "reglages": [
+    "NECK_L : longueur du cou",
+    "MANE_N : flammes de la crinière",
+    "SNOUT_HORN : taille du cristal du museau",
+    "HEX_ROWS : rangées d'hexagones",
+    "CRACKS : fissures de lave",
+    "TAIL_L : longueur de la queue"
+   ]
+  },
+  "ADULTE": {
+   "tris": 6678,
+   "objects": 397,
+   "notes": "Crinière de 9 flammes, grand cristal-corne, cornes rouges à 2 pointes, crête double plaques + flammes, 4 grosses roches par épaule avec cristaux, 15 hexagones par flanc, fissures de lave partout, gantelets olive, 4 flammes au bout de la queue. Budget 8000 (83 %).",
+   "reglages": [
+    "MANE_N / MANE_K : nombre et taille des flammes de crinière",
+    "CREST_N : plaques rouges de la crête",
+    "SHOULDER_ROCKS : roches d'épaule",
+    "CRACKS / LEG_CRACKS : fissures de lave",
+    "TAIL_FLAMES : flammes au bout de la queue",
+    "BW / BH / LEG_H : largeur, hauteur du torse et des pattes"
+   ]
+  }
+ }
+}

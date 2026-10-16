@@ -1,0 +1,44 @@
+{
+ "slug": "GALET",
+ "stages": {
+  "BEBE": {
+   "tris": 2880,
+   "objects": 147,
+   "notes": "Grosse tête carrée, très grands yeux ambre à reflets, 2 petites cornes, crête de 4 éclats, galets sur le dos, ventre ocre en plaques, queue à rocher. Budget 3000 (96 %). Pas d'émission sauf les yeux.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (bébé 1.45)",
+    "HORN_L : longueur des cornes",
+    "CREST_N / BACK_PEBBLES : crête d'éclats et galets du dos",
+    "LEG_H / BW : hauteur des pattes et largeur du corps",
+    "TAIL_L : longueur de la queue",
+    "FX_N : nombre de galets flottants"
+   ]
+  },
+  "ADO": {
+   "tris": 4016,
+   "objects": 216,
+   "notes": "Crocs, sourcils de galet, genouillères de pierre, rochers d'épaule et de hanche, crête de 6 éclats, 9 galets sur le dos, queue à rocher. Budget 4500 (89 %).",
+   "reglages": [
+    "NECK_N / NECK_UP : nombre de maillons et hauteur du cou",
+    "HORN_L : longueur des cornes",
+    "CREST_N / BACK_PEBBLES : crête et galets du dos",
+    "KNEE_ROCK : genouillères et coudières de pierre",
+    "TAIL_L : longueur de la queue",
+    "FX_N : nombre de galets flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5128,
+   "objects": 284,
+   "notes": "Grandes cornes beige, 8 éclats sur le crâne, 20 galets sur le dos, énormes rochers d'épaule et de hanche, genouillères de pierre, ventre ocre en 6 plaques, queue à gros rocher. Budget 6000 (85 %).",
+   "reglages": [
+    "BW / BH : largeur et hauteur du torse",
+    "NECK_FWD / NECK_UP : inclinaison et hauteur du cou",
+    "HORN_L : longueur des grandes cornes",
+    "BACK_PEBBLES / CREST_N : galets et éclats du dos",
+    "SHOULDER_SPIKES : pointes sur les épaules",
+    "TAIL_L / FX_N : longueur de la queue, galets flottants"
+   ]
+  }
+ }
+}

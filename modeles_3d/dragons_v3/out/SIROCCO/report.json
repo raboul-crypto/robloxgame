@@ -1,0 +1,44 @@
+{
+ "slug": "SIROCCO",
+ "stages": {
+  "BEBE": {
+   "tris": 3436,
+   "objects": 256,
+   "notes": "Très grosse tête, très grands yeux avec reflets, petites cornes brunes à branche, collerette de 7 flammes, petites ailes en flammes, volutes dorées. Budget 4000 (86 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "WING_SPAN : envergure des ailes",
+    "MANE_N : flammes de la collerette",
+    "VOLUTES : volutes dorées par côté",
+    "NECK_H : hauteur du cou",
+    "COIL_R : rayon des anneaux au sol"
+   ]
+  },
+  "ADO": {
+   "tris": 5080,
+   "objects": 382,
+   "notes": "Cou plus long, crocs, sourcils, cornes à 2 branches, collerette de 2 anneaux, ailes à 4 doigts avec flammes, crête double, volutes. Budget 6000 (85 %).",
+   "reglages": [
+    "NECK_H : hauteur du cou",
+    "WING_SPAN / WING_LIFT : taille et hauteur des ailes",
+    "WING_FLAMES : couches de flammes au bout des ailes",
+    "HORN_K : taille des cornes",
+    "VOLUTES : volutes dorées",
+    "MANE_N : flammes de la collerette"
+   ]
+  },
+  "ADULTE": {
+   "tris": 6152,
+   "objects": 469,
+   "notes": "Longues cornes à 2 branches avec pointes dorées, collerette de 3 anneaux de flammes, immenses ailes à 5 doigts en flammes rouge/orange/jaune, crête double, volutes dorées, panache de flammes au bout de la queue. Budget 8000 (77 %).",
+   "reglages": [
+    "WING_SPAN / WING_LIFT / WING_SWEEP : envergure, hauteur et recul des ailes",
+    "WING_FLAMES : couches de flammes au bout des doigts",
+    "HORN_K / HORN_TINES : cornes brunes",
+    "MANE_RINGS / MANE_N : collerette de flammes",
+    "VOLUTES : volutes dorées",
+    "NECK_H / COIL_R : cou et anneaux au sol"
+   ]
+  }
+ }
+}

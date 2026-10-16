@@ -234,3 +234,20 @@ stylé, et tout problème restant. Ne colle pas le code dans ta réponse.
   `out/POUSSE/`, Drake `out/MOTTIN/`, Amphiptère `out/BRINDILLE/`, Wyvern `out/BRAISILLON/`,
   Oriental `out/MIRAGE/`, Hydre `out/MAGMA/`, Aquatique `out/ECUME/`. Inspire-toi de leur structure, mais
   ton dragon doit avoir sa propre identité (signes distinctifs, palette, rendu de rareté).
+
+## Reprise (16 oct.) — à lire aussi
+
+- Exemple de prompt terminé à imiter : `out/POUSSE/ADULTE_prompt.md` (+ BEBE, ADO). Même niveau de détail : chaque
+  puce décrit ce que fait VRAIMENT le script (nombre de pièces, couleurs hex, formes). Écris « sur l'Adulte <Nom> »,
+  « sur l'Ado <Nom> », « sur le Bébé <Nom> » (jamais « le Adulte »).
+- Le prompt finit par la section LIVRAISON du Mirage, adaptée :
+  1. Le script complet dans un seul fichier .py.
+  2. Si tu as accès à Blender : lance-le, fais une capture de la vue 3D, compare avec l'image et corrige les écarts
+     visibles avant de me le rendre. Donne le nombre de triangles.
+  3. Une liste courte des réglages à changer pour ajuster la forme.
+- `report.json` : ajoute pour chaque stade une clé `"reglages"` : 4 à 6 puces courtes « VARIABLE : effet » (par ex.
+  « WING_SPAN : envergure des ailes ») ; elles seront imprimées dans le docx sous chaque script.
+- Budget : `build.py` affiche « au-dessus du budget » si tu dépasses. Ne dépasse pas : réduis le nombre de petites
+  pièces (FX, écailles) ou passe des `bevel=` à 0 sur les blocs moyens.
+- Lance build.py avec `timeout 300 python3 build.py ...` et un seul rendu à la fois (2 CPU partagés).
+- Si `out/<SLUG>/` n'existe pas : crée-le et pars d'un dragon terminé de la même morphologie (structure seulement).

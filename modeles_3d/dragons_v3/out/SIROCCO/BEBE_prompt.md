@@ -1,0 +1,68 @@
+Tu es un artiste technique 3D. Tu vas écrire un script Python pour Blender (bpy) qui génère
+le modèle 3D du dragon « Bébé Sirocco » de mon jeu Roblox Dragon Pets Simulator.
+
+PIÈCES JOINTES
+1. Une image de concept montrant les 3 stades du dragon Sirocco (Bébé, Ado, Adulte).
+   Seul le dragon en bas à gauche, nommé « Bébé Sirocco », est à modéliser.
+2. Le GDD du jeu (Dragon_Pets_GDD_v2.3.docx). Lis en priorité :
+   - partie 9, tableau du monde 2 : Sirocco = Feu, Rare, Voltigeur, morphologie Amphiptère ;
+   - partie 13, Direction artistique : style par stade, morphologies, couleurs,
+     « Fabrication des modèles ».
+   Si l'image et le GDD se contredisent, l'image gagne pour l'apparence, le GDD gagne pour
+   les contraintes techniques.
+
+ÉTAPE 1 — AVANT D'ÉCRIRE DU CODE
+Décris en 10 à 15 puces ce que tu vois sur le Bébé Sirocco : pose, proportions, chaque
+élément de la tête, du corps, des ailes et de la queue, et la palette. Puis liste les
+contraintes du GDD qui s'appliquent. Je valide avant que tu codes.
+
+CE QUE LE MODÈLE DOIT REPRODUIRE (vérifie chaque point sur l'image)
+- Pose : petit serpent enroulé sur ses anneaux posés au sol, haut du corps dressé en S (cou court), très grosse tête (environ 35 % de la hauteur) qui regarde vers l'avant et un peu vers le bas (6°), queue qui remonte au centre de l'anneau. Pas de pattes.
+- Tête : crâne carré en wedge rouge-orange, museau court, arête claire, plaque du front, mâchoire orange, ligne de bouche brun foncé, 2 narines, 2 petites perles dorées sur le museau. TRÈS GRANDS yeux : blanc, grand iris doré lumineux, pupille ronde noire, 2 petits reflets blancs. Pas de crocs. 1 oreille-flamme par côté, 2 flammes de joue par côté, 2 flammes de barbe sous le menton.
+- Cornes et collerette : 2 petites cornes brunes recourbées vers l'arrière (3 points) sur des bases brunes, 1 petite branche par corne, pointes dorées métalliques ; 3 flammes sur le front (rouge, jaune, orange) ; 1 anneau de 7 flammes derrière le crâne (collerette).
+- Signe distinctif : VOLUTES DORÉES (tourbillons de vent chaud) sur le corps, AILES AUX BORDS DÉCOUPÉS EN FLAMMES, cornes brunes recourbées vers l'arrière. Les flammes sont des losanges plats rouge, orange et jaune.
+- Corps : segments rouge-orange en deux teintes alternées, anneaux sombres aux jointures, plaques de ventre orange bien séparées, plastron orange avec 3 flammes, petites flammes rouge/orange/jaune sur le dos et les flancs, 2 flammes d'épaule par côté, jusqu'à 4 volutes dorées par côté.
+- Ailes : 2 petites ailes en flammes : bras et avant-bras en os rouge sombre, 3 doigts, membrane rouge-orange, 2 couches de flammes (rouge, orange, jaune) au bout des doigts et 1 rangée entre les doigts.
+- Queue : la queue fait partie de la même courbe, elle se termine par un anneau doré et 4 flammes (rouge, orange, 2 jaunes) ; 4 flammes posées au sol autour des anneaux.
+- Rendu de rareté (Rare) : Rare, en version discrète : motif secondaire (volutes dorées), cornes à branche avec pointes dorées, un seul accent lumineux (iris doré et flammes jaunes émissifs, strength 1.2). 6 braises en losange flottent autour.
+- Palette (hex, Principled BSDF) :
+  Body #D24A2E (corps rouge-orange), BodyDark #A02F20 (segments alternés, plaques de crête), BodyLight #E8693A (arête du museau),
+  Mouth #5C1F14 (bouche, narines, jointures), Belly #F9A93A (ventre, mâchoire, plastron), Horn #6A4026 (cornes, sourcils),
+  Gold #E3AA3C métallique 0.7 (volutes, pointes de corne, anneau de queue), FlameRed #DC3A1E, FlameOrange #F58A1E,
+  FlameYellow #FFC93A émission #FFB02E strength 1.2, WingBone #7A1E16 (os des ailes), Membrane #F26A2C (membrane des ailes),
+  Claw #F2E4C8 (crocs, griffe de pouce), EyeWhite #F4F1E8, Iris #F0B030 émission strength 1.2, Black #0C0807 (pupilles).
+- Style : low-poly en blocs biseautés, lisible de loin, comme sur l'image. Pas de sculpture
+  organique. Les flammes sont des plaques fines en losange, les volutes de petites barres dorées en spirale.
+
+CONTRAINTES TECHNIQUES
+- Budget : 4000 triangles maximum après modificateurs. Biseau à 1 segment au plus, et
+  seulement sur les gros blocs (crâne, museau, premiers segments du corps), jamais sur
+  les flammes, os d'aile, volutes, cornes ou petites pièces. Le script affiche le total de triangles à la fin.
+- Pièces séparées, sans squelette (le rig viendra plus tard, GDD partie 13).
+- Hiérarchie : un empty SIROCCO_BEBE_MASTER_ROOT avec 5 enfants HEAD_ROOT, BODY_ROOT, LEGS_ROOT, TAIL_ROOT et WINGS_ROOT
+  (LEGS_ROOT ne porte que les flammes posées au sol : l'amphiptère n'a pas de pattes). Chaque pièce est parentée au
+  bon root. Les pièces de la tête sont placées en coordonnées locales de HEAD_ROOT (placé à la base du crâne,
+  penché de 6° vers l'avant).
+- Tout dans une collection « SIROCCO_BEBE ». Le script est relançable : au début, il supprime uniquement
+  les objets de cette collection et les enfants des roots SIROCCO_BEBE_*. Il ne touche jamais aux autres
+  stades ni aux autres dragons de la scène.
+- Un bloc « RÉGLAGES DU STADE » en haut du code (ZB, NECK_H, COIL_R, HEAD_SCALE, SNOUT_K, FANGS, MANE_RINGS,
+  MANE_N, HORN_K, HORN_TINES, VOLUTES, WING_SPAN, WING_LIFT, WING_FINGERS, WING_FLAMES, TAIL_FLAME, FX_N...) :
+  c'est le seul bloc qui change entre Bébé, Ado et Adulte.
+- Le corps (cou, descente, anneaux au sol, queue) suit UNE courbe Catmull-Rom (CTRL) rééchantillonnée à pas
+  constant, avec un repère par segment (tangente, dos, côté) et un rayon par clés (RADIUS_KEYS), comme le Mirage.
+- Crée les meshes avec bmesh / from_pydata, pas avec bpy.ops dans les boucles.
+- Matériaux Principled BSDF réutilisés s'ils existent, mais toujours mis à jour. Couleurs saturées
+  en espace linéaire. Émission seulement sur l'iris et les flammes jaunes, strength 1.2. Compatible Blender 4.x et 5.x.
+- Seed aléatoire fixe (2202) pour que chaque exécution donne le même dragon.
+- Option ADD_FLOATING_FX pour ajouter ou non les 6 braises flottantes.
+- Conventions : avant du dragon = -Y, haut = +Z, unité = mètre, hauteur totale 4 m, posé sur Z = 0.
+- Code commenté en français, découpé en sections numérotées (7 palette, 8 hiérarchie, 9 tête,
+  10 corps, 11 pattes (aucune), 12 ailes, 13 queue, 14 rareté / FX, 15 finalisation).
+
+LIVRAISON
+1. Le script complet dans un seul fichier .py.
+2. Si tu as accès à Blender : lance-le, fais une capture de la vue 3D, compare avec
+   l'image et corrige les écarts visibles (couleurs, taille de la tête, ailes en flammes, volutes)
+   avant de me le rendre. Donne le nombre de triangles.
+3. Une liste courte des réglages à changer pour ajuster la forme.

@@ -12,7 +12,7 @@ PIÈCES JOINTES
    les contraintes techniques.
 
 ÉTAPE 1 — AVANT D'ÉCRIRE DU CODE
-Décris en 10 à 15 puces ce que tu vois sur le Ado Pousse : pose, proportions, chaque
+Décris en 10 à 15 puces ce que tu vois sur l'Ado Pousse : pose, proportions, chaque
 élément de la tête, du corps, des ailes, des pattes et de la queue, et la palette. Puis liste les
 contraintes du GDD qui s'appliquent. Je valide avant que tu codes.
 

@@ -1,0 +1,44 @@
+{
+ "slug": "MAGMA",
+ "stages": {
+  "BEBE": {
+   "tris": 4802,
+   "objects": 333,
+   "notes": "Hydre bébé à 1 tête énorme, peau de lave orange en plaques fissurées, taches de roche noire, 2 flammes, noyau de lave. Budget 5000 (96 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "BW, BH, TORSO_L : taille du torse",
+    "LEG_H : hauteur des pattes",
+    "GLOW_STR : puissance de la lueur",
+    "TAIL_L : longueur de la queue",
+    "FX_N : braises flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 8472,
+   "objects": 609,
+   "notes": "Hydre ado à 2 têtes, roche noire fissurée, cous de lave, petites ailes, plastron doré. Budget 8500 (99 %).",
+   "reglages": [
+    "HEADS : position, taille et rotation des têtes",
+    "NECK_L, NECK_N, NECK_CURVE : cous",
+    "WING_SPAN : envergure des ailes",
+    "GLOW_STR : lueur des fissures",
+    "FLAME_N, FLAME_H : flammes",
+    "TAIL_L : longueur de la queue"
+   ]
+  },
+  "ADULTE": {
+   "tris": 12208,
+   "objects": 891,
+   "notes": "Hydre adulte à 3 têtes, roche fissurée, gorges de lave, cornes à pointe de lave, ailes, plastron doré à gemme, braises. Budget 13000 (94 %).",
+   "reglages": [
+    "HEADS : position, taille et rotation des 3 têtes",
+    "NECK_L, NECK_N, NECK_CURVE : cous",
+    "WING_SPAN : envergure des ailes",
+    "GLOW_STR : lueur des fissures",
+    "FLAME_N, FLAME_H : flammes",
+    "FX_N, FX_SIZE : braises flottantes"
+   ]
+  }
+ }
+}

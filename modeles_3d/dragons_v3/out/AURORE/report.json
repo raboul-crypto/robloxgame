@@ -1,0 +1,42 @@
+{
+ "slug": "AURORE",
+ "stages": {
+  "BEBE": {
+   "tris": 4006,
+   "objects": 253,
+   "notes": "Oriental bébé : grosse tête, pousse lumineuse à 2 feuilles entre 2 petites cornes, moustaches dorées, crinière de feuilles, fleurs roses lumineuses. Budget 5000 (80 %).",
+   "reglages": [
+    "HS : taille de la tête",
+    "MANE_RINGS, MANE_N : rangées et nombre de feuilles de la crinière",
+    "GLOW_K : intensité des feuilles lumineuses",
+    "CTRL, RADIUS_KEYS : forme et épaisseur du corps en S",
+    "FX_N : nombre de feuilles flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 7264,
+   "objects": 470,
+   "notes": "Ado Aurore : crinière en feuilles à mi-taille, bois à fleurs roses, petit plastron doré, crocs, queue en touffe. Budget 8500 (85 %).",
+   "reglages": [
+    "HS : taille de la tête",
+    "MANE_RINGS, MANE_N, AURA_N : crinière et aura de feuilles roses",
+    "SPROUT : taille de la pousse",
+    "CTRL, RADIUS_KEYS : forme du corps en S",
+    "FX_N : nombre d'éléments flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 11274,
+   "objects": 749,
+   "notes": "Adulte Aurore : crinière de 4 rangées de feuilles, aura de 15 feuilles roses émissives, bois fleuris, couronne, plastron, épaulières et bracelets dorés, nervures lumineuses. Budget 13000 (87 %).",
+   "reglages": [
+    "HS : taille de la tête",
+    "MANE_RINGS, MANE_N, AURA_N : crinière et aura rose",
+    "BLOSSOMS, MANE_FLOWERS : fleurs roses",
+    "CTRL, RADIUS_KEYS : forme et épaisseur du corps en S",
+    "LEG_TH, LEG_DROP : épaisseur et longueur des pattes",
+    "FX_N, FX_SIZE : éléments flottants"
+   ]
+  }
+ }
+}

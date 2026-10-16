@@ -245,11 +245,11 @@ for i in range(N):
         box(f"{tag}_Belly_{i}", (2 * r * 0.86, L * 0.85, 0.22), mid - d * (r * 0.95), R, M_CREAM, parent, bevel=0.03)
         for sgn in (-1, 1):
             box(f"{tag}_Flank_{i}_{sgn}", (0.1, L * 0.9, r * 1.1), mid + side * sgn * r - d * r * 0.2,
-                R, M_LGOLD, parent, bevel=0.02)
+                R, M_LGOLD, parent, bevel=0)
 
     # Écaille dorsale légèrement inclinée
     Rtilt = R @ Euler((math.radians(-8), 0, 0)).to_matrix()
-    box(f"{tag}_Dorsal_{i}", (2 * r * 0.92, L * 0.95, 0.2), mid + d * (r * 0.95), Rtilt, M_DGOLD, parent, bevel=0.03)
+    box(f"{tag}_Dorsal_{i}", (2 * r * 0.92, L * 0.95, 0.2), mid + d * (r * 0.95), Rtilt, M_DGOLD, parent, bevel=0)
 
     # Grappes de 1 à 3 cristaux cyan sur le dos
     if CRYSTAL_RANGE[0] < s < CRYSTAL_RANGE[1] and i % CRYSTAL_EVERY == 0:

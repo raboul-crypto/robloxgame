@@ -1,0 +1,44 @@
+{
+ "slug": "MIRAGE",
+ "stages": {
+  "BEBE": {
+   "tris": 4412,
+   "objects": 195,
+   "notes": "Oriental bébé : très grands yeux, joyau cyan, petits bois, crinière 1 rangée, quelques cristaux cyan, 6 cristaux flottants. Corrigé : biseaux retirés sur ventre, flancs, dos (5532 -> 4412). Budget 5000 (88 %).",
+   "reglages": [
+    "HEAD_POS, SNOUT_L : position de la tête et longueur du museau",
+    "ANTLER_K, ANTLER_TINES : taille et ramifications des bois",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière",
+    "CTRL, RADIUS_KEYS : forme du corps en S",
+    "CRYSTAL_RANGE, CRYSTAL_EVERY : cristaux du dos",
+    "FX_COUNT : cristaux flottants"
+   ]
+  },
+  "ADO": {
+   "tris": 8198,
+   "objects": 286,
+   "notes": "Ado Mirage : debout, crinière 2 rangées, bois à 2 pointes, petit plastron à gemme, 2 éclats d'aile par épaule, 10 cristaux flottants. Budget 8500 (96 %).",
+   "reglages": [
+    "HEAD_POS, SNOUT_L : tête et museau",
+    "ANTLER_K, ANTLER_TINES : bois",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière",
+    "CTRL, RADIUS_KEYS : corps en S",
+    "LEG_FRONT, LEG_BACK, LEG_K : pattes",
+    "FX_COUNT : cristaux flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 12042,
+   "objects": 412,
+   "notes": "Adulte Mirage v3 : corps en S qui flotte, crinière 3 rangées, bois à 3 pointes, plastron à gemme, ailes d'épaule, cristaux en grappes, 14 cristaux flottants. Budget 13000 (93 %).",
+   "reglages": [
+    "HEAD_POS, SNOUT_L : tête et museau",
+    "ANTLER_K, ANTLER_TINES : bois",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière",
+    "CTRL, RADIUS_KEYS : corps en S",
+    "CRYSTAL_RANGE, CRYSTAL_EVERY : cristaux du dos",
+    "FX_COUNT : cristaux flottants"
+   ]
+  }
+ }
+}

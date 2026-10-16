@@ -1,0 +1,43 @@
+{
+ "slug": "BRAISILLON",
+ "stages": {
+  "BEBE": {
+   "tris": 2926,
+   "objects": 166,
+   "notes": "Grosse tête, couronne de 3 flammes, braises, ailes-bras au sol, ventre doré. Budget 3000 (98 %).",
+   "reglages": [
+    "LEAN : inclinaison du torse",
+    "HEAD_SCALE : taille de la tête",
+    "MANE_N / FLAME_K : nombre et taille des flammes",
+    "WING_SPAN : envergure des ailes-bras",
+    "TAIL_FLAMES : lames de la flamme de queue"
+   ]
+  },
+  "ADO": {
+   "tris": 4462,
+   "objects": 248,
+   "notes": "Cou de 4 maillons, crocs, crinière de flammes 2 anneaux, basalte fissuré de lave, épaulières. Budget 4500 (99 %).",
+   "reglages": [
+    "LEAN : inclinaison du torse",
+    "HEAD_SCALE : taille de la tête",
+    "MANE_N / FLAME_K : nombre et taille des flammes",
+    "WING_SPAN : envergure des ailes-bras",
+    "TAIL_FLAMES : lames de la flamme de queue",
+    "NECK_L / NECK_N : longueur et maillons du cou"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5974,
+   "objects": 340,
+   "notes": "Armure de basalte et fissures de lave, crinière 3 couronnes de flammes, ailes à facettes, bouquet de 7 flammes en queue. Budget 6000 (100 %).",
+   "reglages": [
+    "LEAN : inclinaison du torse",
+    "HEAD_SCALE : taille de la tête",
+    "MANE_N / FLAME_K : nombre et taille des flammes",
+    "WING_SPAN : envergure des ailes-bras",
+    "TAIL_FLAMES : lames de la flamme de queue",
+    "NECK_L / NECK_N : longueur et maillons du cou"
+   ]
+  }
+ }
+}

@@ -91,7 +91,7 @@ SNOUT_K = 1.0
 FANGS = 3
 CHEEK_N = 3
 MANE_RINGS = 2
-MANE_N = 11
+MANE_N = 9
 BELLY_N = 6
 FLANK_ROWS = 3
 FLANK_COLS = 5
@@ -105,7 +105,7 @@ BRACER_K = 0.62
 LEG_BEV = 1
 LEG_CRACKS = True
 TAIL_SCALES = True
-TAIL_BEV_N = 4
+TAIL_BEV_N = 2
 BELLY_SIDES = True
 THIGH_SPIKES = 2
 WING_SPAN = 6.6
@@ -118,7 +118,7 @@ WING_CRACKS = 3
 TAIL_L = 6.5
 TAIL_STEP = 0.9
 TAIL_TIP = 2.0
-FX_N = 6
+FX_N = 4
 FX_SIZE = 0.7
 
 # ----------------------------------------------------------

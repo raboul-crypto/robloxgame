@@ -1,0 +1,44 @@
+{
+ "slug": "BRINDILLE",
+ "stages": {
+  "BEBE": {
+   "tris": 2912,
+   "objects": 209,
+   "notes": "Grosse tête, très grands yeux à reflets, bois courts, petites ailes-feuilles, liane en spirale. Commun sans émission. Budget 3000.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (1.75 = grosse tête de bébé)",
+    "NECK_H : hauteur du cou dressé",
+    "COIL_R : rayon de l'anneau de corps au sol",
+    "WING_L / WING_W : longueur et largeur des ailes-feuilles",
+    "ANT_K : taille des bois",
+    "FX_N : nombre de feuilles flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 4300,
+   "objects": 313,
+   "notes": "Cou en S, crocs, sourcils, bois ramifiés, ailes nervurées avec pointes, écorce sur le dos. Budget 4500.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "NECK_H : hauteur du cou dressé",
+    "COIL_R : rayon de l'anneau au sol",
+    "WING_L / WING_W : taille des ailes-feuilles",
+    "ANT_BEAM / ANT_TINES : ramification des bois",
+    "GRAIN_EVERY : veines de bois sur les flancs"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5476,
+   "objects": 408,
+   "notes": "Grands bois ramifiés à bourgeons, liane en spirale, 5 plaques de bavoir, très grandes ailes-feuilles à pointes crème, feuilles croisées au bout de la queue. Budget 6000.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "NECK_H / ZB : hauteur et départ du cou",
+    "COIL_R / TAIL_UP : anneau au sol et hauteur de la queue",
+    "WING_L / WING_W / WING_EL : taille et inclinaison des ailes",
+    "ANT_K / ANT_TINES / ANT_TWIGS : grandeur et ramification des bois",
+    "FX_N : nombre de feuilles flottantes"
+   ]
+  }
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "slug": "SOLARIS",
+ "stages": {
+  "BEBE": {
+   "tris": 5442,
+   "objects": 237,
+   "notes": "Grosse tête carrée, très grands yeux ambre avec reflets, petite couronne de flammes dorées + petit halo, soleil de poitrine, petites ailes à bord de flammes, flamme dorée au bout de la queue, anneau runique au sol. Budget 6000 (91 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (le bébé a une grosse tête)",
+    "LEG_H : hauteur des pattes",
+    "WING_SPAN : envergure des ailes",
+    "CROWN_N / CROWN_K : nombre et longueur des flammes de la couronne",
+    "HALO_R : rayon du halo derrière la tête",
+    "TAIL_L / TAIL_FLAMES : longueur de la queue et gerbe de flammes finale"
+   ]
+  },
+  "ADO": {
+   "tris": 7928,
+   "objects": 378,
+   "notes": "Cou de 5 plaques, crocs, sourcils dorés, couronne + halo à rayons, armure d'or (front, gorgerin, épaulières à emblème rouge, genouillères, hanches), crête double, ailes à flammes, queue cerclée d'or avec gerbe de flammes. Budget 10000 (79 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "NECK_L / NECK_N : longueur et nombre de maillons du cou",
+    "WING_SPAN / WING_FLAMES : envergure des ailes et flammes du bord",
+    "CROWN_N / HALO_R / HALO_RAYS : couronne et halo de soleil",
+    "SUN_RAYS : nombre de rayons du soleil de poitrine",
+    "TAIL_L / TAIL_FLAMES : longueur de la queue et gerbe de flammes"
+   ]
+  },
+  "ADULTE": {
+   "tris": 10792,
+   "objects": 549,
+   "notes": "Bois d'or ramifiés à pointes-flammes, couronne de 2 anneaux + grand halo, grand soleil de poitrine (2 anneaux, 16 rayons, 2 rubis), armure d'or complète, barbe de flammes, grandes ailes à bord et motifs de flamme, queue à gerbe de 9 flammes, 64 FX + anneau runique. Budget 15000 (72 %).",
+   "reglages": [
+    "BW / BH / LEG_H / TORSO_L : proportions du corps",
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "HEAD_SCALE : taille de la tête",
+    "HALO_R / CROWN_N / HALO_RAYS : halo et couronne de flammes",
+    "WING_SPAN / WING_FLAMES : envergure des ailes et flammes du bord",
+    "TAIL_L / TAIL_FLAMES / FX_N : queue, flamme finale et éléments flottants"
+   ]
+  }
+ }
+}
