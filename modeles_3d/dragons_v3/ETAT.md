@@ -24,13 +24,13 @@
 | Marée (Rare, Aquatique) | 3/3 | 3/3 | oui |
 | Lagon (Rare, Amphiptère) | 3/3 | 3/3 | oui |
 | Perle (Épique, Aquatique) | 0/3 | 0/3 | non |
-| Liane (Épique, Hydre) | 0/3 | 0/3 | non |
-| Neptyr (Légendaire, Oriental) | 0/3 | 0/3 | non |
-| Goéland (Commun, Wyvern) | 0/3 | 0/3 | non |
+| Liane (Épique, Hydre) | 3/3 | 0/3 | non |
+| Neptyr (Légendaire, Oriental) | 3/3 | 0/3 | non |
+| Goéland (Commun, Wyvern) | 3/3 | 0/3 | non |
 | Mousse (Commun, Aquatique) | 3/3 | 3/3 | oui |
 | Rafale (Rare, Amphiptère) | 3/3 | 3/3 | oui |
 | Boussole (Rare, Classique) | 3/3 | 3/3 | oui |
-| Tempête (Épique, Wyvern) | 0/3 | 0/3 | non |
+| Tempête (Épique, Wyvern) | 3/3 | 0/3 | non |
 | Typhon (Légendaire, Hydre) | 0/3 | 0/3 | non |
 | Brume (Légendaire, Oriental) | 0/3 | 0/3 | non |
 | Léviathan (Mythique, Aquatique) | 0/3 | 0/3 | non |
