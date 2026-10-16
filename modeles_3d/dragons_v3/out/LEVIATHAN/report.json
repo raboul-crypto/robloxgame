@@ -1,0 +1,44 @@
+{
+ "slug": "LEVIATHAN",
+ "stages": {
+  "BEBE": {
+   "tris": 5118,
+   "objects": 345,
+   "notes": "Grosse tête, gemme du front, couronne de 5 cornes, plaques de métal sur dos et queue, points et lignes cyan, halo discret, nageoires déjà grandes.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "HORN_N / HORN_L : cornes de la couronne",
+    "HALO_R / HALO_Y : taille et distance du halo",
+    "PEC_SPAN / PEC_RAYS : taille des nageoires",
+    "DOT_ROWS : points lumineux sur les flancs",
+    "FX_N : éclats et bulles en orbite"
+   ]
+  },
+  "ADO": {
+   "tris": 8404,
+   "objects": 599,
+   "notes": "Crocs, sourcils blindés, couronne de 7 cornes, dos blindé à pointes, épaulières, halo à 6 gemmes, pectorales à 7 rayons, 18+6 FX.",
+   "reglages": [
+    "NECK_L / NECK_RISE : longueur et verticalité du cou",
+    "HORN_N / HORN_L : cornes de la couronne",
+    "HALO_R / HALO_Y / HALO_GEMS : halo flottant",
+    "PEC_SPAN / PEC_RAYS : envergure des pectorales",
+    "ARMOR / ARMOR_K : plaques blindées",
+    "FX_N / FX_UP : FX en orbite et qui montent"
+   ]
+  },
+  "ADULTE": {
+   "tris": 13398,
+   "objects": 998,
+   "notes": "Colosse blindé (dos, flancs, queue, épaulières), couronne de 9 cornes, gemmes multiples, halo à 2 anneaux et 8 gemmes, pectorales immenses à 9 rayons, 30+10 FX.",
+   "reglages": [
+    "NECK_L / NECK_RISE : longueur et verticalité du cou",
+    "HEAD_SCALE / HORN_N : tête et couronne de cornes",
+    "HALO_R / HALO_Y / HALO_GEMS : halo flottant",
+    "PEC_SPAN / PEC_RAYS : envergure des pectorales immenses",
+    "ARMOR / ARMOR_K : plaques blindées (0 aucune, 2 complètes)",
+    "DOT_ROWS / LINES / FX_N : bioluminescence et FX"
+   ]
+  }
+ }
+}

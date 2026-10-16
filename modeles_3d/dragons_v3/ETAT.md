@@ -31,12 +31,12 @@
 | Rafale (Rare, Amphiptère) | 3/3 | 3/3 | oui |
 | Boussole (Rare, Classique) | 3/3 | 3/3 | oui |
 | Tempête (Épique, Wyvern) | 3/3 | 3/3 | oui |
-| Typhon (Légendaire, Hydre) | 0/3 | 0/3 | non |
-| Brume (Légendaire, Oriental) | 0/3 | 0/3 | non |
-| Léviathan (Mythique, Aquatique) | 0/3 | 0/3 | non |
+| Typhon (Légendaire, Hydre) | 3/3 | 3/3 | oui |
+| Brume (Légendaire, Oriental) | 3/3 | 3/3 | oui |
+| Léviathan (Mythique, Aquatique) | 3/3 | 3/3 | oui |
 | Stalactite (Rare, Drake) | 3/3 | 3/3 | oui |
-| Ombrelame (Épique, Wyvern) | 0/3 | 0/3 | non |
-| Quartz (Légendaire, Classique) | 0/3 | 0/3 | non |
+| Ombrelame (Épique, Wyvern) | 3/3 | 3/3 | oui |
+| Quartz (Légendaire, Classique) | 3/3 | 3/3 | oui |
 | Pépite (Mythique, Drake) | 0/3 | 0/3 | non |
 | Brillant (Mythique, Classique) | 0/3 | 0/3 | non |
 | Revenant (Secret, Hydre) | 0/3 | 0/3 | non |

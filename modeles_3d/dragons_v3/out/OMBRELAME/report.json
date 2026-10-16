@@ -1,0 +1,44 @@
+{
+ "slug": "OMBRELAME",
+ "stages": {
+  "BEBE": {
+   "tris": 4306,
+   "objects": 262,
+   "notes": "Bébé trapu, grands yeux violets, crinière de 8 lames, ailes-bras à bord de lames, queue-lame, liserés. Budget 5000 (86 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "MANE_RINGS / MANE_N / MANE_K : anneaux, nombre et longueur des lames de crinière",
+    "WING_SPAN / BLADE_N : envergure des ailes-bras et lames du bord",
+    "TAIL_BLADE : taille de la lame de queue",
+    "LISERE_FLANK / LISERE_N : liserés lumineux des flancs",
+    "NECK_L / NECK_N : longueur et maillons du cou"
+   ]
+  },
+  "ADO": {
+   "tris": 6162,
+   "objects": 390,
+   "notes": "Cou 4 maillons, crocs, crinière 2 anneaux, ornements dorés, bord d'aile en lames, queue-lame. Budget 8500 (72 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "MANE_RINGS / MANE_N / MANE_K : anneaux, nombre et longueur des lames de crinière",
+    "WING_SPAN / BLADE_N / ARM_BLADES : envergure et lames des ailes-bras",
+    "TAIL_BLADE / TAIL_SIDE_BLADES : lame de queue et lames latérales",
+    "LISERE_FLANK / LISERE_N : liserés lumineux des flancs",
+    "NECK_L / NECK_N : longueur et maillons du cou"
+   ]
+  },
+  "ADULTE": {
+   "tris": 9068,
+   "objects": 614,
+   "notes": "Wyvern fine, crinière 3 anneaux, très grandes ailes-bras à 24 lames de bord, queue-lame double, FX 14. Budget 13000 (70 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "MANE_RINGS / MANE_N / MANE_K : anneaux, nombre et longueur des lames de crinière",
+    "WING_SPAN / BLADE_N / ARM_BLADES / FINGER_BLADES : envergure et lames des ailes-bras",
+    "TAIL_L / TAIL_BLADE / TAIL_SIDE_BLADES : queue et lame finale",
+    "LISERE_FLANK / LISERE_N : liserés lumineux des flancs",
+    "LEG_H / PITCH : hauteur des pattes et inclinaison du corps"
+   ]
+  }
+ }
+}

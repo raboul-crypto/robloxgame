@@ -1,0 +1,44 @@
+{
+ "slug": "TYPHON",
+ "stages": {
+  "BEBE": {
+   "tris": 5056,
+   "objects": 321,
+   "notes": "Hydre bébé à 3 têtes carrées (centrale plus grande) à crêtes en vagues d'écume, spirales de tourbillon, queue de poisson, couronne et clous d'argent. Budget 6000.",
+   "reglages": [
+    "HEADS : position, taille et rotation des 3 têtes",
+    "HEAD_SCALE : taille de la tête centrale",
+    "BW, BH, TORSO_L : taille du torse",
+    "LEG_H : hauteur des pattes",
+    "TUFT_N, TUFT_L : nombre et hauteur des vagues de crête",
+    "TAIL_L, TAIL_FIN : queue et nageoire caudale"
+   ]
+  },
+  "ADO": {
+   "tris": 9570,
+   "objects": 616,
+   "notes": "Hydre ado à 3 têtes sur cous de 3 maillons, crêtes en vagues, crocs, couronnes et épaulières d'argent, aura, double rangée de pics, trident de queue. Budget 10000.",
+   "reglages": [
+    "HEADS : position, taille et rotation des 3 têtes",
+    "NECK_L, NECK_N, NECK_CURVE : hauteur, maillons et courbe des cous",
+    "TUFT_N, TUFT_L : vagues de crête des têtes",
+    "AURA_N : éclats de l'aura derrière les têtes",
+    "TAIL_L, TAIL_FIN : queue et nageoire caudale",
+    "FX_N : éléments d'eau flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 13898,
+   "objects": 947,
+   "notes": "Hydre adulte à 3 têtes sur cous de 5 maillons, grandes crêtes en vagues déferlantes à écume, spirales de tourbillon, aura d'éclats, armure d'argent, double rangée de pics, queue de poisson à trident, FX d'eau. Budget 15000.",
+   "reglages": [
+    "HEADS : position, taille et rotation des 3 têtes",
+    "NECK_L, NECK_N, NECK_CURVE : hauteur, maillons et courbe des cous",
+    "TUFT_N, TUFT_L, CREST_H : vagues des crêtes",
+    "AURA_N, GLOW_STR : aura et puissance de la lueur",
+    "SWIRLS, SWIRL_TURNS : spirales de tourbillon",
+    "TAIL_L, TAIL_FIN, TRIDENT : queue, nageoire et ornement final"
+   ]
+  }
+ }
+}

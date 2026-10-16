@@ -1,0 +1,44 @@
+{
+ "slug": "BRUME",
+ "stages": {
+  "BEBE": {
+   "tris": 4388,
+   "objects": 246,
+   "notes": "Bébé Brume : grosse tête, très grands yeux lavande, petites cornes noires, crinière de brume, touche d'argent (lune, collier, ornement de queue), mini aura, 6 FX. Budget 6000 (73 %).",
+   "reglages": [
+    "HEAD_POS, HEAD_S, SNOUT_L : position, taille de la tête et longueur du museau",
+    "HORN_K, HORN_RINGS : taille des cornes noires et anneaux d'argent",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière de brume",
+    "CTRL, RADIUS_KEYS : forme du corps en S",
+    "LEG_FRONT, LEG_BACK, LEG_K : pattes",
+    "FX_COUNT, AURA_N : FX flottants et croissant d'aura"
+   ]
+  },
+  "ADO": {
+   "tris": 7530,
+   "objects": 447,
+   "notes": "Ado Brume : flotte en S, cornes noires à 2 anneaux d'argent, veines lavande, plastron et épaulières d'argent, aura 9 pointes, queue qui se dissout, 10 FX. Budget 10000 (75 %).",
+   "reglages": [
+    "HEAD_POS, HEAD_S, SNOUT_L : tête et museau",
+    "HORN_K, HORN_RINGS : cornes noires et anneaux d'argent",
+    "MANE_RINGS, MANE_COUNT, RIBBON_EVERY : crinière de brume",
+    "CTRL, RADIUS_KEYS, MIST_START : corps en S et début de la brume de queue",
+    "CHEST_PLATE, PAULDRONS, COLLAR : ornements d'argent",
+    "AURA_N, AURA_R, FX_COUNT : croissant d'aura et FX"
+   ]
+  },
+  "ADULTE": {
+   "tris": 11730,
+   "objects": 722,
+   "notes": "Adulte Brume : tête x1.3, cornes noires + cornes basses, crinière 3x12 + brins le long du dos, double rangée de pics noirs, argent partout, aura croissant 15 pointes, panache de queue 9 brins, 16 FX et 3 anneaux. Budget 15000 (78 %).",
+   "reglages": [
+    "HEAD_POS, HEAD_S, SNOUT_L : position, taille de la tête et museau",
+    "HORN_K, HORN_RINGS, HORN2 : cornes noires, anneaux d'argent, cornes basses",
+    "MANE_RINGS, MANE_COUNT, MANE_K, RIBBON_EVERY : crinière de brume",
+    "CTRL, RADIUS_KEYS, SEG_STEP, MIST_START : corps en S et dissolution de la queue",
+    "TAIL_PLUME_N, TAIL_K, TAIL_ORNAMENT : panache et ornement de queue",
+    "AURA_N, AURA_R, FX_COUNT : croissant d'aura et FX flottants"
+   ]
+  }
+ }
+}

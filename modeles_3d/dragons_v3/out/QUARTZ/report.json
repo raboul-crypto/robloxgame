@@ -1,0 +1,44 @@
+{
+ "slug": "QUARTZ",
+ "stages": {
+  "BEBE": {
+   "tris": 5614,
+   "objects": 230,
+   "notes": "Bébé compact, grands yeux roses, cornes et grappes de quartz, petit coeur de quartz, petite aura, géode de queue, anneau au sol. Budget 6000 (94 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (le bébé a une grosse tête)",
+    "LEG_H : hauteur des pattes",
+    "WING_SPAN : envergure des ailes",
+    "CROWN_N / HALO_R : cristaux et rayon de l'aura derrière la tête",
+    "CREST_N / CREST_CLUSTER : grappes de quartz sur le dos",
+    "TAIL_L / TAIL_CRYS : longueur de la queue et géode finale"
+   ]
+  },
+  "ADO": {
+   "tris": 9248,
+   "objects": 409,
+   "notes": "Cou de 5 plaques, crocs, cornes en cristal, armure d'argent, aura, double rangée de grappes, ailes à cristaux, géode de queue. Budget 10000 (92 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "NECK_L / NECK_N : longueur et nombre de maillons du cou",
+    "WING_SPAN / WING_CRYS : envergure des ailes et cristaux du bord",
+    "CROWN_N / HALO_R / HALO_RAYS : aura derrière la tête",
+    "CREST_N / CREST_CLUSTER / CREST_K : grappes du dos",
+    "TAIL_L / TAIL_CRYS : queue et géode finale"
+   ]
+  },
+  "ADULTE": {
+   "tris": 12740,
+   "objects": 597,
+   "notes": "Cornes ramifiées, aura de 2 anneaux, grand coeur de quartz, armure d'argent complète, grappes d'épaules et de dos, grandes ailes à facettes, géode de 8 cristaux, 64 FX. Budget 15000 (85 %).",
+   "reglages": [
+    "BW / BH / LEG_H / TORSO_L : proportions du corps",
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "HEAD_SCALE : taille de la tête",
+    "HALO_R / CROWN_N / HALO_RAYS : aura derrière la tête",
+    "WING_SPAN / WING_CRYS / FACETS : envergure et cristaux des ailes",
+    "TAIL_L / TAIL_CRYS / FX_N : queue, géode finale et cristaux flottants"
+   ]
+  }
+ }
+}
