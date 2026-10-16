@@ -1,0 +1,20 @@
+{
+ "slug": "POUSSE",
+ "stages": {
+  "BEBE": {
+   "tris": 2864,
+   "objects": 163,
+   "notes": "Gros crâne carré, très grands yeux avec reflets, pousse à 2 feuilles entre 2 petites cornes, ventre en plaques, petites ailes, rendu Commun sans émission. Budget 3000 (95 %)."
+  },
+  "ADO": {
+   "tris": 4434,
+   "objects": 248,
+   "notes": "Cou de 4 plaques crème, crocs, sourcils, pousse à tige + 3 feuilles, cornes recourbées, lianes sur les bracelets d'écorce, grandes ailes. Budget 4500 (99 %)."
+  },
+  "ADULTE": {
+   "tris": 5638,
+   "objects": 330,
+   "notes": "Petit arbre sur le crâne entre bois beige ramifiés, cou de 5 plaques, écailles-feuilles, plaques d'écorce, bracelets + lianes, pierre verte non émissive au pied, grandes ailes à pointes crème. Budget 6000 (94 %)."
+  }
+ }
+}
