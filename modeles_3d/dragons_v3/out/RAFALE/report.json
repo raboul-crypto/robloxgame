@@ -1,0 +1,44 @@
+{
+ "slug": "RAFALE",
+ "stages": {
+  "BEBE": {
+   "tris": 2944,
+   "objects": 195,
+   "notes": "Très grosse tête, grands yeux bleus, crête de 5 plumes, petites ailes de plumes, bandes de vent argent, tourbillon de plumes au bout de la queue. Budget 4000 (74 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "CREST_N / CREST_L : plumes de la crête",
+    "WING_SPAN / WING_PRIM : ailes et nombre de plumes",
+    "BAND_EVERY : espacement des bandes de vent",
+    "COIL_R / TAIL_UP : anneaux et hélice de la queue",
+    "TAIL_F / TAIL_L : tourbillon de plumes"
+   ]
+  },
+  "ADO": {
+   "tris": 4380,
+   "objects": 273,
+   "notes": "Cou long, crocs fins, sourcils-plumes, collier argent, ailes de 6 primaires + 5 secondaires + couvertures, queue qui monte en hélice. Budget 6000 (73 %).",
+   "reglages": [
+    "HEAD_SCALE / SNOUT_K : tête et museau",
+    "CREST_N / CREST_L : crête de plumes",
+    "WING_SPAN / WING_LIFT / WING_PRIM / WING_SEC : ailes de plumes",
+    "BAND_EVERY : bandes de vent",
+    "NECK_H / COIL_R / TAIL_UP : cou, anneaux, hélice",
+    "FEATHER_K : taille des plumes du corps"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5592,
+   "objects": 363,
+   "notes": "Crête double de plumes, cornes à branche, ailes de 8 primaires + 8 secondaires + couvertures, bandes de vent sur tout le corps, queue en hélice avec tourbillon de 6 plumes, 14 plumes flottantes. Budget 8000 (70 %).",
+   "reglages": [
+    "CREST_N / CREST2 : crête de plumes simple ou double",
+    "WING_SPAN / WING_LIFT / WING_PRIM / WING_SEC / WING_COVERT : ailes",
+    "BAND_EVERY : bandes de vent argent",
+    "NECK_H / COIL_R / TAIL_UP : cou, anneaux, hélice de la queue",
+    "TAIL_F / TAIL_L : tourbillon de plumes",
+    "FEATHER_K / FX_N : plumes du corps et plumes flottantes"
+   ]
+  }
+ }
+}

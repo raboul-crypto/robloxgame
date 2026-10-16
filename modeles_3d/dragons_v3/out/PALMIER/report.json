@@ -1,0 +1,44 @@
+{
+ "slug": "PALMIER",
+ "stages": {
+  "BEBE": {
+   "tris": 2966,
+   "objects": 205,
+   "notes": "Gros crâne carré, très grands yeux ambre, crinière de 5 palmes, ventre-tronc beige à bandes brunes, petites ailes en 3 palmes, queue à 2 noix de coco. Commun sans émission. Budget 3000 (99 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "MANE_FRONDS / MANE_LEN : nombre et longueur des palmes de la crinière",
+    "WING_SPAN / WING_FRONDS : envergure et nombre de palmes des ailes",
+    "BELLY_N : plaques du ventre-tronc",
+    "TAIL_L / COCONUTS : longueur de la queue et noix de coco",
+    "FX_N : palmes flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 4492,
+   "objects": 308,
+   "notes": "Cou de 4 maillons annelés, crocs, sourcils, crinière de 6 palmes, cornes brunes à pointe crème, ailes en 3 palmes, queue à 2 noix de coco et touffe de 3 palmes. Budget 4500 (100 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "MANE_FRONDS / MANE_LEAFLETS : palmes de la crinière et leurs folioles",
+    "WING_SPAN / WING_LEAFLEN : envergure et folioles des ailes",
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "TAIL_L / TAIL_TUFT : longueur de la queue et touffe finale",
+    "FX_N : palmes flottantes"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5992,
+   "objects": 444,
+   "notes": "Grande crinière de 7 palmes + 2 courtes, cornes brunes à pointe beige, cou de 5 maillons annelés, ventre en tronc, 4 grandes palmes par aile, queue à 3 noix de coco et touffe de 4 palmes, 3 crocs par côté. Budget 6000 (100 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "MANE_FRONDS / MANE_LEN : palmes de la crinière",
+    "WING_SPAN / WING_FRONDS / WING_LEAFLETS : taille et densité des ailes en palmes",
+    "BELLY_N / BACK_BANDS : anneaux de tronc sur le ventre et le dos",
+    "TAIL_L / COCONUTS / TAIL_TUFT : queue, noix de coco, touffe",
+    "FX_N : palmes flottantes"
+   ]
+  }
+ }
+}

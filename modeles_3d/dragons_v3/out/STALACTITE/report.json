@@ -1,0 +1,44 @@
+{
+ "slug": "STALACTITE",
+ "stages": {
+  "BEBE": {
+   "tris": 3600,
+   "objects": 208,
+   "notes": "Gros crâne, très grands yeux à reflets, cornes de pierre à 2 pointes, 5 stalagmites dorsales (crête double), grappes de cristaux (front, épaule, queue), barbe de 2 stalactites, strates + veine de minerai. Budget 4000 (90 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (bébé 1.2)",
+    "CREST_N / CREST_K : nombre et taille des stalagmites du dos",
+    "CLUSTER_N / CLUSTER_K : cristaux des grappes",
+    "BEARD / BEARD_K : stalactites sous le menton",
+    "LEG_H / BW : hauteur des pattes et largeur du corps",
+    "FX_N : nombre d'éléments flottants"
+   ]
+  },
+  "ADO": {
+   "tris": 5060,
+   "objects": 300,
+   "notes": "Crocs, sourcils de roche, barbe de 3 stalactites, 6 stalagmites + rangée latérale + cristaux, plaques de roche sur les pattes, genouillères avec cristaux, strates et veines lumineuses. Budget 6000 (84 %).",
+   "reglages": [
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "CREST_N / CREST_K / SIDE_ROW : stalagmites du dos et crête double",
+    "CLUSTER_N / SHOULDER_CLUSTERS : grappes de cristaux",
+    "STRATA / SLAB_ROWS / CRACKS : strates, plaques et veines de minerai",
+    "TAIL_L / TIP_STAL / TIP_CRYS : queue et massue",
+    "FX_N : nombre d'éléments flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 6136,
+   "objects": 362,
+   "notes": "Forêt de 7 stalagmites en crête double avec cristaux, barbe de 5 stalactites, grappes de cristaux (front, 2 par épaule, genoux, queue), 4 roches d'épaule, strates, plaques de roche, veines de minerai lumineuses, massue de queue hérissée. Budget 8000 (77 %). Lueur discrète strength <= 1.4.",
+   "reglages": [
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "CREST_N / CREST_K / SIDE_ROW : forêt de stalagmites",
+    "CLUSTER_N / CLUSTER_K / SHOULDER_CLUSTERS : grappes de cristaux",
+    "BEARD / BEARD_K : barbe de stalactites",
+    "STRATA / SLAB_ROWS / CRACKS / LEG_CRACKS : strates et veines de minerai",
+    "TAIL_L / CLUB_SIZE / TIP_STAL : queue et massue"
+   ]
+  }
+ }
+}

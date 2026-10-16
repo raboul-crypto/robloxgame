@@ -1,0 +1,44 @@
+{
+ "slug": "MOUSSE",
+ "stages": {
+  "BEBE": {
+   "tris": 2952,
+   "objects": 172,
+   "notes": "Énorme tête de bouledogue, très grands yeux à reflets, collerette d'écume (2 rangées), bulles sur le dos, nageoires-oreilles épaisses à facettes, queue plate. Budget 3000 (98 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (bébé 1.25)",
+    "RUFF_N / RUFF_ROWS / RUFF_L : collerette d'écume (nombre, rangées, longueur des pointes)",
+    "EAR_L / EAR_TH : taille et épaisseur des nageoires-oreilles",
+    "BUB_R / BUB_EVERY : taille et espacement des bulles dorsales",
+    "STEP / TAIL_STEP : pas des segments (budget de triangles)",
+    "FX_N : nombre de bulles flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 3658,
+   "objects": 223,
+   "notes": "Museau plus long, sourcils, 2 petits crocs, collerette plus fournie, 2 rangées de planches, bulles satellites. Budget 4500 (81 %).",
+   "reglages": [
+    "NECK_L / NECK_RISE : longueur et inclinaison du cou",
+    "RUFF_N / RUFF_L : collerette d'écume (signe distinctif)",
+    "PLANK_ROWS : rangées de planches sur les flancs",
+    "PEC_SPAN / PEC_RAYS : taille et rayons des pectorales épaisses",
+    "TAIL_L / CAUDAL_L : longueur de la queue et taille de la caudale",
+    "BUB_R / BUB_EVERY : bulles dorsales"
+   ]
+  },
+  "ADULTE": {
+   "tris": 4512,
+   "objects": 285,
+   "notes": "Mâchoire carrée, 3 crocs gris, sourcils sévères, grande collerette (2 rangées), 3 rangées de planches, bulles + satellites sur toute la crête, caudale en V à 4 rayons épais. Budget 6000 (75 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (adulte 1.45)",
+    "RUFF_N / RUFF_ROWS / RUFF_L : collerette d'écume",
+    "PLANK_ROWS : rangées de planches (aspect coque)",
+    "PEC_SPAN / PEC_RAYS : envergure et rayons des pectorales",
+    "TAIL_L / CAUDAL_L : queue de poisson et caudale",
+    "BUB_R / BUB_EVERY : bulles translucides du dos"
+   ]
+  }
+ }
+}

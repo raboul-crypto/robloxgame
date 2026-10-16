@@ -1,0 +1,44 @@
+{
+ "slug": "BOUSSOLE",
+ "stages": {
+  "BEBE": {
+   "tris": 3072,
+   "objects": 183,
+   "notes": "Gros crâne bleu marine, très grands yeux dorés lumineux, rose des vents sur le front et sur le poitrail, 2 cornes-aiguilles (gauche à pointe rouge), petites ailes-voiles à os de laiton, flèche dorée au bout de la queue. Rare discret. Budget 4000 (77 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "HORN_L : longueur des cornes-aiguilles",
+    "ROSE_CHEST : taille de la rose des vents du poitrail",
+    "WING_SPAN / WING_LIFT : envergure et inclinaison des ailes",
+    "TAIL_L / ARROW : longueur de la queue et taille de la flèche",
+    "FX_N : gouttes et étoiles flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 4964,
+   "objects": 291,
+   "notes": "Cou de 4 maillons à bagues de laiton, crocs, sourcils, cornes à 2 pointes, crête double, plaques d'épaule en laiton, lignes de carte + route + croix lumineuses, étoile sur les voiles, flèche à empennage rouge. Budget 6000 (83 %).",
+   "reglages": [
+    "HORN_L / HORN_SPUR : longueur et 2e pointe des cornes",
+    "ROSE_CHEST : taille de la rose du poitrail",
+    "MAP_LINES / MAP_MARKS / MAP_ROUTE : lignes de carte et repères sur les flancs",
+    "CREST_N / CREST2 : crête dorsale simple ou double",
+    "WING_SPAN / WING_ROSE : envergure des ailes et étoile sur la voile",
+    "FX_N : gouttes et étoiles flottantes"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5774,
+   "objects": 348,
+   "notes": "Hautes cornes-aiguilles à 2 pointes (gauche rouge), grande rose lumineuse au poitrail, épaulières de laiton, crête double, carte marine (2 parallèles, route, 3 croix par flanc), voiles à étoile, grande flèche de boussole, 3 crocs par côté. Budget 8000 (72 %).",
+   "reglages": [
+    "HORN_L : longueur des cornes-aiguilles",
+    "ROSE_CHEST : taille de la rose des vents du poitrail",
+    "SHOULDER_PLATES : taille des plaques d'épaule en laiton",
+    "MAP_LINES / MAP_MARKS : lignes de carte et croix lumineuses",
+    "WING_SPAN / WING_FINGERS : envergure et doigts des ailes",
+    "TAIL_L / ARROW : longueur de la queue et taille de la flèche"
+   ]
+  }
+ }
+}

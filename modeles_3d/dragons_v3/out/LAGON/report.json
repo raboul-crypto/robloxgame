@@ -1,0 +1,44 @@
+{
+ "slug": "LAGON",
+ "stages": {
+  "BEBE": {
+   "tris": 3370,
+   "objects": 252,
+   "notes": "Très grosse tête, grands yeux, éventail de crête à 4 rayons, nageoires-oreilles, petites ailes translucides, losanges, caudale en V. Budget 4000 (84 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "FAN_N / FAN_L : rayons et taille de la crête-nageoire",
+    "WING_SPAN : envergure des ailes",
+    "NECK_H / NECK_LEAN : hauteur et inclinaison du cou",
+    "COIL_R : rayon des anneaux au sol",
+    "TAIL_FIN : taille de la nageoire caudale"
+   ]
+  },
+  "ADO": {
+   "tris": 4774,
+   "objects": 355,
+   "notes": "Cou de cygne, crocs, sourcils, crête double (5+3 rayons), ailes 4 doigts avec reflets d'eau, cornes à 2 pointes. Budget 6000 (80 %).",
+   "reglages": [
+    "HEAD_SCALE / SNOUT_K : tête et longueur du museau",
+    "FAN_N / FAN2_N : rayons des deux éventails de crête",
+    "WING_SPAN / WING_LIFT : taille et hauteur des ailes",
+    "WING_VEINS : reflets d'eau sur les ailes",
+    "NECK_H / NECK_LEAN : cou de cygne",
+    "DORSAL : taille de la nageoire dorsale"
+   ]
+  },
+  "ADULTE": {
+   "tris": 6006,
+   "objects": 453,
+   "notes": "Crête-nageoire double 7+5 rayons, collerette de 9 épines, 3 crocs, immenses ailes 5 doigts avec reflets d'eau émissifs discrets, caudale en V, 14 gouttes. Budget 8000 (75 %).",
+   "reglages": [
+    "FAN_N / FAN2_N / FAN_L : crête-nageoire double",
+    "COLLAR_N : épines de la collerette",
+    "WING_SPAN / WING_LIFT / WING_FINGERS : ailes",
+    "WING_VEINS : reflets d'eau",
+    "NECK_H / COIL_R : cou et anneaux au sol",
+    "TAIL_FIN / FX_N : caudale et gouttes flottantes"
+   ]
+  }
+ }
+}

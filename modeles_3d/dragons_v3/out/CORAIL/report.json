@@ -1,0 +1,44 @@
+{
+ "slug": "CORAIL",
+ "stages": {
+  "BEBE": {
+   "tris": 2552,
+   "objects": 138,
+   "notes": "Grosse tête carrée, très grands yeux à reflets, petits bois de corail ramifiés, 3 coraux dorsaux, coquille Saint-Jacques en épaulette, nageoires-oreilles, petit bouquet de corail en bout de queue. Budget 3000 (85 %). Seule émission : iris.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (bébé 1.2)",
+    "ANTLER_K / ANTLER_DEPTH : taille et ramification des bois de corail",
+    "CORAL_N / CORAL_K : nombre et taille des coraux du dos",
+    "SHELL_K : taille des coquilles d'épaule",
+    "LEG_H / BW : hauteur des pattes et largeur du corps",
+    "FX_N : nombre de bulles flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 3950,
+   "objects": 221,
+   "notes": "Crocs, sourcils corail, bois ramifiés à 2 niveaux, 5 coraux dorsaux et plaques d'armure, coraux de nuque, coquilles, bracelets sombres, aileron de queue. Budget 4500 (88 %).",
+   "reglages": [
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "ANTLER_K / ANTLER_DEPTH : bois de corail",
+    "CORAL_N / CORAL_K / PLATE_N : coraux et plaques du dos",
+    "SHELL_K / SHELL_RIBS : coquilles d'épaule",
+    "TAIL_L / TAIL_TIP_N / TAIL_FIN : queue, bouquet et aileron",
+    "FX_N : nombre de bulles flottantes"
+   ]
+  },
+  "ADULTE": {
+   "tris": 5636,
+   "objects": 328,
+   "notes": "Grande ramure à 3 niveaux, coraux de joue, 6 coraux dorsaux + 4 plaques par côté, coquilles d'épaule et de hanche, genouillères en coquille, 5 blocs de cou, bouquet de corail et aileron au bout de la queue. Budget 6000 (94 %). Commun : pas d'émission hors yeux.",
+   "reglages": [
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "ANTLER_K / ANTLER_DEPTH / CHEEK_CORAL : ramure et coraux de joue",
+    "CORAL_N / CORAL_K / CORAL_DEPTH : coraux du dos, du cou et de la queue",
+    "SHELL_N / SHELL_K / KNEE : coquilles d'épaule, de hanche et de genou",
+    "EAR_N / EAR_K : nageoires-oreilles",
+    "TAIL_L / TAIL_TIP_N / TAIL_FIN : queue, bouquet et aileron"
+   ]
+  }
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "slug": "MAREE",
+ "stages": {
+  "BEBE": {
+   "tris": 3606,
+   "objects": 232,
+   "notes": "Grosse tête, très grands yeux, cou en petite arche, vague sur le crâne, 1 volute par flanc, dégradé bleu roi vers turquoise, queue en S. Budget 4000 (90 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (bébé 1.5)",
+    "NECK_L / NECK_REACH : longueur du cou et avancée de la tête",
+    "CREST_K / WAVE_N : taille et nombre de lames de la vague du crâne",
+    "SWIRLS / SWIRL_N : volutes sur les flancs",
+    "TAIL_L / TAIL_SWAY : longueur et ondulation de la queue",
+    "GLOW : intensité de l'accent lumineux"
+   ]
+  },
+  "ADO": {
+   "tris": 5340,
+   "objects": 358,
+   "notes": "Cou en arche de vague, museau allongé, sourcils, 2 petits crocs, crête double, cornes à 3 pointes, 2 volutes par flanc. Budget 6000 (89 %).",
+   "reglages": [
+    "NECK_L / NECK_REACH : arche du cou",
+    "CREST_H / WAVE_EVERY : hauteur et espacement des vagues dorsales",
+    "SWIRLS / SWIRL_N : volutes de vagues sur les flancs",
+    "EAR_L / EAR_RAYS : nageoires-oreilles en rubans",
+    "PEC_SPAN / PEC_RAYS : pectorales balayées vers l'arrière",
+    "TAIL_L / TAIL_SWAY / CAUDAL_L : queue en S et caudale en croissant"
+   ]
+  },
+  "ADULTE": {
+   "tris": 7330,
+   "objects": 510,
+   "notes": "Long cou en arche, 3 crocs, sourcils sévères, cornes à 3 pointes, crête double (vagues + petites vagues), 3 volutes par flanc et 1 par cuisse, accent lumineux discret (iris, écume, volutes), queue en S à caudale en croissant. Budget 8000 (92 %).",
+   "reglages": [
+    "NECK_L / NECK_REACH / NECK_DROP : forme de l'arche du cou",
+    "CREST_H / WAVE_EVERY / WAVE_N : vagues de la crête (taille, espacement, lames)",
+    "SWIRLS / SWIRL_N : volutes sur les flancs",
+    "EAR_L / EAR_RAYS : nageoires-oreilles",
+    "TAIL_L / TAIL_SWAY / CAUDAL_L : queue et caudale",
+    "GLOW : intensité des lueurs (iris, écume, volutes)"
+   ]
+  }
+ }
+}
