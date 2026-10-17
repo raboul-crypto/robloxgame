@@ -1,0 +1,44 @@
+{
+ "slug": "REVENANT",
+ "stages": {
+  "BEBE": {
+   "tris": 5108,
+   "objects": 332,
+   "notes": "3 petites têtes, grands yeux, côtes d'os, fumée violette, feux follets. Secret en petit. Budget 7000.",
+   "reglages": [
+    "HEADS : position, taille et angle des 3 têtes",
+    "NECK_L / NECK_N / NECK_CURVE : longueur, segments et courbure des cous",
+    "RIB_N : nombre de côtes d'os du flanc gauche",
+    "CREST_N / SMOKE_N : pics de crête et volutes de fumée",
+    "TAIL_L / TAIL_FRAG : longueur de la queue et fragments qui se détachent",
+    "FX_N / FX_SIZE : éclats et lambeaux flottants"
+   ]
+  },
+  "ADO": {
+   "tris": 8274,
+   "objects": 561,
+   "notes": "Cous en S, crocs, corne cassée, voile déchiré, fissures, patte squelette. Budget 11000.",
+   "reglages": [
+    "HEADS : position, taille et angle des 3 têtes",
+    "NECK_L / NECK_N / NECK_CURVE : longueur, segments et courbure des cous",
+    "RIB_N : nombre de côtes d'os du flanc gauche",
+    "CREST_N / SMOKE_N : pics de crête et volutes de fumée",
+    "TAIL_L / TAIL_FRAG : longueur de la queue et fragments qui se détachent",
+    "FX_N / FX_SIZE : éclats et lambeaux flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 11886,
+   "objects": 842,
+   "notes": "3 têtes imposantes, tête gauche mâchoire dissoute, droite crâne troué, cage d'os, voile déchiré, queue fantôme. Budget 17000.",
+   "reglages": [
+    "HEADS : position, taille et angle des 3 têtes",
+    "NECK_L / NECK_N / NECK_CURVE : longueur, segments et courbure des cous",
+    "RIB_N : nombre de côtes d'os du flanc gauche",
+    "CREST_N / SMOKE_N : pics de crête et volutes de fumée",
+    "TAIL_L / TAIL_FRAG : longueur de la queue et fragments qui se détachent",
+    "FX_N / FX_SIZE : éclats et lambeaux flottants"
+   ]
+  }
+ }
+}

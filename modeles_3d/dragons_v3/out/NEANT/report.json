@@ -1,0 +1,44 @@
+{
+ "slug": "NEANT",
+ "stages": {
+  "BEBE": {
+   "tris": 6406,
+   "objects": 356,
+   "notes": "Serpent noir enroulé, grosse tête, yeux blancs lumineux, liserés et anneaux violets. Budget 7000.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "NECK_H / COIL_R : hauteur du cou dressé, rayon de l'anneau au sol",
+    "BODY_STEP : pas des segments (moins = corps plus fin et plus lourd)",
+    "RING_EVERY / GROUND_RINGS / BACK_RINGS : anneaux lumineux sur le corps, au sol et sur le dos",
+    "WING_SPAN / WING_FINGERS : envergure et doigts des ailes",
+    "HALO_N / FX_N / FX_RINGS : halo derrière la tête et éclats flottants"
+   ]
+  },
+  "ADO": {
+   "tris": 9228,
+   "objects": 408,
+   "notes": "Serpent en S, crocs, halo, ailes à os violets, queue fantôme. Budget 11000.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "NECK_H / COIL_R : hauteur du cou dressé, rayon de l'anneau au sol",
+    "BODY_STEP : pas des segments (moins = corps plus fin et plus lourd)",
+    "RING_EVERY / GROUND_RINGS / BACK_RINGS : anneaux lumineux sur le corps, au sol et sur le dos",
+    "WING_SPAN / WING_FINGERS : envergure et doigts des ailes",
+    "HALO_N / FX_N / FX_RINGS : halo derrière la tête et éclats flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 13600,
+   "objects": 529,
+   "notes": "Grand serpent noir, double halo, 4 anneaux au sol et sur le dos, ailes déchirées, fragments. Budget 17000.",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "NECK_H / COIL_R : hauteur du cou dressé, rayon de l'anneau au sol",
+    "BODY_STEP : pas des segments (moins = corps plus fin et plus lourd)",
+    "RING_EVERY / GROUND_RINGS / BACK_RINGS : anneaux lumineux sur le corps, au sol et sur le dos",
+    "WING_SPAN / WING_FINGERS : envergure et doigts des ailes",
+    "HALO_N / FX_N / FX_RINGS : halo derrière la tête et éclats flottants"
+   ]
+  }
+ }
+}

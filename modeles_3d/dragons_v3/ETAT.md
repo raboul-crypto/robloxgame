@@ -39,8 +39,8 @@
 | Quartz (Légendaire, Classique) | 3/3 | 3/3 | oui |
 | Pépite (Mythique, Drake) | 3/3 | 3/3 | oui |
 | Brillant (Mythique, Classique) | 3/3 | 3/3 | oui |
-| Revenant (Secret, Hydre) | 3/3 | 3/3 | non |
-| Néant (Secret, Amphiptère) | 0/3 | 0/3 | non |
+| Revenant (Secret, Hydre) | 3/3 | 3/3 | oui |
+| Néant (Secret, Amphiptère) | 3/3 | 3/3 | oui |
 | Aïon (Mythe, Oriental) | 3/3 | 3/3 | oui |
 | Prisma (Exclusif, Classique) | 3/3 | 3/3 | oui |
 | Nébula (Exclusif, Oriental) | 3/3 | 3/3 | oui |
