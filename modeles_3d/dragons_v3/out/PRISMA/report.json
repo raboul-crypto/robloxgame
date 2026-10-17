@@ -1,0 +1,44 @@
+{
+ "slug": "PRISMA",
+ "stages": {
+  "BEBE": {
+   "tris": 6396,
+   "objects": 282,
+   "notes": "BEBE Prisma : arc-en-ciel segment par segment, ailes irisées, traînée, halo de cristaux. Budget 7000 (91 %).",
+   "reglages": [
+    "WING_SPAN : envergure des ailes",
+    "NECK_L, NECK_N : longueur et maillons du cou",
+    "TAIL_L, TAIL_STEP : longueur de la queue",
+    "MANE_RINGS, MANE_N : crinière de cristaux",
+    "TRAIL_L : longueur de la traînée arc-en-ciel",
+    "FX_N : nombre de cristaux flottants"
+   ]
+  },
+  "ADO": {
+   "tris": 9366,
+   "objects": 393,
+   "notes": "ADO Prisma : arc-en-ciel segment par segment, ailes irisées, traînée, halo de cristaux. Budget 11000 (85 %).",
+   "reglages": [
+    "WING_SPAN : envergure des ailes",
+    "NECK_L, NECK_N : longueur et maillons du cou",
+    "TAIL_L, TAIL_STEP : longueur de la queue",
+    "MANE_RINGS, MANE_N : crinière de cristaux",
+    "TRAIL_L : longueur de la traînée arc-en-ciel",
+    "FX_N : nombre de cristaux flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 12142,
+   "objects": 531,
+   "notes": "ADULTE Prisma : arc-en-ciel segment par segment, ailes irisées, traînée, halo de cristaux. Budget 17000 (71 %).",
+   "reglages": [
+    "WING_SPAN : envergure des ailes",
+    "NECK_L, NECK_N : longueur et maillons du cou",
+    "TAIL_L, TAIL_STEP : longueur de la queue",
+    "MANE_RINGS, MANE_N : crinière de cristaux",
+    "TRAIL_L : longueur de la traînée arc-en-ciel",
+    "FX_N : nombre de cristaux flottants"
+   ]
+  }
+ }
+}

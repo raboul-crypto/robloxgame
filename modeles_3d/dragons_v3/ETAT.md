@@ -42,5 +42,5 @@
 | Revenant (Secret, Hydre) | 3/3 | 3/3 | non |
 | Néant (Secret, Amphiptère) | 0/3 | 0/3 | non |
 | Aïon (Mythe, Oriental) | 3/3 | 3/3 | oui |
-| Prisma (Exclusif, Classique) | 3/3 | 0/3 | non |
-| Nébula (Exclusif, Oriental) | 3/3 | 0/3 | non |
+| Prisma (Exclusif, Classique) | 3/3 | 3/3 | oui |
+| Nébula (Exclusif, Oriental) | 3/3 | 3/3 | oui |

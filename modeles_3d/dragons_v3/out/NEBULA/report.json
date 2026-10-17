@@ -1,0 +1,44 @@
+{
+ "slug": "NEBULA",
+ "stages": {
+  "BEBE": {
+   "tris": 6902,
+   "objects": 300,
+   "notes": "BEBE Nebula : croissant de lune noir/violet, étoiles émissives, crinière nébuleuse, anneaux d'orbite. Budget 7000 (99 %).",
+   "reglages": [
+    "CTRL_K, RAD_K : taille et épaisseur du corps en croissant",
+    "SNOUT_L, HORN_K : museau et cornes",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière nébuleuse",
+    "STAR_CHANCE, STAR_K : densité et taille des étoiles",
+    "ORBIT_RINGS, RING_R : anneaux d'orbite",
+    "FX_COUNT : étoiles flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 10976,
+   "objects": 487,
+   "notes": "ADO Nebula : croissant de lune noir/violet, étoiles émissives, crinière nébuleuse, anneaux d'orbite. Budget 11000 (100 %).",
+   "reglages": [
+    "CTRL_K, RAD_K : taille et épaisseur du corps en croissant",
+    "SNOUT_L, HORN_K : museau et cornes",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière nébuleuse",
+    "STAR_CHANCE, STAR_K : densité et taille des étoiles",
+    "ORBIT_RINGS, RING_R : anneaux d'orbite",
+    "FX_COUNT : étoiles flottantes"
+   ]
+  },
+  "ADULTE": {
+   "tris": 12986,
+   "objects": 588,
+   "notes": "ADULTE Nebula : croissant de lune noir/violet, étoiles émissives, crinière nébuleuse, anneaux d'orbite. Budget 17000 (76 %).",
+   "reglages": [
+    "CTRL_K, RAD_K : taille et épaisseur du corps en croissant",
+    "SNOUT_L, HORN_K : museau et cornes",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière nébuleuse",
+    "STAR_CHANCE, STAR_K : densité et taille des étoiles",
+    "ORBIT_RINGS, RING_R : anneaux d'orbite",
+    "FX_COUNT : étoiles flottantes"
+   ]
+  }
+ }
+}
