@@ -1,0 +1,44 @@
+{
+ "slug": "BRILLANT",
+ "stages": {
+  "BEBE": {
+   "tris": 5974,
+   "objects": 256,
+   "notes": "Classique en diamant blanc-bleuté translucide, platine, cœur et halo, reflets arc-en-ciel discrets, géode de queue. Budget 7000 (85 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H / NECK_L : hauteur des pattes et longueur du cou",
+    "WING_SPAN / WING_CRYS / FACETS : envergure et cristaux des ailes",
+    "HALO_R / CROWN_N / HALO_RAYS : halo derrière la tête",
+    "FACET_ROWS / FACET_COLS / CREST_N : facettes des flancs et grappes du dos",
+    "TAIL_L / TAIL_CRYS / FX_N : queue, géode finale et éclats flottants"
+   ]
+  },
+  "ADO": {
+   "tris": 10016,
+   "objects": 465,
+   "notes": "Classique en diamant blanc-bleuté translucide, platine, cœur et halo, reflets arc-en-ciel discrets, géode de queue. Budget 11000 (91 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H / NECK_L : hauteur des pattes et longueur du cou",
+    "WING_SPAN / WING_CRYS / FACETS : envergure et cristaux des ailes",
+    "HALO_R / CROWN_N / HALO_RAYS : halo derrière la tête",
+    "FACET_ROWS / FACET_COLS / CREST_N : facettes des flancs et grappes du dos",
+    "TAIL_L / TAIL_CRYS / FX_N : queue, géode finale et éclats flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 13744,
+   "objects": 673,
+   "notes": "Classique en diamant blanc-bleuté translucide, platine, cœur et halo, reflets arc-en-ciel discrets, géode de queue. Budget 17000 (81 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H / NECK_L : hauteur des pattes et longueur du cou",
+    "WING_SPAN / WING_CRYS / FACETS : envergure et cristaux des ailes",
+    "HALO_R / CROWN_N / HALO_RAYS : halo derrière la tête",
+    "FACET_ROWS / FACET_COLS / CREST_N : facettes des flancs et grappes du dos",
+    "TAIL_L / TAIL_CRYS / FX_N : queue, géode finale et éclats flottants"
+   ]
+  }
+ }
+}

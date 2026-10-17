@@ -1,0 +1,63 @@
+Tu es un artiste technique 3D. Tu vas écrire un script Python pour Blender (bpy) qui génère
+le modèle 3D du dragon « Adulte Revenant » de mon jeu Roblox Dragon Pets Simulator.
+
+PIÈCES JOINTES
+1. Une image de concept des 3 stades si tu en as une ; sinon la description ci-dessous fait foi.
+2. Le GDD du jeu (Dragon_Pets_GDD_v2.3.docx). Lis en priorité :
+   - partie 9, tableau du monde 5 : Revenant = Ténèbres, Secret, Brute, morphologie Hydre ;
+   - partie 13, Direction artistique : style par stade, morphologies, couleurs,
+     « Fabrication des modèles ».
+   Si l'image et le GDD se contredisent, l'image gagne pour l'apparence, le GDD gagne pour
+   les contraintes techniques.
+
+ÉTAPE 1 — AVANT D'ÉCRIRE DU CODE
+Décris en 10 à 15 puces ce que tu vois sur l'Adulte Revenant : pose, proportions, chaque
+élément des trois têtes, du corps, des pattes et de la queue, et la palette. Puis liste les
+contraintes du GDD qui s'appliquent. Je valide avant que tu codes.
+
+CE QUE LE MODÈLE DOIT REPRODUIRE (vérifie chaque point)
+- Pose : massif et inquiétant, corps puissant sur 4 pattes, trois têtes imposantes sur de longs cous en S (5 à 7 segments), la centrale plus grande (hauteur totale 11 m), les latérales tournées de 26° vers l'extérieur, sans ailes.
+- Têtes : crâne carré, museau en bloc avec arête d'os pâle, mâchoire d'os distincte et ligne de bouche, 2 narines noires, yeux en éclats lilas émissifs à pupille fendue. Cous catmull-rom (neck_l 4,6), vertèbres d'os sur le dos de chaque cou, pics translucides, 3 crocs d'os par côté et crocs du bas, mâchoire entrouverte, sourcils sévères inclinés de 20°.
+- Signe distinctif : trois têtes ; contours qui se dissipent en fumée violette translucide ; longues cornes sombres à anneau d'os et pointe d'os, un feu follet lilas au bout de chaque corne, corne droite cassée, crâne troué par une fenêtre de vide lumineux sur la tête de droite.
+- Corps : torse noir-violet très sombre, 8 côtes d'os apparentes autour d'un vide lumineux (flanc gauche), colonne d'os le long du dos, épaulières d'os en wedge, patte arrière gauche squelette, 9 plaques de voile déchiré translucide qui pendent des épaules. Écailles en quinconce sur les flancs, plaques de ventre violettes bien séparées et plastron avec cristal lilas. 15 pics de crête translucides (alpha 0.62) sur le dos, 12 volutes de fumée violette, 5 fissures lilas émissives sur les flancs, 8 plaques de ventre violettes et plastron avec cristal lilas.
+- Ailes : aucune (hydre sans ailes), donc pas de WINGS_ROOT.
+- Pattes : 4 pattes épaisses, 3 doigts et 3 griffes pâles, bracelets et genouillères d'os, fumée violette aux pieds.
+- Queue : queue de 6 m aux segments à plaques d'os, qui devient fantôme puis se défait en 11 fragments translucides terminés par un feu follet.
+- Rendu de rareté (Secret) : Secret complet : os apparents, vide dans la cage thoracique et les orbites, parties fantômes (alpha 0.5 à 0.65), silhouette déchirée et asymétrique, yeux et fissures émissifs (strength 3.0), fumée aux pieds. FX flottants : 42 éclats d'os, perles de feu follet et lambeaux de fumée en orbite.
+- Palette (hex, Principled BSDF) :
+  Body #1A1420 (corps, crânes, cous), BodyDark #100C13 (genoux, épaules, sourcils), ScaleA #130F18 / ScaleB #322544 (écailles),
+  Void #050308 (vide : orbites, cage thoracique, bouche), Nostril #0C090E, Belly #4E2E78 (ventre, plastron, gorge), Bone #D8CCEA (os apparents, museau, mâchoire, bracelets),
+  HornTip #CDB3FF (pointes de cornes), Crest #8C64C8 et Crest2 #4E2E78 (crêtes translucides, alpha 0.62),
+  Smoke #8C64C8 (alpha 0.55), SmokeLight #B79AEE (alpha 0.50), SmokeDark #4E2E78 (alpha 0.65) pour la fumée et les parties fantômes,
+  Claw #E6DCF5, Eye #CDB3FF (émissif), Glow #CDB3FF (émissif : fissures, feux follets), WispViolet #8C64C8 (émissif : cœur des flammes), White #F2F2F2, Black #0A0A0A.
+  Mêmes couleurs aux 3 stades.
+- Style : low-poly en blocs biseautés, lisible de loin, étrange mais pas gore (aucun sang, pas de chair). Pas de sculpture
+  organique.
+
+CONTRAINTES TECHNIQUES
+- Budget : 17000 triangles maximum après modificateurs. Biseau à 1 segment au plus, et
+  seulement sur les gros blocs (crânes, torse, bassin, premiers segments des cous), jamais sur les éclats, griffes
+  ou petites pièces. Le script affiche le total de triangles à la fin.
+- Pièces séparées, sans squelette (le rig viendra plus tard, GDD partie 13).
+- Hiérarchie : un empty REVENANT_ADULTE_MASTER_ROOT avec 5 enfants HEAD_ROOT (tête centrale), HEAD2_ROOT (gauche), HEAD3_ROOT (droite), BODY_ROOT, LEGS_ROOT et TAIL_ROOT.
+  Chaque pièce est parentée au bon root. Les pièces de chaque tête sont placées en coordonnées locales
+  de son root (placé à la base du crâne).
+- Tout dans une collection « REVENANT_ADULTE ». Le script est relançable : au début, il supprime uniquement
+  les objets de cette collection et les enfants des roots REVENANT_ADULTE_*. Il ne touche jamais aux autres
+  stades ni aux autres dragons de la scène.
+- Les trois cous suivent chacun une courbe Catmull-Rom rééchantillonnée à pas constant, avec un repère par segment et un rayon par clés (NECK_R). La queue de même.
+- Crée les meshes avec bmesh / from_pydata, pas avec bpy.ops dans les boucles.
+- Matériaux Principled BSDF réutilisés s'ils existent, mais toujours mis à jour. Couleurs saturées
+  en espace linéaire. Émission seulement sur les yeux, fissures et feux follets ; fumée et crêtes en alpha 0.5 à 0.65. Compatible Blender 4.x et 5.x.
+- Seed aléatoire fixe (5317) pour que chaque exécution donne le même dragon.
+- Option ADD_FLOATING_FX pour ajouter ou non les éclats et lambeaux flottants.
+- Conventions : avant du dragon = -Y, haut = +Z, unité = mètre, hauteur totale ~11 m, posé sur Z = 0.
+- Code commenté en français, découpé en sections numérotées (7 palette, 8 hiérarchie, 9 têtes,
+  10 corps, 11 pattes, 12 ailes (aucune), 13 queue, 14 rareté / FX, 15 finalisation).
+
+LIVRAISON
+1. Le script complet dans un seul fichier .py.
+2. Si tu as accès à Blender : lance-le, fais une capture de la vue 3D, compare avec
+   l'image et corrige les écarts visibles (couleurs, taille des têtes, cous, fumée)
+   avant de me le rendre. Donne le nombre de triangles.
+3. Une liste courte des réglages à changer pour ajuster la forme.

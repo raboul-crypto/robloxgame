@@ -55,7 +55,6 @@ for me in list(bpy.data.meshes):
 #  Unités de construction : tête d'environ 1.5 m de large ; finalize() remet ensuite le dragon à TARGET_HEIGHT.
 # ----------------------------------------------------------
 STAGE = "ADULTE"
-HEAD_POS   = Vector((0, -1.5, 8.9))   # base du crâne (HEAD_ROOT)
 HEAD_TILT  = 8                        # inclinaison de la tête vers l'avant (degrés)
 SNOUT_L    = 1.55                     # longueur du museau
 BABY_EYES  = False                    # True = très grands yeux ronds avec reflet (bébé)
@@ -71,6 +70,10 @@ STAR_CHANCE = 0.95                    # probabilité d'étoiles sur chaque côt�
 STAR_K = 1.0                          # taille des étoiles du corps
 HALO_N = 12                           # éclats du halo derrière la tête
 ORBIT_RINGS = 2                       # anneaux d'orbite derrière le dragon (0 à 2)
+
+CTRL_K = 1.0                          # échelle du corps (la tête garde sa taille : petit corps = grosse tête)
+RAD_K  = 1.0                          # épaisseur du corps
+RING_R = 4.9                          # rayon du premier anneau d'orbite
 
 # Colonne vertébrale : croissant de lune (tête en haut devant, ventre bas, queue qui remonte)
 CTRL = [
@@ -89,16 +92,21 @@ CTRL = [
 ]
 RADIUS_KEYS = [(0.0, 0.62), (0.08, 0.74), (0.2, 0.92), (0.35, 1.0), (0.5, 0.96),
                (0.65, 0.8), (0.82, 0.5), (1.0, 0.2)]
+RADIUS_KEYS = [(a, b * RAD_K) for a, b in RADIUS_KEYS]
+CTRL = [tuple(c * CTRL_K for c in p) for p in CTRL]
+HEAD_POS = Vector(CTRL[0]) + Vector((0, -0.1, 0.1))   # base du crâne (HEAD_ROOT), collée au début du corps
 SEG_STEP   = 0.55                     # longueur d'un segment du corps
 TAIL_START = 0.62                     # à partir de s = 0.62, les segments vont dans TAIL_ROOT
 TUFT_N, TUFT_L = 9, 1.5               # comète au bout de la queue : éclats, longueur
 FX_COUNT = 40                         # étoiles flottantes
+FX_SPREAD = 3.5                       # largeur de la zone des étoiles flottantes
 FX_SIZE = 0.3                         # taille des étoiles flottantes
 
 # Pattes : position sur le corps (s), vecteurs haut et bas de patte, épaisseurs, écart sur le côté.
 LEG_FRONT = dict(s=0.3, upper=(0, -0.45, -0.7), lower=(0, -0.55, -0.35), th_up=0.46, th_low=0.36, push=0.3)
 LEG_BACK  = dict(s=0.62, upper=(0, -0.5, -0.5), lower=(0, 0.3, -0.7),   th_up=0.52, th_low=0.38, push=0.28)
 LEG_K = 1.0                           # taille des épaules, pieds et griffes
+LEG_D = 1.0                           # longueur des segments de patte
 
 # ----------------------------------------------------------
 # 7. PALETTE (identique aux 3 stades) : noir-violet, violets, nébuleuse bleu / rose / violet, étoiles blanches émissives
@@ -352,8 +360,8 @@ def leg(name, cfg):
     for sgn in (-1, 1):
         n = f"{name}_{sgn}"
         root = mid + side * sgn * r * 0.85 - d * 0.15
-        joint = root + Vector((sgn * cfg["push"], 0, 0)) + Vector(cfg["upper"])
-        wrist = joint + Vector((sgn * 0.05, 0, 0)) + Vector(cfg["lower"])
+        joint = root + Vector((sgn * cfg["push"], 0, 0)) + Vector(cfg["upper"]) * LEG_D
+        wrist = joint + Vector((sgn * 0.05, 0, 0)) + Vector(cfg["lower"]) * LEG_D
         box(f"{n}_Shoulder", (0.62 * LEG_K,) * 3, root, mat=M_VIOLET, parent=legs_root, bevel=0.06)
         link(f"{n}_Upper", root, joint, cfg["th_up"], M_VIOLET, legs_root, up=(1, 0, 0), bevel=0.05)
         link(f"{n}_Lower", joint, wrist, cfg["th_low"], M_VIOLET, legs_root, up=(1, 0, 0), bevel=0.04)
@@ -392,7 +400,7 @@ hi = Vector([max(p[j] for p in CTRL) for j in range(3)])
 if ORBIT_RINGS > 0:
     cy, cz = (lo.y + hi.y) / 2 + 0.2, (lo.z + hi.z) / 2 + 0.3
     for k in range(ORBIT_RINGS):
-        rr = 4.9 + k * 1.1
+        rr = RING_R + k * 1.1 * RING_R / 4.9
         ring(f"Orbit_Ring_{k}", rr, 0.14 + 0.05 * k, 0.08, (-2.2 - k * 0.5, cy, cz), (1, 0, 0), M_RING, master, sides=28)
         for j in range(3):
             a = j * 2.1 + k
@@ -401,7 +409,7 @@ if ORBIT_RINGS > 0:
 
 if ADD_FLOATING_FX:
     for k in range(FX_COUNT):
-        p = Vector((random.uniform(-3.5, 3.5), random.uniform(lo.y - 2.0, hi.y + 1.5), random.uniform(max(1.0, lo.z - 0.5), hi.z + 1.2)))
+        p = Vector((random.uniform(-1, 1) * FX_SPREAD, random.uniform(lo.y - 2.0, hi.y + 1.5), random.uniform(max(1.0, lo.z - 0.5), hi.z + 1.2)))
         nrm = Vector([random.uniform(-1, 1) for _ in range(3)])
         star(f"FX_Star_{k}", FX_SIZE * random.uniform(0.6, 1.3), p, nrm, STARS[k % 4], master, spin=random.random() * 3)
 
