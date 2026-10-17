@@ -1,0 +1,44 @@
+{
+ "slug": "PEPITE",
+ "stages": {
+  "BEBE": {
+   "tris": 6572,
+   "objects": 187,
+   "notes": "Drake tout en or métallique, pépites bosselées, halo de pièces, gemmes, massue de queue. Budget 7000 (94 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête (grosse chez le bébé)",
+    "LEG_H : hauteur des pattes",
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "HALO_R / HALO_COINS : rayon du halo et pièces dessus",
+    "TAIL_L / CLUB_SIZE : longueur de la queue et massue finale",
+    "FX_COINS / FX_SPARKS : pièces et éclats flottants"
+   ]
+  },
+  "ADO": {
+   "tris": 7844,
+   "objects": 342,
+   "notes": "Drake tout en or métallique, pépites bosselées, halo de pièces, gemmes, massue de queue. Budget 11000 (71 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H : hauteur des pattes",
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "HALO_R / HALO_COINS / HALO_RAYS : halo derrière la tête",
+    "FLANK_ROWS / SHOULDER_ROCKS : pépites des flancs et des épaules",
+    "TAIL_L / CLUB_SIZE / CLUB_GEMS : queue et massue finale"
+   ]
+  },
+  "ADULTE": {
+   "tris": 15550,
+   "objects": 451,
+   "notes": "Drake tout en or métallique, pépites bosselées, halo de pièces, gemmes, massue de queue. Budget 17000 (91 %).",
+   "reglages": [
+    "HEAD_SCALE : taille de la tête",
+    "LEG_H : hauteur des pattes",
+    "NECK_L / NECK_N : longueur et maillons du cou",
+    "HALO_R / HALO_COINS / HALO_RAYS : halo derrière la tête",
+    "FLANK_ROWS / SHOULDER_ROCKS : pépites des flancs et des épaules",
+    "TAIL_L / CLUB_SIZE / CLUB_GEMS : queue et massue finale"
+   ]
+  }
+ }
+}

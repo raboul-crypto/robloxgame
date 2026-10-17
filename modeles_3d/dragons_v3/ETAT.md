@@ -37,10 +37,10 @@
 | Stalactite (Rare, Drake) | 3/3 | 3/3 | oui |
 | Ombrelame (Épique, Wyvern) | 3/3 | 3/3 | oui |
 | Quartz (Légendaire, Classique) | 3/3 | 3/3 | oui |
-| Pépite (Mythique, Drake) | 3/3 | 0/3 | non |
+| Pépite (Mythique, Drake) | 3/3 | 3/3 | oui |
 | Brillant (Mythique, Classique) | 0/3 | 0/3 | non |
 | Revenant (Secret, Hydre) | 3/3 | 0/3 | non |
 | Néant (Secret, Amphiptère) | 0/3 | 0/3 | non |
-| Aïon (Mythe, Oriental) | 3/3 | 0/3 | non |
+| Aïon (Mythe, Oriental) | 3/3 | 3/3 | oui |
 | Prisma (Exclusif, Classique) | 3/3 | 0/3 | non |
 | Nébula (Exclusif, Oriental) | 1/3 | 0/3 | non |

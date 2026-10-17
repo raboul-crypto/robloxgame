@@ -1,0 +1,44 @@
+{
+ "slug": "AION",
+ "stages": {
+  "BEBE": {
+   "tris": 7660,
+   "objects": 417,
+   "notes": "Bébé Aïon : petit halo cosmique derrière la tête (2 anneaux + 10 éclats + runes), 1 anneau runique flottant autour du corp. Budget 8000 (96 %).",
+   "reglages": [
+    "BODY_K : longueur du corps",
+    "SNOUT_L : longueur du museau",
+    "ANTLER_K, ANTLER_TINES : taille et ramifications des bois",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière",
+    "HALO_N, HALO_R : halo cosmique",
+    "FX_COUNT : étoiles flottantes"
+   ]
+  },
+  "ADO": {
+   "tris": 12506,
+   "objects": 701,
+   "notes": "Ado Aïon : halo cosmique (3 anneaux, 14 éclats, étoiles, runes), 2 anneaux runiques flottants, 12 étoiles + 3 anneaux + 2. Budget 13000 (96 %).",
+   "reglages": [
+    "BODY_K : longueur du corps",
+    "SNOUT_L, FANGS : museau et crocs",
+    "ANTLER_K, ANTLER_TINES : bois",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière",
+    "HALO_R, ORBIT_S : halo et anneaux runiques",
+    "FX_COUNT : FX flottants"
+   ]
+  },
+  "ADULTE": {
+   "tris": 18528,
+   "objects": 1054,
+   "notes": "Adulte Aïon : halo cosmique derrière la tête (4 anneaux violet / or / blanc / or lumineux, 20 éclats, étoiles, 10 runes), 4 . Budget 20000 (93 %).",
+   "reglages": [
+    "CTRL, RADIUS_KEYS : forme du corps en S",
+    "SNOUT_L, FANGS : museau et crocs",
+    "ANTLER_K, ANTLER_TINES : bois",
+    "MANE_RINGS, MANE_COUNT, MANE_K : crinière",
+    "HALO_R, HALO_RINGS, ORBIT_S : halo et anneaux runiques",
+    "FX_COUNT, FX_RINGS, FX_HOUR : FX flottants"
+   ]
+  }
+ }
+}

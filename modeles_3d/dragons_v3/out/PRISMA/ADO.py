@@ -453,7 +453,7 @@ for sgn in (-1, 1):
     # Traînée arc-en-ciel : 8 rubans de couleurs qui partent du dernier bout de doigt, vers l'arrière
     base = tips[-1]
     dirv = Vector((sgn * 0.2, 1.0, 0.1)).normalized() * TRAIL_L
-    spread = Vector((sgn * 0.6, 0.0, 0.8)) * (WING_BONE * 0.9)
+    spread = Vector((sgn * 0.08, 0.0, 1.0)) * (WING_BONE * 0.9)
     for c in range(8):
         a0 = base + spread * (c - 3.5)
         a1 = a0 + spread
